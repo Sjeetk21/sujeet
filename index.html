@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sujeet Kumar | Creative Developer Portfolio</title>
+    <title>Sujeet Kumar | Portfolio</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -13,11 +13,11 @@
                 extend: {
                     colors: {
                         brand: {
-                            50: '#f5f3ff',
-                            100: '#ede9fe',
-                            500: '#8b5cf6',
-                            600: '#7c3aed',
-                            700: '#6d28d9',
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
                         }
                     }
                 }
@@ -32,8 +32,8 @@
     <!-- Top Navigation Bar -->
     <header class="fixed top-0 left-0 w-full z-40 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-colors duration-300">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-            <a href="#hero" class="text-xl font-bold bg-gradient-to-r from-brand-600 to-indigo-500 bg-clip-text text-transparent hover:opacity-80 transition">
-                &lt;Alex.Dev /&gt;
+            <a href="#hero" class="text-xl font-bold bg-gradient-to-r from-brand-600 to-blue-500 bg-clip-text text-transparent hover:opacity-80 transition">
+                &lt;Sujeet /&gt;
             </a>
 
             <!-- Desktop Nav Links -->
@@ -41,6 +41,7 @@
                 <a href="#about" class="text-sm font-medium hover:text-brand-600 dark:hover:text-brand-500 transition-colors">About</a>
                 <a href="#skills" class="text-sm font-medium hover:text-brand-600 dark:hover:text-brand-500 transition-colors">Skills</a>
                 <a href="#projects" class="text-sm font-medium hover:text-brand-600 dark:hover:text-brand-500 transition-colors">Projects</a>
+                <a href="#experience" class="text-sm font-medium hover:text-brand-600 dark:hover:text-brand-500 transition-colors">Experience</a>
                 <a href="#contact" class="text-sm font-medium hover:text-brand-600 dark:hover:text-brand-500 transition-colors">Contact</a>
             </nav>
 
@@ -48,7 +49,7 @@
             <div class="flex items-center space-x-4">
                 <button id="theme-toggle" class="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition" aria-label="Toggle dark mode">
                     <i data-lucide="sun" id="sun-icon" class="hidden h-5 w-5 text-amber-500"></i>
-                    <i data-lucide="moon" id="moon-icon" class="h-5 w-5 text-indigo-600"></i>
+                    <i data-lucide="moon" id="moon-icon" class="h-5 w-5 text-brand-600"></i>
                 </button>
 
                 <button id="mobile-menu-btn" class="p-2 md:hidden rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition" aria-label="Toggle mobile menu">
@@ -62,6 +63,7 @@
             <a href="#about" class="block py-2 text-base font-medium hover:text-brand-600 dark:hover:text-brand-500 transition-colors">About</a>
             <a href="#skills" class="block py-2 text-base font-medium hover:text-brand-600 dark:hover:text-brand-500 transition-colors">Skills</a>
             <a href="#projects" class="block py-2 text-base font-medium hover:text-brand-600 dark:hover:text-brand-500 transition-colors">Projects</a>
+            <a href="#experience" class="block py-2 text-base font-medium hover:text-brand-600 dark:hover:text-brand-500 transition-colors">Experience</a>
             <a href="#contact" class="block py-2 text-base font-medium hover:text-brand-600 dark:hover:text-brand-500 transition-colors">Contact</a>
         </div>
     </header>
@@ -72,26 +74,26 @@
         <!-- Hero Section -->
         <section id="hero" class="relative overflow-hidden min-h-[calc(100vh-4rem)] flex items-center justify-center px-4 sm:px-6 lg:px-8 py-12">
             <!-- Background Accent Blobs -->
-            <div class="absolute top-1/4 left-1/4 w-72 h-72 bg-purple-300 dark:bg-purple-900/30 rounded-full mix-blend-multiply filter blur-2xl opacity-70 animate-pulse -z-10"></div>
-            <div class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-blue-300 dark:bg-indigo-900/30 rounded-full mix-blend-multiply filter blur-2xl opacity-70 animate-pulse -z-10" style="animation-delay: 2s;"></div>
+            <div class="absolute top-1/4 left-1/4 w-72 h-72 bg-blue-300 dark:bg-blue-900/30 rounded-full mix-blend-multiply filter blur-2xl opacity-70 animate-pulse -z-10"></div>
+            <div class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-cyan-300 dark:bg-cyan-900/30 rounded-full mix-blend-multiply filter blur-2xl opacity-70 animate-pulse -z-10" style="animation-delay: 2s;"></div>
 
             <div class="max-w-4xl mx-auto text-center space-y-6">
                 <!-- Status Badge -->
                 <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-green-200 dark:border-green-900/50 bg-green-50 dark:bg-green-950/40 text-green-700 dark:text-green-400 text-sm font-medium animate-bounce">
                     <span class="w-2.5 h-2.5 bg-green-500 rounded-full animate-ping"></span>
-                    Available for Freelance & Full-time Roles
+                    Open for colaboration on AI, Robotic and Aeromodelling
                 </div>
 
                 <h1 class="text-4xl sm:text-6xl font-black tracking-tight leading-none">
-                    Hi, I'm <span class="bg-gradient-to-r from-brand-600 to-indigo-500 bg-clip-text text-transparent">Sujeet Kumar</span>
+                    Hi, I'm <span class="bg-gradient-to-r from-brand-600 to-cyan-500 bg-clip-text text-transparent">Sujeet Kumar</span>
                 </h1>
                 
                 <p class="text-xl sm:text-2xl font-semibold text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
-                    Full-Stack Software Engineer & Creative UI Designer
+                    Aeromodelling, Robotics Enthusiast and AI
                 </p>
 
-                <p class="text-base sm:text-lg text-slate-500 dark:text-slate-400 max-w-xl mx-auto leading-relaxed">
-                    I craft performant, user-centered digital experiences that combine robust backend logic with smooth front-end designs.
+                <p class="text-base sm:text-lg text-slate-500 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
+                    Fourth-Year Undergraduate at IIT Kanpur pursuing B.Tech in Mechanical Engineering with a Minor in Linguistic Theory. Passionate about solving complex problems through AI, scalable data systems, and algorithmic planning.
                 </p>
 
                 <div class="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -100,17 +102,16 @@
                         <i data-lucide="arrow-right" class="w-4 h-4"></i>
                     </a>
                     <a href="#contact" class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-medium hover:bg-slate-50 dark:hover:bg-slate-700 transition duration-200 flex items-center justify-center gap-2">
-                        Let's Talk
+                        Get In Touch
                         <i data-lucide="message-square" class="w-4 h-4"></i>
                     </a>
                 </div>
 
                 <!-- Socials Panel -->
                 <div class="pt-8 flex justify-center gap-6 text-slate-400 dark:text-slate-500">
-                    <a href="#" class="hover:text-brand-600 dark:hover:text-brand-400 transition" aria-label="GitHub"><i data-lucide="github" class="w-6 h-6"></i></a>
-                    <a href="#" class="hover:text-brand-600 dark:hover:text-brand-400 transition" aria-label="LinkedIn"><i data-lucide="linkedin" class="w-6 h-6"></i></a>
-                    <a href="#" class="hover:text-brand-600 dark:hover:text-brand-400 transition" aria-label="Twitter"><i data-lucide="twitter" class="w-6 h-6"></i></a>
-                    <a href="#" class="hover:text-brand-600 dark:hover:text-brand-400 transition" aria-label="Dribbble"><i data-lucide="dribbble" class="w-6 h-6"></i></a>
+                    <a href="https://github.com/Sjeetk21" target="_blank" class="hover:text-brand-600 dark:hover:text-brand-400 transition" aria-label="GitHub"><i data-lucide="github" class="w-6 h-6"></i></a>
+                    <a href="https://linkedin.com/in/sujeet-kumar" target="_blank" class="hover:text-brand-600 dark:hover:text-brand-400 transition" aria-label="LinkedIn"><i data-lucide="linkedin" class="w-6 h-6"></i></a>
+                    <a href="mailto:sjeetk21@iitk.ac.in" class="hover:text-brand-600 dark:hover:text-brand-400 transition" aria-label="Email"><i data-lucide="mail" class="w-6 h-6"></i></a>
                 </div>
             </div>
         </section>
@@ -120,28 +121,26 @@
             <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
                     
-                    <!-- Left: Profile Image Frame -->
+                    <!-- Left: Profile Graphic -->
                     <div class="md:col-span-5 relative group flex justify-center">
-                        <div class="absolute inset-0 bg-gradient-to-tr from-brand-500 to-indigo-500 rounded-2xl transform rotate-3 scale-105 group-hover:rotate-6 transition duration-300 opacity-70"></div>
+                        <div class="absolute inset-0 bg-gradient-to-tr from-brand-400 to-cyan-500 rounded-2xl transform rotate-3 scale-105 group-hover:rotate-6 transition duration-300 opacity-70"></div>
                         <div class="relative w-72 h-80 bg-slate-200 dark:bg-slate-800 rounded-2xl overflow-hidden shadow-xl flex items-center justify-center">
-                            <!-- Custom Vector Avatar placeholder -->
-                            <svg class="w-48 h-48 text-brand-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M18 21a6 6 0 0 0-12 0" />
-                                <circle cx="12" cy="10" r="4" />
-                                <path d="M12 2v2M12 18v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+                            <svg class="w-40 h-40 text-brand-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+                                <path d="M6 12v5c3 3 9 3 12 0v-5"/>
                             </svg>
                         </div>
                     </div>
 
                     <!-- Right: Narrative -->
                     <div class="md:col-span-7 space-y-6">
-                        <span class="text-xs font-bold uppercase tracking-widest text-brand-600 dark:text-brand-400">My Story</span>
-                        <h2 class="text-3xl font-extrabold sm:text-4xl">Building products that scale and engage</h2>
+                        <span class="text-xs font-bold uppercase tracking-widest text-brand-600 dark:text-brand-400">My Background</span>
+                        <h2 class="text-3xl font-extrabold sm:text-4xl">Bridging Mechanics, AI, and Innovation</h2>
                         <p class="text-lg text-slate-600 dark:text-slate-300">
-                            I'm a versatile software professional with 5+ years of experience. I enjoy breaking down complex analytical problems and translating them into simple, beautifully engineered web interfaces.
+                            I am a senior undergraduate at the Indian Institute of Technology Kanpur, combining a strong foundation in Mechanical Engineering with advanced knowledge in Machine Learning and Data Science.
                         </p>
                         <p class="text-slate-500 dark:text-slate-400">
-                            Beyond code, I'm passionate about accessibility standards, UI micro-interactions, and visual storytelling. My workflow involves collaborating closely with cross-functional partners to drive designs from napkin concepts to fully deployed production servers.
+                            My journey is driven by a desire to build intelligent systems. Whether it's designing a RAG-based Chatbot, engineering an autonomous UAV drone, or optimizing robotic navigation pathways, I thrive at the intersection of software intelligence and physical implementation.
                         </p>
                         
                         <div class="grid grid-cols-2 gap-4 pt-4">
@@ -149,25 +148,25 @@
                                 <div class="p-2 rounded-lg bg-brand-50 dark:bg-brand-950/50 text-brand-600 dark:text-brand-400">
                                     <i data-lucide="check-circle" class="w-5 h-5"></i>
                                 </div>
-                                <span class="font-medium text-sm">Clean & Documented Code</span>
+                                <span class="font-medium text-sm">200+ Days GFG DSA Streak</span>
                             </div>
                             <div class="flex items-center gap-3">
                                 <div class="p-2 rounded-lg bg-brand-50 dark:bg-brand-950/50 text-brand-600 dark:text-brand-400">
                                     <i data-lucide="check-circle" class="w-5 h-5"></i>
                                 </div>
-                                <span class="font-medium text-sm">SEO & Mobile First</span>
+                                <span class="font-medium text-sm">Hardware & IoT Prototyping</span>
                             </div>
                             <div class="flex items-center gap-3">
                                 <div class="p-2 rounded-lg bg-brand-50 dark:bg-brand-950/50 text-brand-600 dark:text-brand-400">
                                     <i data-lucide="check-circle" class="w-5 h-5"></i>
                                 </div>
-                                <span class="font-medium text-sm">Interactive Prototyping</span>
+                                <span class="font-medium text-sm">Machine Learning Models</span>
                             </div>
                             <div class="flex items-center gap-3">
                                 <div class="p-2 rounded-lg bg-brand-50 dark:bg-brand-950/50 text-brand-600 dark:text-brand-400">
                                     <i data-lucide="check-circle" class="w-5 h-5"></i>
                                 </div>
-                                <span class="font-medium text-sm">API Integration Masters</span>
+                                <span class="font-medium text-sm">Cross-functional Leadership</span>
                             </div>
                         </div>
                     </div>
@@ -181,63 +180,63 @@
                 <div class="max-w-xl mx-auto space-y-3">
                     <span class="text-xs font-bold uppercase tracking-widest text-brand-600 dark:text-brand-400">Expertise</span>
                     <h2 class="text-3xl font-extrabold sm:text-4xl">Technical Arsenal</h2>
-                    <p class="text-slate-500 dark:text-slate-400">Here's a curated list of modern technologies and platforms I frequently work with.</p>
+                    <p class="text-slate-500 dark:text-slate-400">A comprehensive view of the programming languages, ML libraries, and hardware tools I utilize.</p>
                 </div>
 
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-left">
-                    <!-- Frontend -->
+                    <!-- Programming Languages -->
                     <div class="p-6 rounded-2xl bg-white dark:bg-slate-800/40 border border-slate-100 dark:border-slate-850 shadow-sm space-y-4">
                         <div class="w-10 h-10 rounded-xl bg-orange-100 dark:bg-orange-950/50 text-orange-600 dark:text-orange-400 flex items-center justify-center">
-                            <i data-lucide="layout" class="w-5 h-5"></i>
+                            <i data-lucide="code" class="w-5 h-5"></i>
                         </div>
-                        <h3 class="font-bold text-lg">Frontend Development</h3>
+                        <h3 class="font-bold text-lg">Programming</h3>
                         <ul class="space-y-2 text-sm text-slate-500 dark:text-slate-400">
-                            <li>React / Next.js</li>
-                            <li>Tailwind CSS</li>
-                            <li>TypeScript</li>
-                            <li>HTML5 / Sass</li>
+                            <li>C / C++</li>
+                            <li>Python & MATLAB</li>
+                            <li>SQL</li>
+                            <li>HTML / CSS / JavaScript</li>
                         </ul>
                     </div>
 
-                    <!-- Backend -->
+                    <!-- AI & Data Science -->
                     <div class="p-6 rounded-2xl bg-white dark:bg-slate-800/40 border border-slate-100 dark:border-slate-850 shadow-sm space-y-4">
                         <div class="w-10 h-10 rounded-xl bg-blue-100 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400 flex items-center justify-center">
-                            <i data-lucide="database" class="w-5 h-5"></i>
+                            <i data-lucide="brain-circuit" class="w-5 h-5"></i>
                         </div>
-                        <h3 class="font-bold text-lg">Backend Systems</h3>
+                        <h3 class="font-bold text-lg">AI & Data Science</h3>
                         <ul class="space-y-2 text-sm text-slate-500 dark:text-slate-400">
-                            <li>Node.js / Express</li>
-                            <li>Python / Django</li>
-                            <li>PostgreSQL / MySQL</li>
-                            <li>REST & GraphQL APIs</li>
+                            <li>TensorFlow & Keras</li>
+                            <li>Scikit-Learn & OpenCV</li>
+                            <li>Pandas & NumPy</li>
+                            <li>LangChain & LLMs</li>
                         </ul>
                     </div>
 
-                    <!-- Tools & Cloud -->
+                    <!-- Hardware & CAD -->
                     <div class="p-6 rounded-2xl bg-white dark:bg-slate-800/40 border border-slate-100 dark:border-slate-850 shadow-sm space-y-4">
                         <div class="w-10 h-10 rounded-xl bg-green-100 dark:bg-green-950/50 text-green-600 dark:text-green-400 flex items-center justify-center">
-                            <i data-lucide="cloud" class="w-5 h-5"></i>
+                            <i data-lucide="cpu" class="w-5 h-5"></i>
                         </div>
-                        <h3 class="font-bold text-lg">DevOps & Cloud</h3>
+                        <h3 class="font-bold text-lg">Robotics & CAD</h3>
                         <ul class="space-y-2 text-sm text-slate-500 dark:text-slate-400">
-                            <li>Git & GitHub Actions</li>
-                            <li>Docker Containers</li>
-                            <li>AWS Cloud Engine</li>
-                            <li>Vercel & Netlify</li>
+                            <li>AutoCAD & SolidWorks</li>
+                            <li>Autodesk Inventor</li>
+                            <li>Arduino & ESP32</li>
+                            <li>Ansys & Simulink</li>
                         </ul>
                     </div>
 
-                    <!-- Design & Method -->
+                    <!-- Utilities & Tools -->
                     <div class="p-6 rounded-2xl bg-white dark:bg-slate-800/40 border border-slate-100 dark:border-slate-850 shadow-sm space-y-4">
                         <div class="w-10 h-10 rounded-xl bg-purple-100 dark:bg-purple-950/50 text-purple-600 dark:text-purple-400 flex items-center justify-center">
-                            <i data-lucide="figma" class="w-5 h-5"></i>
+                            <i data-lucide="wrench" class="w-5 h-5"></i>
                         </div>
-                        <h3 class="font-bold text-lg">UI/UX & Operations</h3>
+                        <h3 class="font-bold text-lg">Utilities & Cloud</h3>
                         <ul class="space-y-2 text-sm text-slate-500 dark:text-slate-400">
-                            <li>Figma Prototyping</li>
-                            <li>Component Libraries</li>
-                            <li>Agile / Scrum</li>
-                            <li>A/B Conversion Testing</li>
+                            <li>Git / GitHub</li>
+                            <li>PowerBI & Tableau</li>
+                            <li>AWS EC2 & MySQL</li>
+                            <li>LaTeX & Streamlit</li>
                         </ul>
                     </div>
                 </div>
@@ -250,117 +249,117 @@
                 <div class="flex flex-col md:flex-row items-start md:items-end justify-between gap-6">
                     <div class="space-y-3">
                         <span class="text-xs font-bold uppercase tracking-widest text-brand-600 dark:text-brand-400">Portfolio</span>
-                        <h2 class="text-3xl font-extrabold sm:text-4xl">Featured Creations</h2>
-                        <p class="text-slate-500 dark:text-slate-400">A handpicked list of projects that represent my technical skill level.</p>
+                        <h2 class="text-3xl font-extrabold sm:text-4xl">Featured Projects</h2>
+                        <p class="text-slate-500 dark:text-slate-400">A selection of my best work across Machine Learning, Robotics, and IoT.</p>
                     </div>
 
                     <!-- Category Filters -->
                     <div class="flex flex-wrap gap-2" id="filter-container">
-                        <button data-filter="all" class="px-4 py-2 rounded-lg text-sm font-medium bg-brand-600 text-white shadow-sm transition">All Work</button>
-                        <button data-filter="web" class="px-4 py-2 rounded-lg text-sm font-medium bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 transition">Web Apps</button>
-                        <button data-filter="mobile" class="px-4 py-2 rounded-lg text-sm font-medium bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 transition">Mobile</button>
-                        <button data-filter="design" class="px-4 py-2 rounded-lg text-sm font-medium bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 transition">UI Design</button>
+                        <button data-filter="all" class="px-4 py-2 rounded-lg text-sm font-medium bg-brand-600 text-white shadow-sm transition">All Projects</button>
+                        <button data-filter="ml" class="px-4 py-2 rounded-lg text-sm font-medium bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 transition">AI & ML</button>
+                        <button data-filter="robotics" class="px-4 py-2 rounded-lg text-sm font-medium bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 transition">Robotics</button>
+                        <button data-filter="hardware" class="px-4 py-2 rounded-lg text-sm font-medium bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 transition">Hardware / IoT</button>
                     </div>
                 </div>
 
                 <!-- Projects Grid -->
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-grid">
-                    <!-- Project Card 1 -->
-                    <div class="group relative bg-white dark:bg-slate-800/80 border border-slate-100 dark:border-slate-750 rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 flex flex-col justify-between" data-category="web">
+                    
+                    <!-- Project Card 1: RAG Chatbot -->
+                    <div class="group relative bg-white dark:bg-slate-800/80 border border-slate-100 dark:border-slate-750 rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 flex flex-col justify-between" data-category="ml">
                         <div>
-                            <!-- Aspect ratio card header with cool gradient background instead of heavy image URL -->
-                            <div class="aspect-video w-full bg-gradient-to-br from-purple-500 to-indigo-600 relative p-6 flex flex-col justify-between text-white">
+                            <div class="aspect-video w-full bg-gradient-to-br from-indigo-500 to-purple-600 relative p-6 flex flex-col justify-between text-white">
                                 <div class="flex justify-between items-start">
-                                    <span class="px-2.5 py-1 rounded-full text-xs font-medium bg-white/20 backdrop-blur-sm">Next.js • Node</span>
+                                    <span class="px-2.5 py-1 rounded-full text-xs font-medium bg-white/20 backdrop-blur-sm">LangChain • Python</span>
                                     <i data-lucide="external-link" class="w-5 h-5 text-white/80 group-hover:scale-110 transition"></i>
                                 </div>
                                 <div>
-                                    <h4 class="text-xl font-bold">Zenith SaaS Dashboard</h4>
+                                    <h4 class="text-xl font-bold">RAG-based Job Chatbot</h4>
                                 </div>
                             </div>
                             <div class="p-6 space-y-3">
                                 <p class="text-sm text-slate-500 dark:text-slate-400 line-clamp-3">
-                                    A real-time financial tracking platform featuring modern data visualization, multi-tenant databases, and customizable widgets.
+                                    Developed an LLM-powered RAG chatbot to compare scraped data from 100+ companies, designed specifically to assist freshers in job applications with conversational memory.
                                 </p>
                             </div>
                         </div>
                         <div class="p-6 pt-0">
-                            <button onclick="openModal('zenith')" class="w-full text-center py-2.5 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-brand-50 dark:hover:bg-brand-950/20 text-brand-600 dark:text-brand-400 font-medium text-sm transition-all">
+                            <button onclick="openModal('chatbot')" class="w-full text-center py-2.5 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-brand-50 dark:hover:bg-brand-950/20 text-brand-600 dark:text-brand-400 font-medium text-sm transition-all">
                                 Project Overview
                             </button>
                         </div>
                     </div>
 
-                    <!-- Project Card 2 -->
-                    <div class="group relative bg-white dark:bg-slate-800/80 border border-slate-100 dark:border-slate-750 rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 flex flex-col justify-between" data-category="mobile">
+                    <!-- Project Card 2: Optimized Robotic Navigation -->
+                    <div class="group relative bg-white dark:bg-slate-800/80 border border-slate-100 dark:border-slate-750 rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 flex flex-col justify-between" data-category="robotics">
                         <div>
                             <div class="aspect-video w-full bg-gradient-to-br from-emerald-500 to-teal-600 relative p-6 flex flex-col justify-between text-white">
                                 <div class="flex justify-between items-start">
-                                    <span class="px-2.5 py-1 rounded-full text-xs font-medium bg-white/20 backdrop-blur-sm">React Native • Expo</span>
+                                    <span class="px-2.5 py-1 rounded-full text-xs font-medium bg-white/20 backdrop-blur-sm">MATLAB • Algorithms</span>
                                     <i data-lucide="external-link" class="w-5 h-5 text-white/80 group-hover:scale-110 transition"></i>
                                 </div>
                                 <div>
-                                    <h4 class="text-xl font-bold">NutriFit Health Tracker</h4>
+                                    <h4 class="text-xl font-bold">Robotic Navigation System</h4>
                                 </div>
                             </div>
                             <div class="p-6 space-y-3">
                                 <p class="text-sm text-slate-500 dark:text-slate-400 line-clamp-3">
-                                    A gorgeous iOS & Android lifestyle application delivering custom food intake analytics, active water goals, and step counting with device sensor integration.
+                                    Simulated a 3-DOF planner arm using advanced path planning algorithms (Dijkstra, A*, Potential Field) to safely map and traverse C-spaces while avoiding dynamic obstacles.
                                 </p>
                             </div>
                         </div>
                         <div class="p-6 pt-0">
-                            <button onclick="openModal('nutrifit')" class="w-full text-center py-2.5 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-brand-50 dark:hover:bg-brand-950/20 text-brand-600 dark:text-brand-400 font-medium text-sm transition-all">
+                            <button onclick="openModal('navigation')" class="w-full text-center py-2.5 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-brand-50 dark:hover:bg-brand-950/20 text-brand-600 dark:text-brand-400 font-medium text-sm transition-all">
                                 Project Overview
                             </button>
                         </div>
                     </div>
 
-                    <!-- Project Card 3 -->
-                    <div class="group relative bg-white dark:bg-slate-800/80 border border-slate-100 dark:border-slate-750 rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 flex flex-col justify-between" data-category="design">
-                        <div>
-                            <div class="aspect-video w-full bg-gradient-to-br from-pink-500 to-rose-600 relative p-6 flex flex-col justify-between text-white">
-                                <div class="flex justify-between items-start">
-                                    <span class="px-2.5 py-1 rounded-full text-xs font-medium bg-white/20 backdrop-blur-sm">Figma • Framer</span>
-                                    <i data-lucide="external-link" class="w-5 h-5 text-white/80 group-hover:scale-110 transition"></i>
-                                </div>
-                                <div>
-                                    <h4 class="text-xl font-bold">Aura Travel Design System</h4>
-                                </div>
-                            </div>
-                            <div class="p-6 space-y-3">
-                                <p class="text-sm text-slate-500 dark:text-slate-400 line-clamp-3">
-                                    A clean, modular visual asset strategy crafted to support multi-platform designs including mobile travel bookings, hotel listings, and digital boarding passes.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="p-6 pt-0">
-                            <button onclick="openModal('aura')" class="w-full text-center py-2.5 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-brand-50 dark:hover:bg-brand-950/20 text-brand-600 dark:text-brand-400 font-medium text-sm transition-all">
-                                Project Overview
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Project Card 4 -->
-                    <div class="group relative bg-white dark:bg-slate-800/80 border border-slate-100 dark:border-slate-750 rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 flex flex-col justify-between" data-category="web">
+                    <!-- Project Card 3: Smart Ride Navigator -->
+                    <div class="group relative bg-white dark:bg-slate-800/80 border border-slate-100 dark:border-slate-750 rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 flex flex-col justify-between" data-category="hardware">
                         <div>
                             <div class="aspect-video w-full bg-gradient-to-br from-amber-500 to-orange-600 relative p-6 flex flex-col justify-between text-white">
                                 <div class="flex justify-between items-start">
-                                    <span class="px-2.5 py-1 rounded-full text-xs font-medium bg-white/20 backdrop-blur-sm">PostgreSQL • Py</span>
+                                    <span class="px-2.5 py-1 rounded-full text-xs font-medium bg-white/20 backdrop-blur-sm">ESP32 • Android App</span>
                                     <i data-lucide="external-link" class="w-5 h-5 text-white/80 group-hover:scale-110 transition"></i>
                                 </div>
                                 <div>
-                                    <h4 class="text-xl font-bold">Atlas Logistics Engine</h4>
+                                    <h4 class="text-xl font-bold">Smart Ride Navigator</h4>
                                 </div>
                             </div>
                             <div class="p-6 space-y-3">
                                 <p class="text-sm text-slate-500 dark:text-slate-400 line-clamp-3">
-                                    An algorithmic warehouse router maximizing fleet logistics efficiency. Built with Django, integrated with complex geospatial plotting structures.
+                                    A patented haptic-based navigation system to enhance biker safety. Translates Google Maps directions via Bluetooth to an ESP32 controlling handlebar haptics.
                                 </p>
                             </div>
                         </div>
                         <div class="p-6 pt-0">
-                            <button onclick="openModal('atlas')" class="w-full text-center py-2.5 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-brand-50 dark:hover:bg-brand-950/20 text-brand-600 dark:text-brand-400 font-medium text-sm transition-all">
+                            <button onclick="openModal('ride')" class="w-full text-center py-2.5 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-brand-50 dark:hover:bg-brand-950/20 text-brand-600 dark:text-brand-400 font-medium text-sm transition-all">
+                                Project Overview
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Project Card 4: ML OCR -->
+                    <div class="group relative bg-white dark:bg-slate-800/80 border border-slate-100 dark:border-slate-750 rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 flex flex-col justify-between" data-category="ml">
+                        <div>
+                            <div class="aspect-video w-full bg-gradient-to-br from-blue-500 to-cyan-600 relative p-6 flex flex-col justify-between text-white">
+                                <div class="flex justify-between items-start">
+                                    <span class="px-2.5 py-1 rounded-full text-xs font-medium bg-white/20 backdrop-blur-sm">TensorFlow • SVM</span>
+                                    <i data-lucide="external-link" class="w-5 h-5 text-white/80 group-hover:scale-110 transition"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-xl font-bold">ML Character Recognition</h4>
+                                </div>
+                            </div>
+                            <div class="p-6 space-y-3">
+                                <p class="text-sm text-slate-500 dark:text-slate-400 line-clamp-3">
+                                    Designed a sophisticated CNN architecture and trained multiple classifiers (LR, SVM, RF) to achieve high-accuracy Optical Character Recognition using advanced image processing.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="p-6 pt-0">
+                            <button onclick="openModal('ocr')" class="w-full text-center py-2.5 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-brand-50 dark:hover:bg-brand-950/20 text-brand-600 dark:text-brand-400 font-medium text-sm transition-all">
                                 Project Overview
                             </button>
                         </div>
@@ -370,11 +369,11 @@
         </section>
 
         <!-- Professional Experience Section -->
-        <section class="py-20">
+        <section id="experience" class="py-20">
             <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
                 <div class="text-center space-y-3">
                     <span class="text-xs font-bold uppercase tracking-widest text-brand-600 dark:text-brand-400">My Path</span>
-                    <h2 class="text-3xl font-extrabold sm:text-4xl">Work Experience</h2>
+                    <h2 class="text-3xl font-extrabold sm:text-4xl">Experience & Leadership</h2>
                 </div>
 
                 <div class="relative border-l border-slate-200 dark:border-slate-800 ml-4 sm:ml-6 space-y-10">
@@ -384,11 +383,11 @@
                             <span class="h-2 w-2 rounded-full bg-brand-600"></span>
                         </span>
                         <div class="space-y-1">
-                            <span class="inline-block px-2.5 py-0.5 rounded text-xs font-medium bg-brand-50 dark:bg-brand-950/40 text-brand-700 dark:text-brand-400">2023 - Present</span>
-                            <h3 class="font-bold text-xl">Senior Frontend Developer</h3>
-                            <p class="text-sm font-semibold text-slate-500 dark:text-slate-400">Vertex Solutions Group</p>
+                            <span class="inline-block px-2.5 py-0.5 rounded text-xs font-medium bg-brand-50 dark:bg-brand-950/40 text-brand-700 dark:text-brand-400">Jun '24 - Jul '24</span>
+                            <h3 class="font-bold text-xl">Data Science Intern</h3>
+                            <p class="text-sm font-semibold text-slate-500 dark:text-slate-400">Deepjob Technology Pvt. Ltd / MyAnalytics School</p>
                             <p class="text-sm text-slate-600 dark:text-slate-300 max-w-2xl mt-2 leading-relaxed">
-                                Lead a remote team of 6 engineers to maintain and construct scalable SaaS infrastructure components. Increased visual dashboard optimization scores by over 35%.
+                                Developed a RAG-based chatbot using LangChain and web-scraped data to assist freshers. Integrated ChromaDB, optimized cross-encoders for re-ranking, and deployed the Streamlit interface on AWS EC2. Achieved an 85% accuracy with 2-second response times, increasing platform users by 20%.
                             </p>
                         </div>
                     </div>
@@ -399,11 +398,11 @@
                             <span class="h-2 w-2 rounded-full bg-brand-600"></span>
                         </span>
                         <div class="space-y-1">
-                            <span class="inline-block px-2.5 py-0.5 rounded text-xs font-medium bg-brand-50 dark:bg-brand-950/40 text-brand-700 dark:text-brand-400">2020 - 2023</span>
-                            <h3 class="font-bold text-xl">Full Stack Software Engineer</h3>
-                            <p class="text-sm font-semibold text-slate-500 dark:text-slate-400">Aero Digital Studio</p>
+                            <span class="inline-block px-2.5 py-0.5 rounded text-xs font-medium bg-brand-50 dark:bg-brand-950/40 text-brand-700 dark:text-brand-400">Dec '23 - May '24</span>
+                            <h3 class="font-bold text-xl">Undergraduate Researcher (UAVs)</h3>
+                            <p class="text-sm font-semibold text-slate-500 dark:text-slate-400">IIT Kanpur (Under Prof. Abhishek)</p>
                             <p class="text-sm text-slate-600 dark:text-slate-300 max-w-2xl mt-2 leading-relaxed">
-                                Managed end-to-end cloud deployments using AWS Elastic Beanstalk and GitHub actions. Championed micro-interactions on product pages, increasing customer conversion rates.
+                                Researched and designed next-gen folding wing mechanisms for UAVs. Utilized Autodesk Inventor for modeling 4-bar linkage mechanisms and rigorously tested 3D-printed prototypes. Contributed significantly to high-altitude optimization in Kalam Lab.
                             </p>
                         </div>
                     </div>
@@ -414,11 +413,11 @@
                             <span class="h-2 w-2 rounded-full bg-brand-600"></span>
                         </span>
                         <div class="space-y-1">
-                            <span class="inline-block px-2.5 py-0.5 rounded text-xs font-medium bg-brand-50 dark:bg-brand-950/40 text-brand-700 dark:text-brand-400">2018 - 2020</span>
-                            <h3 class="font-bold text-xl">Junior Developer & UI designer</h3>
-                            <p class="text-sm font-semibold text-slate-500 dark:text-slate-400">Inbound Software Systems</p>
+                            <span class="inline-block px-2.5 py-0.5 rounded text-xs font-medium bg-brand-50 dark:bg-brand-950/40 text-brand-700 dark:text-brand-400">May '23 - Apr '24</span>
+                            <h3 class="font-bold text-xl">Coordinator, Aeromodelling Club</h3>
+                            <p class="text-sm font-semibold text-slate-500 dark:text-slate-400">IIT Kanpur</p>
                             <p class="text-sm text-slate-600 dark:text-slate-300 max-w-2xl mt-2 leading-relaxed">
-                                Assisted engineering pipelines with automated UI test coverages. Designed visual components in Figma before direct code-translation workflows.
+                                Led a team of 25+ secretaries and mentored the development of a UAV Military Drone (MQ-9 Reaper replica), earning recognition from the Indian Army. Successfully guided teams to the finals of the Boeing Aeromodelling Competition at Techfest, IIT Bombay.
                             </p>
                         </div>
                     </div>
@@ -436,7 +435,7 @@
                         <span class="text-xs font-bold uppercase tracking-widest text-brand-600 dark:text-brand-400">Get in Touch</span>
                         <h2 class="text-3xl font-extrabold sm:text-4xl">Let's build something fantastic</h2>
                         <p class="text-slate-500 dark:text-slate-400">
-                            Ready to take your product's performance or architecture to the next tier? Reach out! I respond to most inquiries within 24 business hours.
+                            Looking to collaborate on exciting tech projects or have opportunities in Data Science and Software Development? Feel free to reach out!
                         </p>
 
                         <div class="space-y-4 pt-4">
@@ -445,8 +444,18 @@
                                     <i data-lucide="mail" class="w-5 h-5"></i>
                                 </div>
                                 <div>
-                                    <p class="text-xs text-slate-400 font-semibold uppercase">Email Me Directly</p>
-                                    <a href="mailto:hello@alexmorgan.dev" class="font-medium text-slate-700 dark:text-slate-200 hover:text-brand-600 transition">hello@alexmorgan.dev</a>
+                                    <p class="text-xs text-slate-400 font-semibold uppercase">Email Me</p>
+                                    <a href="mailto:sk7370066@gmail.com" class="font-medium text-slate-700 dark:text-slate-200 hover:text-brand-600 transition">sk7370066@gmail.com</a>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center gap-4">
+                                <div class="w-11 h-11 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-brand-600 dark:text-brand-400">
+                                    <i data-lucide="phone" class="w-5 h-5"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-slate-400 font-semibold uppercase">Phone</p>
+                                    <a href="tel:+918709021300" class="font-medium text-slate-700 dark:text-slate-200 hover:text-brand-600 transition">+91 8709021300</a>
                                 </div>
                             </div>
 
@@ -455,8 +464,8 @@
                                     <i data-lucide="map-pin" class="w-5 h-5"></i>
                                 </div>
                                 <div>
-                                    <p class="text-xs text-slate-400 font-semibold uppercase">Current Location</p>
-                                    <p class="font-medium text-slate-700 dark:text-slate-200">San Francisco, California</p>
+                                    <p class="text-xs text-slate-400 font-semibold uppercase">Location</p>
+                                    <p class="font-medium text-slate-700 dark:text-slate-200">IIT Kanpur, UP, India</p>
                                 </div>
                             </div>
                         </div>
@@ -483,7 +492,7 @@
 
                             <div class="space-y-1.5">
                                 <label for="form-message" class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase">Your Message</label>
-                                <textarea id="form-message" rows="5" required class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900/50 focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 outline-none transition resize-none" placeholder="Describe your project, timeline, or thoughts here..."></textarea>
+                                <textarea id="form-message" rows="5" required class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900/50 focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 outline-none transition resize-none" placeholder="Describe your inquiry here..."></textarea>
                             </div>
 
                             <button type="submit" class="w-full py-4 px-6 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-medium shadow-md shadow-brand-500/10 hover:shadow-brand-500/25 transition-all flex items-center justify-center gap-2">
@@ -503,13 +512,13 @@
     <footer class="border-t border-slate-200 dark:border-slate-850 py-12 bg-white dark:bg-slate-900 transition-colors">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
             <p class="text-sm text-slate-400">
-                &copy; 2026 Sujeet Kumar. Built with modern web craft. All rights reserved.
+                &copy; 2026 Sujeet Kumar. Built with code & passion.
             </p>
             <div class="flex gap-6 text-sm text-slate-400">
                 <a href="#about" class="hover:text-brand-500 transition">About</a>
                 <a href="#skills" class="hover:text-brand-500 transition">Skills</a>
                 <a href="#projects" class="hover:text-brand-500 transition">Projects</a>
-                <a href="#contact" class="hover:text-brand-500 transition">Contact</a>
+                <a href="#experience" class="hover:text-brand-500 transition">Experience</a>
             </div>
         </div>
     </footer>
@@ -538,7 +547,7 @@
         </div>
         <div>
             <p class="font-bold text-sm">Message Sent Successfully!</p>
-            <p class="text-xs text-emerald-100">Thank you, I will get back to you shortly.</p>
+            <p class="text-xs text-emerald-100">Thank you, I will respond to you shortly.</p>
         </div>
     </div>
 
@@ -554,7 +563,6 @@
         const sunIcon = document.getElementById('sun-icon');
         const moonIcon = document.getElementById('moon-icon');
 
-        // Check local storage or system preference
         if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
             sunIcon.classList.remove('hidden');
@@ -589,7 +597,6 @@
             mobileMenu.classList.toggle('hidden');
         });
 
-        // Close mobile menu when links are clicked
         mobileMenu.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
                 mobileMenu.classList.add('hidden');
@@ -604,7 +611,6 @@
 
         filterButtons.forEach(btn => {
             btn.addEventListener('click', () => {
-                // Update active states
                 filterButtons.forEach(b => {
                     b.className = 'px-4 py-2 rounded-lg text-sm font-medium bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 transition';
                 });
@@ -624,35 +630,55 @@
         });
 
         // -------------------------
-        // Project Overview Modals Data & Flow
+        // Project Overview Modals Data
         // -------------------------
         const modalElement = document.getElementById('project-modal');
         const modalContent = document.getElementById('modal-content');
 
         const projectDetails = {
-            zenith: {
-                title: "Zenith SaaS Dashboard",
-                tech: "React, Node.js, ChartsJS, WebSockets",
-                desc: "A performant telemetry monitoring dashboard built to handle millions of transactions with complex live analytical feedback. Integrates fully customized webhooks, microservice routing patterns, and customizable dynamic visualization boards.",
-                features: ["Low Latency Event Stream processing Engine", "Adaptive dynamic chart UI resizing structure", "Premium security access controls with Auth0 integration"]
+            chatbot: {
+                title: "RAG-based Job Chatbot",
+                tech: "Python, LangChain, ChromaDB, AWS EC2, Streamlit",
+                desc: "An intelligent retrieval-augmented generation (RAG) chatbot created during my internship. Built to process data scraped from over 100 job portals, helping freshers accurately find and compare job requirements based on conversational queries.",
+                features: [
+                    "Recursive text chunking & advanced embedding vectors stored in ChromaDB",
+                    "Integrated Cross-Encoder to re-rank outputs, boosting context relevance to 85%",
+                    "Conversation buffer memory ensuring fluid, multi-turn dialogues",
+                    "Handled AWS EC2 deployment and integration with Streamlit interface"
+                ]
             },
-            nutrifit: {
-                title: "NutriFit Health Tracker",
-                tech: "React Native, Expo, Redux Toolkit",
-                desc: "A wellness product mapping metrics from daily steps, workouts, calorie integrations, and active sleep schedules. Designed optimized local database structures to handle offline operations flawlessly.",
-                features: ["Offline first data synching structure", "Custom circular dashboard visualization graphs", "Rich mobile native step sensing hook mechanisms"]
+            navigation: {
+                title: "Optimized Robotic Navigation",
+                tech: "MATLAB, Path Planning Algorithms",
+                desc: "A highly sophisticated MATLAB simulation program mapping configuration spaces (C-space) for a 3-DOF planner arm. Programmed the robot to seamlessly detect goals and avoid dynamic obstacles.",
+                features: [
+                    "Implementation of Dijkstra's Shortest Path & A* graph-traversal logic",
+                    "Employed Potential Field techniques for obstacle repelling and goal attraction",
+                    "Simulated Visibility Graph, Bushfire, and Dynamic RRT algorithms",
+                    "Applied gradient descent to continuously optimize pathways"
+                ]
             },
-            aura: {
-                title: "Aura Travel Design System",
-                tech: "Figma Components, Atomic Style Guides, Typography mapping",
-                desc: "Visual language blueprints designed to scale. Aura ensures brand integrity and design-to-code translations are flawless. Focuses on high-fidelity user-journey pathways for flight lookups and seat map selectors.",
-                features: ["250+ responsive accessible UI variables", "Consistent light/dark theme structural logic", "Pre-built visual documentation boards"]
+            ride: {
+                title: "Smart Ride Navigator",
+                tech: "ESP32, MIT App Inventor, Bluetooth, Autodesk Inventor",
+                desc: "A hardware-software safety ecosystem allowing motorcycle riders to receive navigation prompts without looking at a screen. Physical haptic vibrations on the handlebars instruct the driver based on synced Google Maps data. (Patent Filed)",
+                features: [
+                    "Custom Android Application transmitting real-time routing instructions via Bluetooth",
+                    "Programmed ESP32 logic to trigger precise directional haptic motors",
+                    "Physical enclosures strictly crafted and 3D printed via Autodesk Inventor",
+                    "Significantly reduced reliance on audio-visual cues for urban mobility safety"
+                ]
             },
-            atlas: {
-                title: "Atlas Logistics Engine",
-                tech: "Python, Django, PostgreSQL, Google Maps Geo API",
-                desc: "A massive distribution planning application configured to determine real-time route optimization solutions. Integrates dynamic route maps, inventory reports, and heavy custom geo-routing analytics.",
-                features: ["Geo-fencing status events system", "Highly responsive dynamic routing layout", "CSV report export structures"]
+            ocr: {
+                title: "ML Optical Character Recognition",
+                tech: "Python, TensorFlow, Scikit-Learn, OpenCV",
+                desc: "A robust computer vision pipeline designed from scratch to extract text from unstructured images. Compared various classifier models and deep learning architectures to pinpoint peak optimization limits.",
+                features: [
+                    "Engineered a multi-layered CNN Sequential architecture with pooling constraints",
+                    "Trained robust LR, SVM, and RF classifiers with k-fold cross validation",
+                    "Applied complex OpenCV image thresholds (Erosion, Dilation, Median Filter)",
+                    "Achieved a highly consistent 80.43% test-set accuracy via GridSearchCV"
+                ]
             }
         };
 
@@ -676,25 +702,21 @@
                     </ul>
                 </div>
                 <div class="pt-4 flex gap-4">
-                    <a href="#" class="flex-1 text-center py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-medium text-sm transition">
-                        Visit Live Demo
-                    </a>
-                    <button onclick="closeModal()" class="px-5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition font-medium text-sm">
-                        Close
+                    <button onclick="closeModal()" class="w-full px-5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition font-medium text-sm">
+                        Close Modal
                     </button>
                 </div>
             `;
 
             modalElement.classList.remove('hidden');
-            document.body.style.overflow = 'hidden'; // Stop background scrolling
+            document.body.style.overflow = 'hidden';
         }
 
         function closeModal() {
             modalElement.classList.add('hidden');
-            document.body.style.overflow = ''; // Resume scrolling
+            document.body.style.overflow = '';
         }
 
-        // Close on Escape Key
         window.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') closeModal();
         });
@@ -718,7 +740,6 @@
             toast.classList.remove('translate-y-12', 'opacity-0', 'pointer-events-none');
             toast.classList.add('translate-y-0', 'opacity-100');
 
-            // Automatically hide Toast after 4.5 seconds
             setTimeout(() => {
                 toast.classList.remove('translate-y-0', 'opacity-100');
                 toast.classList.add('translate-y-12', 'opacity-0', 'pointer-events-none');

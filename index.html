@@ -1,172 +1,344 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="dark scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sujeet Kumar | Portfolio</title>
+    <title>Sujeet Kumar | Engineering Command Center</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Typed.js for typing animation -->
+    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+    <!-- Vanilla Tilt for 3D card effects -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
     <script>
         tailwind.config = {
             darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
-                        brand: {
-                            50: '#f0f9ff',
-                            100: '#e0f2fe',
-                            500: '#0ea5e9',
-                            600: '#0284c7',
-                            700: '#0369a1',
-                        }
+                        space: '#050816',
+                        navy: '#0B1120',
+                        cyan: {
+                            400: '#00E5FF',
+                            500: '#00B3CC',
+                        },
+                        aero: '#0099FF',
+                        neon: '#00FFB3',
+                        warning: '#FF7A00',
+                    },
+                    fontFamily: {
+                        orbitron: ['Orbitron', 'sans-serif'],
+                        rajdhani: ['Rajdhani', 'sans-serif'],
+                        inter: ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'spin-slow': 'spin 12s linear infinite',
+                        'spin-reverse': 'spin 15s linear infinite reverse',
+                        'pulse-fast': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
                     }
                 }
             }
         }
     </script>
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-</head>
-<body class="bg-slate-50 text-slate-800 dark:bg-slate-900 dark:text-slate-100 transition-colors duration-300 font-sans antialiased">
 
-    <!-- Top Navigation Bar -->
-    <header class="fixed top-0 left-0 w-full z-40 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-colors duration-300">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-            <a href="#hero" class="text-xl font-bold bg-gradient-to-r from-brand-600 to-blue-500 bg-clip-text text-transparent hover:opacity-80 transition">
-                &lt;Sujeet /&gt;
+    <style>
+        body {
+            background-color: #050816;
+            color: #e2e8f0;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 { font-family: 'Orbitron', sans-serif; }
+        .font-rajdhani { font-family: 'Rajdhani', sans-serif; }
+
+        /* CRT Scanline Overlay */
+        .scanlines {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0, 229, 255, 0.05) 50%, rgba(0, 229, 255, 0.05));
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* HUD Glassmorphism Panels */
+        .hud-panel {
+            background: rgba(11, 17, 32, 0.6);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(0, 229, 255, 0.2);
+            box-shadow: 0 0 15px rgba(0, 229, 255, 0.05) inset;
+            transition: all 0.3s ease;
+        }
+        .hud-panel:hover {
+            border-color: #00E5FF;
+            box-shadow: 0 0 20px rgba(0, 229, 255, 0.2), 0 0 10px rgba(0, 229, 255, 0.1) inset;
+        }
+
+        /* Interactive Elements */
+        .cyber-button {
+            position: relative;
+            background: rgba(0, 229, 255, 0.1);
+            border: 1px solid #00E5FF;
+            color: #00E5FF;
+            text-transform: uppercase;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 2px;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+        .cyber-button:hover {
+            background: #00E5FF;
+            color: #050816;
+            box-shadow: 0 0 20px #00E5FF;
+        }
+        .cyber-button::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: 0.5s;
+        }
+        .cyber-button:hover::before { left: 100%; }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #050816; }
+        ::-webkit-scrollbar-thumb { background: #0099FF; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #00E5FF; }
+
+        /* Terminal Inputs */
+        .terminal-input {
+            background: rgba(11, 17, 32, 0.8);
+            border: 1px solid rgba(0, 229, 255, 0.3);
+            color: #00FFB3;
+            font-family: 'Rajdhani', sans-serif;
+            transition: 0.3s;
+        }
+        .terminal-input:focus {
+            outline: none;
+            border-color: #00FFB3;
+            box-shadow: 0 0 15px rgba(0, 255, 179, 0.2) inset, 0 0 10px rgba(0, 255, 179, 0.4);
+        }
+        .terminal-input::placeholder { color: rgba(0, 229, 255, 0.4); }
+
+        /* Canvas Grid */
+        #bg-canvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            z-index: -1;
+            opacity: 0.4;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-cyan-400 selection:text-space relative">
+
+    <!-- Global Scanline Overlay -->
+    <div class="scanlines"></div>
+    
+    <!-- Dynamic Canvas Background -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Top Navigation HUD -->
+    <header class="fixed top-0 left-0 w-full z-40 bg-navy/70 backdrop-blur-md border-b border-cyan-500/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <a href="#hero" class="flex items-center gap-3 group">
+                <div class="w-2 h-2 bg-neon rounded-full animate-pulse-fast shadow-[0_0_10px_#00FFB3]"></div>
+                <span class="text-sm font-orbitron text-cyan-400 tracking-widest group-hover:text-white transition">SK // SYSTEM_ONLINE</span>
             </a>
 
             <!-- Desktop Nav Links -->
-            <nav class="hidden md:flex items-center space-x-8">
-                <a href="#about" class="text-sm font-medium hover:text-brand-600 dark:hover:text-brand-500 transition-colors">About</a>
-                <a href="#skills" class="text-sm font-medium hover:text-brand-600 dark:hover:text-brand-500 transition-colors">Skills</a>
-                <a href="#projects" class="text-sm font-medium hover:text-brand-600 dark:hover:text-brand-500 transition-colors">Projects</a>
-                <a href="#experience" class="text-sm font-medium hover:text-brand-600 dark:hover:text-brand-500 transition-colors">Experience</a>
-                <a href="#contact" class="text-sm font-medium hover:text-brand-600 dark:hover:text-brand-500 transition-colors">Contact</a>
+            <nav class="hidden md:flex items-center space-x-8 font-rajdhani text-sm tracking-widest">
+                <a href="#about" class="text-slate-400 hover:text-cyan-400 transition-colors flex items-center gap-1"><span class="text-cyan-500/50">01.</span> PROFILE</a>
+                <a href="#skills" class="text-slate-400 hover:text-cyan-400 transition-colors flex items-center gap-1"><span class="text-cyan-500/50">02.</span> CAPABILITIES</a>
+                <a href="#projects" class="text-slate-400 hover:text-cyan-400 transition-colors flex items-center gap-1"><span class="text-cyan-500/50">03.</span> MISSIONS</a>
+                <a href="#experience" class="text-slate-400 hover:text-cyan-400 transition-colors flex items-center gap-1"><span class="text-cyan-500/50">04.</span> LOGS</a>
+                <a href="#contact" class="text-neon hover:text-white transition-colors flex items-center gap-1"><span class="text-cyan-500/50">05.</span> COMM_LINK</a>
             </nav>
 
-            <!-- Theme Switcher & Mobile Menu Button -->
-            <div class="flex items-center space-x-4">
-                <button id="theme-toggle" class="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition" aria-label="Toggle dark mode">
-                    <i data-lucide="sun" id="sun-icon" class="hidden h-5 w-5 text-amber-500"></i>
-                    <i data-lucide="moon" id="moon-icon" class="h-5 w-5 text-brand-600"></i>
-                </button>
-
-                <button id="mobile-menu-btn" class="p-2 md:hidden rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition" aria-label="Toggle mobile menu">
-                    <i data-lucide="menu" class="h-6 w-6"></i>
-                </button>
-            </div>
+            <button id="mobile-menu-btn" class="p-2 md:hidden text-cyan-400 border border-cyan-500/30 bg-navy hover:bg-cyan-900/30 transition">
+                <i data-lucide="menu" class="h-5 w-5"></i>
+            </button>
         </div>
-
-        <!-- Mobile Nav Menu -->
-        <div id="mobile-menu" class="hidden md:hidden border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-4 py-4 space-y-3">
-            <a href="#about" class="block py-2 text-base font-medium hover:text-brand-600 dark:hover:text-brand-500 transition-colors">About</a>
-            <a href="#skills" class="block py-2 text-base font-medium hover:text-brand-600 dark:hover:text-brand-500 transition-colors">Skills</a>
-            <a href="#projects" class="block py-2 text-base font-medium hover:text-brand-600 dark:hover:text-brand-500 transition-colors">Projects</a>
-            <a href="#experience" class="block py-2 text-base font-medium hover:text-brand-600 dark:hover:text-brand-500 transition-colors">Experience</a>
-            <a href="#contact" class="block py-2 text-base font-medium hover:text-brand-600 dark:hover:text-brand-500 transition-colors">Contact</a>
-        </div>
+        
+        <!-- Crosshairs decorative -->
+        <div class="absolute bottom-0 left-4 w-4 h-4 border-l border-b border-cyan-500/50"></div>
+        <div class="absolute bottom-0 right-4 w-4 h-4 border-r border-b border-cyan-500/50"></div>
     </header>
 
-    <!-- Main Container -->
+    <!-- Mobile Nav Menu -->
+    <div id="mobile-menu" class="hidden fixed inset-0 top-16 z-30 bg-space/95 backdrop-blur-xl border-t border-cyan-500/30 p-6 flex flex-col space-y-6 font-rajdhani text-lg tracking-widest">
+        <a href="#about" class="text-cyan-400 hover:text-white transition border-b border-cyan-500/20 pb-2">> INITIATE: PROFILE</a>
+        <a href="#skills" class="text-cyan-400 hover:text-white transition border-b border-cyan-500/20 pb-2">> INITIATE: CAPABILITIES</a>
+        <a href="#projects" class="text-cyan-400 hover:text-white transition border-b border-cyan-500/20 pb-2">> INITIATE: MISSIONS</a>
+        <a href="#experience" class="text-cyan-400 hover:text-white transition border-b border-cyan-500/20 pb-2">> INITIATE: LOGS</a>
+        <a href="#contact" class="text-neon hover:text-white transition">> ESTABLISH: COMM_LINK</a>
+    </div>
+
     <main class="pt-16">
         
-        <!-- Hero Section -->
-        <section id="hero" class="relative overflow-hidden min-h-[calc(100vh-4rem)] flex items-center justify-center px-4 sm:px-6 lg:px-8 py-12">
-            <!-- Background Accent Blobs -->
-            <div class="absolute top-1/4 left-1/4 w-72 h-72 bg-blue-300 dark:bg-blue-900/30 rounded-full mix-blend-multiply filter blur-2xl opacity-70 animate-pulse -z-10"></div>
-            <div class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-cyan-300 dark:bg-cyan-900/30 rounded-full mix-blend-multiply filter blur-2xl opacity-70 animate-pulse -z-10" style="animation-delay: 2s;"></div>
-
-            <div class="max-w-4xl mx-auto text-center space-y-6">
-                <!-- Status Badge -->
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-green-200 dark:border-green-900/50 bg-green-50 dark:bg-green-950/40 text-green-700 dark:text-green-400 text-sm font-medium animate-bounce">
-                    <span class="w-2.5 h-2.5 bg-green-500 rounded-full animate-ping"></span>
-                    Open for colaboration on AI, Robotic and Aeromodelling
-                </div>
-
-                <h1 class="text-4xl sm:text-6xl font-black tracking-tight leading-none">
-                    Hi, I'm <span class="bg-gradient-to-r from-brand-600 to-cyan-500 bg-clip-text text-transparent">Sujeet Kumar</span>
-                </h1>
+        <!-- Hero Section: COMMAND CENTER -->
+        <section id="hero" class="relative min-h-[calc(100vh-4rem)] flex items-center justify-center px-4 sm:px-6 lg:px-8 py-12 overflow-hidden">
+            <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center w-full relative z-10">
                 
-                <p class="text-xl sm:text-2xl font-semibold text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
-                    Aeromodelling, Robotics Enthusiast and AI
-                </p>
+                <!-- Left: Terminal Readout -->
+                <div class="space-y-6">
+                    <div class="inline-flex items-center gap-3 px-4 py-1.5 border border-warning/50 bg-warning/10 text-warning text-xs font-rajdhani font-bold tracking-widest uppercase">
+                        <i data-lucide="alert-triangle" class="w-4 h-4"></i>
+                        Open for collaboration
+                    </div>
 
-                <p class="text-base sm:text-lg text-slate-500 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
-                    Fourth-Year Undergraduate at IIT Kanpur pursuing B.Tech in Mechanical Engineering with a Minor in Linguistic Theory. Passionate about solving complex problems through AI, scalable data systems, and algorithmic planning.
-                </p>
+                    <div>
+                        <h2 class="text-cyan-500 font-rajdhani tracking-[0.3em] text-sm uppercase mb-2">Lead Systems Operator</h2>
+                        <h1 class="text-5xl sm:text-7xl font-black text-white leading-none tracking-tight">
+                            SUJEET <br>
+                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-aero">KUMAR</span>
+                        </h1>
+                    </div>
+                    
+                    <div class="h-8">
+                        <span class="text-2xl sm:text-3xl font-rajdhani font-bold text-neon">> <span id="typed-output"></span></span>
+                    </div>
 
-                <div class="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
-                    <a href="#projects" class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-brand-600 text-white font-medium hover:bg-brand-700 shadow-lg shadow-brand-500/25 transition duration-200 flex items-center justify-center gap-2">
-                        View My Work
-                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                    </a>
-                    <a href="#contact" class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-medium hover:bg-slate-50 dark:hover:bg-slate-700 transition duration-200 flex items-center justify-center gap-2">
-                        Get In Touch
-                        <i data-lucide="message-square" class="w-4 h-4"></i>
-                    </a>
+                    <p class="text-slate-400 font-inter text-sm sm:text-base max-w-lg leading-relaxed border-l-2 border-cyan-500/30 pl-4 py-1">
+                        Fourth-Year Undergraduate at IIT Kanpur. Passionate about solving complex problems through AI, scalable data systems, robotics logic, and algorithmic flight planning.
+                    </p>
+
+                    <div class="pt-6 flex flex-wrap items-center gap-4 font-rajdhani text-sm">
+                        <a href="#projects" class="cyber-button px-8 py-3 flex items-center gap-2">
+                            Access Archives <i data-lucide="database" class="w-4 h-4"></i>
+                        </a>
+                        <a href="#contact" class="px-8 py-3 border border-slate-600 text-slate-300 hover:border-neon hover:text-neon transition flex items-center gap-2 uppercase tracking-widest bg-navy/50">
+                            Transmit Signal <i data-lucide="radio" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+
+                    <!-- Socials Comm Panel -->
+                    <div class="pt-8 flex gap-6 text-cyan-500/50">
+                        <a href="https://github.com/Sjeetk21" target="_blank" class="hover:text-cyan-400 hover:shadow-[0_0_10px_#00E5FF] transition rounded-full p-2 border border-transparent hover:border-cyan-500/30" aria-label="GitHub"><i data-lucide="github" class="w-5 h-5"></i></a>
+                        <a href="https://linkedin.com/in/sujeet-kumar" target="_blank" class="hover:text-cyan-400 hover:shadow-[0_0_10px_#00E5FF] transition rounded-full p-2 border border-transparent hover:border-cyan-500/30" aria-label="LinkedIn"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
+                        <a href="mailto:sjeetk21@iitk.ac.in" class="hover:text-cyan-400 hover:shadow-[0_0_10px_#00E5FF] transition rounded-full p-2 border border-transparent hover:border-cyan-500/30" aria-label="Email"><i data-lucide="mail" class="w-5 h-5"></i></a>
+                    </div>
                 </div>
 
-                <!-- Socials Panel -->
-                <div class="pt-8 flex justify-center gap-6 text-slate-400 dark:text-slate-500">
-                    <a href="https://github.com/Sjeetk21" target="_blank" class="hover:text-brand-600 dark:hover:text-brand-400 transition" aria-label="GitHub"><i data-lucide="github" class="w-6 h-6"></i></a>
-                    <a href="https://linkedin.com/in/sujeet-kumar" target="_blank" class="hover:text-brand-600 dark:hover:text-brand-400 transition" aria-label="LinkedIn"><i data-lucide="linkedin" class="w-6 h-6"></i></a>
-                    <a href="mailto:sjeetk21@iitk.ac.in" class="hover:text-brand-600 dark:hover:text-brand-400 transition" aria-label="Email"><i data-lucide="mail" class="w-6 h-6"></i></a>
+                <!-- Right: 3D Engineering Dashboard -->
+                <div class="relative h-[500px] w-full flex items-center justify-center hidden lg:flex perspective-1000">
+                    <!-- Central HUD Elements -->
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <!-- Outer rotating ring -->
+                        <svg class="w-96 h-96 animate-spin-slow opacity-30 text-cyan-500" viewBox="0 0 100 100">
+                            <circle cx="50" cy="50" r="48" fill="none" stroke="currentColor" stroke-width="0.5" stroke-dasharray="2 4" />
+                            <circle cx="50" cy="50" r="42" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="10 5" />
+                        </svg>
+                        <!-- Inner rotating ring -->
+                        <svg class="w-72 h-72 animate-spin-reverse opacity-50 text-aero absolute" viewBox="0 0 100 100">
+                            <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="4 8" />
+                            <circle cx="50" cy="50" r="38" fill="none" stroke="currentColor" stroke-width="0.5" />
+                        </svg>
+                        <!-- Central Core Icon (Drone/AI fusion) -->
+                        <div class="absolute text-cyan-300 animate-pulse drop-shadow-[0_0_15px_rgba(0,229,255,0.8)]">
+                            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+                                <circle cx="12" cy="12" r="4"/>
+                                <circle cx="12" cy="12" r="1"/>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Floating Stat Widgets -->
+                    <div data-tilt data-tilt-glare data-tilt-max-glare="0.2" class="absolute top-10 left-0 hud-panel p-4 flex flex-col gap-1 z-20 cursor-default">
+                        <span class="text-xs text-cyan-500 font-rajdhani tracking-widest uppercase">Logic Engine</span>
+                        <span class="text-2xl font-orbitron font-bold text-white">200+</span>
+                        <span class="text-xs text-slate-400 font-inter">Days DSA Streak</span>
+                    </div>
+
+                    <div data-tilt data-tilt-glare data-tilt-max-glare="0.2" class="absolute bottom-20 left-4 hud-panel p-4 flex flex-col gap-1 z-20 cursor-default">
+                        <span class="text-xs text-neon font-rajdhani tracking-widest uppercase">Command Ops</span>
+                        <span class="text-2xl font-orbitron font-bold text-white">15+</span>
+                        <span class="text-xs text-slate-400 font-inter">Team Members Led</span>
+                    </div>
+
+                    <div data-tilt data-tilt-glare data-tilt-max-glare="0.2" class="absolute top-32 right-0 hud-panel p-4 flex flex-col gap-1 z-20 cursor-default">
+                        <span class="text-xs text-warning font-rajdhani tracking-widest uppercase">Archived</span>
+                        <span class="text-2xl font-orbitron font-bold text-white">13+</span>
+                        <span class="text-xs text-slate-400 font-inter">Engr Projects</span>
+                    </div>
+
+                    <div data-tilt data-tilt-glare data-tilt-max-glare="0.2" class="absolute bottom-10 right-10 hud-panel p-4 flex flex-col gap-1 z-20 cursor-default">
+                        <span class="text-xs text-aero font-rajdhani tracking-widest uppercase">R&D output</span>
+                        <span class="text-2xl font-orbitron font-bold text-white">02</span>
+                        <span class="text-xs text-slate-400 font-inter">Patents/Research</span>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- About Me Section -->
-        <section id="about" class="py-20 bg-white dark:bg-slate-900/50 border-y border-slate-100 dark:border-slate-800/50">
-            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- About Section: MISSION PROFILE -->
+        <section id="about" class="py-24 relative border-y border-cyan-900/30 bg-navy/40">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="mb-12 border-l-4 border-cyan-400 pl-4">
+                    <h2 class="text-3xl font-orbitron font-bold text-white uppercase tracking-wider">Mission Profile</h2>
+                    <p class="text-cyan-500 font-rajdhani tracking-[0.2em] text-sm uppercase mt-1">Classification: Mechanical & AI Engineer</p>
+                </div>
+
                 <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
-                    
-                    <!-- Left: Profile Graphic -->
-                    <div class="md:col-span-5 relative group flex justify-center">
-                        <div class="absolute inset-0 bg-gradient-to-tr from-brand-400 to-cyan-500 rounded-2xl transform rotate-3 scale-105 group-hover:rotate-6 transition duration-300 opacity-70"></div>
-                        <div class="relative w-72 h-80 bg-slate-200 dark:bg-slate-800 rounded-2xl overflow-hidden shadow-xl flex items-center justify-center">
-                            <svg class="w-40 h-40 text-brand-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
-                                <path d="M6 12v5c3 3 9 3 12 0v-5"/>
-                            </svg>
+                    <!-- Left: Aerospace SVG Diagram -->
+                    <div class="md:col-span-5 flex justify-center relative">
+                        <div class="w-full aspect-square max-w-sm rounded-full border border-cyan-500/20 flex items-center justify-center relative">
+                            <!-- Radar sweep -->
+                            <div class="absolute inset-0 rounded-full border border-cyan-500/40" style="background: conic-gradient(from 0deg, rgba(0,229,255,0) 70%, rgba(0,229,255,0.2) 100%); animation: spin 4s linear infinite;"></div>
+                            
+                            <!-- Static Grid lines -->
+                            <div class="absolute inset-0 w-full h-full">
+                                <div class="w-[1px] h-full bg-cyan-500/20 absolute left-1/2"></div>
+                                <div class="h-[1px] w-full bg-cyan-500/20 absolute top-1/2"></div>
+                            </div>
+                            
+                            <!-- Center Icon -->
+                            <i data-lucide="satellite" class="w-20 h-20 text-cyan-300 relative z-10 animate-pulse"></i>
                         </div>
                     </div>
 
                     <!-- Right: Narrative -->
                     <div class="md:col-span-7 space-y-6">
-                        <span class="text-xs font-bold uppercase tracking-widest text-brand-600 dark:text-brand-400">My Background</span>
-                        <h2 class="text-3xl font-extrabold sm:text-4xl">Bridging Mechanics, AI, and Innovation</h2>
-                        <p class="text-lg text-slate-600 dark:text-slate-300">
-                            I am a senior undergraduate at the Indian Institute of Technology Kanpur, combining a strong foundation in Mechanical Engineering with advanced knowledge in Machine Learning and Data Science.
+                        <p class="text-lg text-slate-300 font-inter leading-relaxed">
+                            I am a senior undergraduate at the <span class="text-cyan-400 font-semibold">Indian Institute of Technology Kanpur</span>, combining a rigorous foundation in Mechanical Engineering with advanced applied knowledge in Machine Learning, Aeromodelling, and Autonomous Robotics.
                         </p>
-                        <p class="text-slate-500 dark:text-slate-400">
-                            My journey is driven by a desire to build intelligent systems. Whether it's designing a RAG-based Chatbot, engineering an autonomous UAV drone, or optimizing robotic navigation pathways, I thrive at the intersection of software intelligence and physical implementation.
+                        <p class="text-slate-400 font-inter leading-relaxed">
+                            My operational directive is building intelligent, scalable physical and digital systems. Whether architecting a RAG-based LLM structure, engineering aerodynamic mechanisms for UAVs, or executing precise pathfinding algorithms for rovers, I bridge the critical gap between software intelligence and hardware execution.
                         </p>
                         
-                        <div class="grid grid-cols-2 gap-4 pt-4">
-                            <div class="flex items-center gap-3">
-                                <div class="p-2 rounded-lg bg-brand-50 dark:bg-brand-950/50 text-brand-600 dark:text-brand-400">
-                                    <i data-lucide="check-circle" class="w-5 h-5"></i>
-                                </div>
-                                <span class="font-medium text-sm">200+ Days GFG DSA Streak</span>
+                        <!-- Mini achievement grids -->
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6">
+                            <div class="hud-panel p-4 text-center group">
+                                <i data-lucide="graduation-cap" class="w-6 h-6 text-aero mx-auto mb-2 group-hover:scale-110 transition"></i>
+                                <span class="block text-xs font-rajdhani font-bold text-white tracking-wider">IIT KANPUR</span>
+                                <span class="text-[10px] text-slate-500">Academics</span>
                             </div>
-                            <div class="flex items-center gap-3">
-                                <div class="p-2 rounded-lg bg-brand-50 dark:bg-brand-950/50 text-brand-600 dark:text-brand-400">
-                                    <i data-lucide="check-circle" class="w-5 h-5"></i>
-                                </div>
-                                <span class="font-medium text-sm">Hardware & IoT Prototyping</span>
+                            <div class="hud-panel p-4 text-center group">
+                                <i data-lucide="plane-takeoff" class="w-6 h-6 text-neon mx-auto mb-2 group-hover:scale-110 transition"></i>
+                                <span class="block text-xs font-rajdhani font-bold text-white tracking-wider">UAV RESEARCH</span>
+                                <span class="text-[10px] text-slate-500">Aeromodelling</span>
                             </div>
-                            <div class="flex items-center gap-3">
-                                <div class="p-2 rounded-lg bg-brand-50 dark:bg-brand-950/50 text-brand-600 dark:text-brand-400">
-                                    <i data-lucide="check-circle" class="w-5 h-5"></i>
-                                </div>
-                                <span class="font-medium text-sm">Machine Learning Models</span>
+                            <div class="hud-panel p-4 text-center group">
+                                <i data-lucide="cpu" class="w-6 h-6 text-warning mx-auto mb-2 group-hover:scale-110 transition"></i>
+                                <span class="block text-xs font-rajdhani font-bold text-white tracking-wider">PRODUCT DEV</span>
+                                <span class="text-[10px] text-slate-500">Hardware & IoT</span>
                             </div>
-                            <div class="flex items-center gap-3">
-                                <div class="p-2 rounded-lg bg-brand-50 dark:bg-brand-950/50 text-brand-600 dark:text-brand-400">
-                                    <i data-lucide="check-circle" class="w-5 h-5"></i>
-                                </div>
-                                <span class="font-medium text-sm">Cross-functional Leadership</span>
+                            <div class="hud-panel p-4 text-center group">
+                                <i data-lucide="brain-circuit" class="w-6 h-6 text-cyan-400 mx-auto mb-2 group-hover:scale-110 transition"></i>
+                                <span class="block text-xs font-rajdhani font-bold text-white tracking-wider">AI SYSTEMS</span>
+                                <span class="text-[10px] text-slate-500">Data Science</span>
                             </div>
                         </div>
                     </div>
@@ -174,330 +346,419 @@
             </div>
         </section>
 
-        <!-- Skill Stack Section -->
-        <section id="skills" class="py-20">
-            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-12">
-                <div class="max-w-xl mx-auto space-y-3">
-                    <span class="text-xs font-bold uppercase tracking-widest text-brand-600 dark:text-brand-400">Expertise</span>
-                    <h2 class="text-3xl font-extrabold sm:text-4xl">Technical Arsenal</h2>
-                    <p class="text-slate-500 dark:text-slate-400">A comprehensive view of the programming languages, ML libraries, and hardware tools I utilize.</p>
+        <!-- Skills Section: TECH STACK & CAPABILITIES -->
+        <section id="skills" class="py-24 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="mb-12 border-l-4 border-neon pl-4">
+                    <h2 class="text-3xl font-orbitron font-bold text-white uppercase tracking-wider">Engineering Capabilities</h2>
+                    <p class="text-neon font-rajdhani tracking-[0.2em] text-sm uppercase mt-1">System Technical Stack</p>
                 </div>
 
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-left">
-                    <!-- Programming Languages -->
-                    <div class="p-6 rounded-2xl bg-white dark:bg-slate-800/40 border border-slate-100 dark:border-slate-850 shadow-sm space-y-4">
-                        <div class="w-10 h-10 rounded-xl bg-orange-100 dark:bg-orange-950/50 text-orange-600 dark:text-orange-400 flex items-center justify-center">
-                            <i data-lucide="code" class="w-5 h-5"></i>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- AI Panel -->
+                    <div data-tilt data-tilt-scale="1.02" class="hud-panel p-6 border-t-4 border-t-cyan-400">
+                        <div class="flex items-center gap-3 mb-6 border-b border-cyan-500/20 pb-3">
+                            <i data-lucide="network" class="w-6 h-6 text-cyan-400"></i>
+                            <h3 class="font-orbitron font-bold text-sm tracking-widest text-white uppercase">AI & ML</h3>
                         </div>
-                        <h3 class="font-bold text-lg">Programming</h3>
-                        <ul class="space-y-2 text-sm text-slate-500 dark:text-slate-400">
-                            <li>C / C++</li>
-                            <li>Python & MATLAB</li>
-                            <li>SQL</li>
-                            <li>HTML / CSS / JavaScript</li>
+                        <ul class="space-y-3 font-rajdhani text-slate-300 tracking-wide text-sm">
+                            <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-cyan-400"></div> TensorFlow & Keras</li>
+                            <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-cyan-400"></div> Scikit-Learn</li>
+                            <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-cyan-400"></div> OpenCV</li>
+                            <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-cyan-400"></div> LangChain & LLMs</li>
+                            <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-cyan-400"></div> Pandas & NumPy</li>
                         </ul>
                     </div>
 
-                    <!-- AI & Data Science -->
-                    <div class="p-6 rounded-2xl bg-white dark:bg-slate-800/40 border border-slate-100 dark:border-slate-850 shadow-sm space-y-4">
-                        <div class="w-10 h-10 rounded-xl bg-blue-100 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400 flex items-center justify-center">
-                            <i data-lucide="brain-circuit" class="w-5 h-5"></i>
+                    <!-- Robotics Panel -->
+                    <div data-tilt data-tilt-scale="1.02" class="hud-panel p-6 border-t-4 border-t-warning">
+                        <div class="flex items-center gap-3 mb-6 border-b border-warning/20 pb-3">
+                            <i data-lucide="bot" class="w-6 h-6 text-warning"></i>
+                            <h3 class="font-orbitron font-bold text-sm tracking-widest text-white uppercase">Robotics</h3>
                         </div>
-                        <h3 class="font-bold text-lg">AI & Data Science</h3>
-                        <ul class="space-y-2 text-sm text-slate-500 dark:text-slate-400">
-                            <li>TensorFlow & Keras</li>
-                            <li>Scikit-Learn & OpenCV</li>
-                            <li>Pandas & NumPy</li>
-                            <li>LangChain & LLMs</li>
+                        <ul class="space-y-3 font-rajdhani text-slate-300 tracking-wide text-sm">
+                            <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-warning"></div> Arduino & ESP32</li>
+                            <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-warning"></div> Control Systems</li>
+                            <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-warning"></div> Path Planning (A*, RRT)</li>
+                            <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-warning"></div> Sensor Integration (IoT)</li>
+                            <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-warning"></div> Hardware Prototyping</li>
                         </ul>
                     </div>
 
-                    <!-- Hardware & CAD -->
-                    <div class="p-6 rounded-2xl bg-white dark:bg-slate-800/40 border border-slate-100 dark:border-slate-850 shadow-sm space-y-4">
-                        <div class="w-10 h-10 rounded-xl bg-green-100 dark:bg-green-950/50 text-green-600 dark:text-green-400 flex items-center justify-center">
-                            <i data-lucide="cpu" class="w-5 h-5"></i>
+                    <!-- Aerospace Panel -->
+                    <div data-tilt data-tilt-scale="1.02" class="hud-panel p-6 border-t-4 border-t-aero">
+                        <div class="flex items-center gap-3 mb-6 border-b border-aero/20 pb-3">
+                            <i data-lucide="rocket" class="w-6 h-6 text-aero"></i>
+                            <h3 class="font-orbitron font-bold text-sm tracking-widest text-white uppercase">Aerospace</h3>
                         </div>
-                        <h3 class="font-bold text-lg">Robotics & CAD</h3>
-                        <ul class="space-y-2 text-sm text-slate-500 dark:text-slate-400">
-                            <li>AutoCAD & SolidWorks</li>
-                            <li>Autodesk Inventor</li>
-                            <li>Arduino & ESP32</li>
-                            <li>Ansys & Simulink</li>
+                        <ul class="space-y-3 font-rajdhani text-slate-300 tracking-wide text-sm">
+                            <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-aero"></div> Pixhawk PX4</li>
+                            <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-aero"></div> Mission Planner</li>
+                            <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-aero"></div> XFLR5 (Aerodynamics)</li>
+                            <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-aero"></div> Autodesk Inventor</li>
+                            <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-aero"></div> SolidWorks / AutoCAD</li>
                         </ul>
                     </div>
 
-                    <!-- Utilities & Tools -->
-                    <div class="p-6 rounded-2xl bg-white dark:bg-slate-800/40 border border-slate-100 dark:border-slate-850 shadow-sm space-y-4">
-                        <div class="w-10 h-10 rounded-xl bg-purple-100 dark:bg-purple-950/50 text-purple-600 dark:text-purple-400 flex items-center justify-center">
-                            <i data-lucide="wrench" class="w-5 h-5"></i>
+                    <!-- Software Panel -->
+                    <div data-tilt data-tilt-scale="1.02" class="hud-panel p-6 border-t-4 border-t-neon">
+                        <div class="flex items-center gap-3 mb-6 border-b border-neon/20 pb-3">
+                            <i data-lucide="terminal" class="w-6 h-6 text-neon"></i>
+                            <h3 class="font-orbitron font-bold text-sm tracking-widest text-white uppercase">Software</h3>
                         </div>
-                        <h3 class="font-bold text-lg">Utilities & Cloud</h3>
-                        <ul class="space-y-2 text-sm text-slate-500 dark:text-slate-400">
-                            <li>Git / GitHub</li>
-                            <li>PowerBI & Tableau</li>
-                            <li>AWS EC2 & MySQL</li>
-                            <li>LaTeX & Streamlit</li>
+                        <ul class="space-y-3 font-rajdhani text-slate-300 tracking-wide text-sm">
+                            <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-neon"></div> Python</li>
+                            <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-neon"></div> C / C++ / C#</li>
+                            <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-neon"></div> MATLAB</li>
+                            <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-neon"></div> SQL / Databases</li>
+                            <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-neon"></div> Cloud (AWS EC2)</li>
                         </ul>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Dynamic Projects Gallery Section -->
-        <section id="projects" class="py-20 bg-slate-100/50 dark:bg-slate-900/30 border-t border-slate-100 dark:border-slate-800/60">
-            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-                <div class="flex flex-col md:flex-row items-start md:items-end justify-between gap-6">
-                    <div class="space-y-3">
-                        <span class="text-xs font-bold uppercase tracking-widest text-brand-600 dark:text-brand-400">Portfolio</span>
-                        <h2 class="text-3xl font-extrabold sm:text-4xl">Featured Projects</h2>
-                        <p class="text-slate-500 dark:text-slate-400">A selection of my best work across Machine Learning, Robotics, and IoT.</p>
+        <!-- Projects Section: ENGINEERING MISSION CARDS -->
+        <section id="projects" class="py-24 relative border-t border-cyan-900/30 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-navy/50 via-space to-space">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+                
+                <!-- Hero Project: MQ-9 Reaper -->
+                <div class="space-y-6">
+                    <div class="border-l-4 border-warning pl-4 flex items-center justify-between">
+                        <div>
+                            <h2 class="text-3xl font-orbitron font-bold text-white uppercase tracking-wider">Primary Archive</h2>
+                            <p class="text-warning font-rajdhani tracking-[0.2em] text-sm uppercase mt-1">Classified: Hero Project</p>
+                        </div>
+                        <div class="px-3 py-1 border border-neon text-neon text-xs font-orbitron flex items-center gap-2">
+                            <div class="w-2 h-2 bg-neon animate-pulse"></div> MISSION COMPLETED
+                        </div>
                     </div>
 
-                    <!-- Category Filters -->
-                    <div class="flex flex-wrap gap-2" id="filter-container">
-                        <button data-filter="all" class="px-4 py-2 rounded-lg text-sm font-medium bg-brand-600 text-white shadow-sm transition">All Projects</button>
-                        <button data-filter="ml" class="px-4 py-2 rounded-lg text-sm font-medium bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 transition">AI & ML</button>
-                        <button data-filter="robotics" class="px-4 py-2 rounded-lg text-sm font-medium bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 transition">Robotics</button>
-                        <button data-filter="hardware" class="px-4 py-2 rounded-lg text-sm font-medium bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 transition">Hardware / IoT</button>
+                    <div class="hud-panel p-6 sm:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center group cursor-pointer" onclick="openModal('uavDrone')">
+                        <div class="lg:col-span-7 h-64 sm:h-80 w-full relative border border-cyan-500/20 bg-space overflow-hidden flex items-center justify-center">
+                            <!-- Background Grid -->
+                            <div class="absolute inset-0 bg-[linear-gradient(rgba(0,229,255,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(0,229,255,0.1)_1px,transparent_1px)] bg-[size:20px_20px]"></div>
+                            <!-- SVG Wireframe -->
+                            <svg class="w-full h-full text-cyan-500/80 p-8 group-hover:scale-105 transition duration-500 drop-shadow-[0_0_8px_rgba(0,229,255,0.8)]" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="0.5">
+                                <path d="M50 10 L50 90 M20 40 L80 40 M30 70 L70 70" stroke-dasharray="2 2" opacity="0.5"/>
+                                <path d="M48 20 L52 20 L55 50 L85 55 L85 60 L55 60 L52 80 L60 85 L60 88 L40 88 L40 85 L48 80 L45 60 L15 60 L15 55 L45 50 Z" stroke-width="1.5" stroke-linejoin="round"/>
+                            </svg>
+                            <div class="absolute top-4 left-4 text-xs font-rajdhani text-cyan-500 tracking-widest">DRONE_SCHEMATIC_v1.0</div>
+                        </div>
+
+                        <div class="lg:col-span-5 space-y-6">
+                            <div>
+                                <h3 class="text-3xl font-orbitron font-bold text-white tracking-wide">MQ-9 Reaper Scaled UAV</h3>
+                                <p class="text-cyan-400 font-rajdhani text-sm mt-1 tracking-widest">Pixhawk PX4 • GPS • Mission Planner</p>
+                            </div>
+                            <p class="text-slate-400 font-inter text-sm leading-relaxed">
+                                Mentored a 15-student engineering team to configure and assemble a fully autonomous 1:10 scaled military drone. Recognized by the Indian Army for outstanding mentorship.
+                            </p>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="border border-cyan-500/20 p-3 bg-navy/50">
+                                    <span class="block text-[10px] text-slate-500 font-orbitron uppercase">Wingspan</span>
+                                    <span class="text-lg text-white font-rajdhani">2.5 Meters</span>
+                                </div>
+                                <div class="border border-cyan-500/20 p-3 bg-navy/50">
+                                    <span class="block text-[10px] text-slate-500 font-orbitron uppercase">MTOW</span>
+                                    <span class="text-lg text-white font-rajdhani">2.7 kg</span>
+                                </div>
+                                <div class="border border-cyan-500/20 p-3 bg-navy/50">
+                                    <span class="block text-[10px] text-slate-500 font-orbitron uppercase">Payload</span>
+                                    <span class="text-lg text-white font-rajdhani">300 grams</span>
+                                </div>
+                                <div class="border border-cyan-500/20 p-3 bg-navy/50">
+                                    <span class="block text-[10px] text-slate-500 font-orbitron uppercase">Endurance</span>
+                                    <span class="text-lg text-white font-rajdhani">10 Minutes</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Projects Grid -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-grid">
+                <!-- Grid Filters -->
+                <div class="pt-10">
+                    <div class="border-l-4 border-cyan-400 pl-4 mb-6">
+                        <h2 class="text-xl font-orbitron font-bold text-white uppercase tracking-wider">Mission Archives</h2>
+                    </div>
+                    <div class="flex flex-wrap gap-3 font-rajdhani tracking-widest text-sm" id="filter-container">
+                        <button data-filter="all" class="px-4 py-1.5 border border-cyan-400 bg-cyan-400/10 text-cyan-400 hover:bg-cyan-400 hover:text-space transition uppercase">SYS.ALL</button>
+                        <button data-filter="ml" class="px-4 py-1.5 border border-slate-700 text-slate-400 hover:border-cyan-400 hover:text-cyan-400 transition uppercase">TRGT: AI/ML</button>
+                        <button data-filter="robotics" class="px-4 py-1.5 border border-slate-700 text-slate-400 hover:border-cyan-400 hover:text-cyan-400 transition uppercase">TRGT: ROBOTICS</button>
+                        <button data-filter="aero" class="px-4 py-1.5 border border-slate-700 text-slate-400 hover:border-cyan-400 hover:text-cyan-400 transition uppercase">TRGT: AERO</button>
+                        <button data-filter="hardware" class="px-4 py-1.5 border border-slate-700 text-slate-400 hover:border-cyan-400 hover:text-cyan-400 transition uppercase">TRGT: HARDWARE</button>
+                    </div>
+                </div>
+
+                <!-- Grid Projects -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="projects-grid">
                     
-                    <!-- Project Card 1: RAG Chatbot -->
-                    <div class="group relative bg-white dark:bg-slate-800/80 border border-slate-100 dark:border-slate-750 rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 flex flex-col justify-between" data-category="ml">
-                        <div>
-                            <div class="aspect-video w-full bg-gradient-to-br from-indigo-500 to-purple-600 relative p-6 flex flex-col justify-between text-white">
-                                <div class="flex justify-between items-start">
-                                    <span class="px-2.5 py-1 rounded-full text-xs font-medium bg-white/20 backdrop-blur-sm">LangChain • Python</span>
-                                    <i data-lucide="external-link" class="w-5 h-5 text-white/80 group-hover:scale-110 transition"></i>
-                                </div>
-                                <div>
-                                    <h4 class="text-xl font-bold">RAG-based Job Chatbot</h4>
-                                </div>
-                            </div>
-                            <div class="p-6 space-y-3">
-                                <p class="text-sm text-slate-500 dark:text-slate-400 line-clamp-3">
-                                    Developed an LLM-powered RAG chatbot to compare scraped data from 100+ companies, designed specifically to assist freshers in job applications with conversational memory.
-                                </p>
-                            </div>
+                    <!-- RAG Chatbot -->
+                    <div data-tilt data-tilt-scale="1.02" class="hud-panel flex flex-col justify-between group cursor-pointer" data-category="ml" onclick="openModal('chatbot')">
+                        <div class="p-5 border-b border-cyan-500/20 relative overflow-hidden bg-space/50">
+                            <i data-lucide="brain-circuit" class="w-12 h-12 text-cyan-400 mb-2 opacity-80 group-hover:scale-110 transition duration-500"></i>
+                            <div class="absolute top-2 right-2 text-[10px] text-neon font-orbitron flex items-center gap-1 border border-neon/30 px-2 py-0.5"><div class="w-1 h-1 bg-neon rounded-full"></div> CMPLTD</div>
                         </div>
-                        <div class="p-6 pt-0">
-                            <button onclick="openModal('chatbot')" class="w-full text-center py-2.5 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-brand-50 dark:hover:bg-brand-950/20 text-brand-600 dark:text-brand-400 font-medium text-sm transition-all">
-                                Project Overview
-                            </button>
+                        <div class="p-5 space-y-3 flex-grow">
+                            <h4 class="text-lg font-orbitron font-bold text-white group-hover:text-cyan-400 transition">RAG Job Chatbot</h4>
+                            <p class="text-xs font-rajdhani text-cyan-500 tracking-widest uppercase">LangChain • ChromaDB</p>
+                            <p class="text-sm text-slate-400 font-inter line-clamp-3">LLM-powered RAG chatbot comparing data from 100+ companies. Features semantic embeddings, cross-encoders, and AWS EC2 deployment.</p>
                         </div>
                     </div>
 
-                    <!-- Project Card 2: Optimized Robotic Navigation -->
-                    <div class="group relative bg-white dark:bg-slate-800/80 border border-slate-100 dark:border-slate-750 rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 flex flex-col justify-between" data-category="robotics">
-                        <div>
-                            <div class="aspect-video w-full bg-gradient-to-br from-emerald-500 to-teal-600 relative p-6 flex flex-col justify-between text-white">
-                                <div class="flex justify-between items-start">
-                                    <span class="px-2.5 py-1 rounded-full text-xs font-medium bg-white/20 backdrop-blur-sm">MATLAB • Algorithms</span>
-                                    <i data-lucide="external-link" class="w-5 h-5 text-white/80 group-hover:scale-110 transition"></i>
-                                </div>
-                                <div>
-                                    <h4 class="text-xl font-bold">Robotic Navigation System</h4>
-                                </div>
-                            </div>
-                            <div class="p-6 space-y-3">
-                                <p class="text-sm text-slate-500 dark:text-slate-400 line-clamp-3">
-                                    Simulated a 3-DOF planner arm using advanced path planning algorithms (Dijkstra, A*, Potential Field) to safely map and traverse C-spaces while avoiding dynamic obstacles.
-                                </p>
-                            </div>
+                    <!-- Optimized Robotic Nav -->
+                    <div data-tilt data-tilt-scale="1.02" class="hud-panel flex flex-col justify-between group cursor-pointer" data-category="robotics" onclick="openModal('navigation')">
+                        <div class="p-5 border-b border-cyan-500/20 relative overflow-hidden bg-space/50">
+                            <i data-lucide="navigation-2" class="w-12 h-12 text-warning mb-2 opacity-80 group-hover:scale-110 transition duration-500"></i>
+                            <div class="absolute top-2 right-2 text-[10px] text-neon font-orbitron flex items-center gap-1 border border-neon/30 px-2 py-0.5"><div class="w-1 h-1 bg-neon rounded-full"></div> CMPLTD</div>
                         </div>
-                        <div class="p-6 pt-0">
-                            <button onclick="openModal('navigation')" class="w-full text-center py-2.5 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-brand-50 dark:hover:bg-brand-950/20 text-brand-600 dark:text-brand-400 font-medium text-sm transition-all">
-                                Project Overview
-                            </button>
+                        <div class="p-5 space-y-3 flex-grow">
+                            <h4 class="text-lg font-orbitron font-bold text-white group-hover:text-cyan-400 transition">Robotic Nav System</h4>
+                            <p class="text-xs font-rajdhani text-warning tracking-widest uppercase">MATLAB • A* • RRT</p>
+                            <p class="text-sm text-slate-400 font-inter line-clamp-3">Simulated 3-DOF planar arm mapping C-spaces. Leveraged Potential Field and Dijkstra algorithms for obstacle traversal.</p>
                         </div>
                     </div>
 
-                    <!-- Project Card 3: Smart Ride Navigator -->
-                    <div class="group relative bg-white dark:bg-slate-800/80 border border-slate-100 dark:border-slate-750 rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 flex flex-col justify-between" data-category="hardware">
-                        <div>
-                            <div class="aspect-video w-full bg-gradient-to-br from-amber-500 to-orange-600 relative p-6 flex flex-col justify-between text-white">
-                                <div class="flex justify-between items-start">
-                                    <span class="px-2.5 py-1 rounded-full text-xs font-medium bg-white/20 backdrop-blur-sm">ESP32 • Android App</span>
-                                    <i data-lucide="external-link" class="w-5 h-5 text-white/80 group-hover:scale-110 transition"></i>
-                                </div>
-                                <div>
-                                    <h4 class="text-xl font-bold">Smart Ride Navigator</h4>
-                                </div>
-                            </div>
-                            <div class="p-6 space-y-3">
-                                <p class="text-sm text-slate-500 dark:text-slate-400 line-clamp-3">
-                                    A patented haptic-based navigation system to enhance biker safety. Translates Google Maps directions via Bluetooth to an ESP32 controlling handlebar haptics.
-                                </p>
-                            </div>
+                    <!-- Smart Ride Navigator -->
+                    <div data-tilt data-tilt-scale="1.02" class="hud-panel flex flex-col justify-between group cursor-pointer" data-category="hardware" onclick="openModal('ride')">
+                        <div class="p-5 border-b border-cyan-500/20 relative overflow-hidden bg-space/50">
+                            <i data-lucide="map" class="w-12 h-12 text-aero mb-2 opacity-80 group-hover:scale-110 transition duration-500"></i>
+                            <div class="absolute top-2 right-2 text-[10px] text-neon font-orbitron flex items-center gap-1 border border-neon/30 px-2 py-0.5"><div class="w-1 h-1 bg-neon rounded-full"></div> CMPLTD</div>
                         </div>
-                        <div class="p-6 pt-0">
-                            <button onclick="openModal('ride')" class="w-full text-center py-2.5 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-brand-50 dark:hover:bg-brand-950/20 text-brand-600 dark:text-brand-400 font-medium text-sm transition-all">
-                                Project Overview
-                            </button>
+                        <div class="p-5 space-y-3 flex-grow">
+                            <h4 class="text-lg font-orbitron font-bold text-white group-hover:text-cyan-400 transition">Smart Ride Navigator</h4>
+                            <p class="text-xs font-rajdhani text-aero tracking-widest uppercase">ESP32 • Bluetooth • IoT</p>
+                            <p class="text-sm text-slate-400 font-inter line-clamp-3">Haptic handlebar navigation syncing GPS via bluetooth to ESP32 to eliminate visual screen distraction. Patent Filed.</p>
                         </div>
                     </div>
 
-                    <!-- Project Card 4: ML OCR -->
-                    <div class="group relative bg-white dark:bg-slate-800/80 border border-slate-100 dark:border-slate-750 rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 flex flex-col justify-between" data-category="ml">
-                        <div>
-                            <div class="aspect-video w-full bg-gradient-to-br from-blue-500 to-cyan-600 relative p-6 flex flex-col justify-between text-white">
-                                <div class="flex justify-between items-start">
-                                    <span class="px-2.5 py-1 rounded-full text-xs font-medium bg-white/20 backdrop-blur-sm">TensorFlow • SVM</span>
-                                    <i data-lucide="external-link" class="w-5 h-5 text-white/80 group-hover:scale-110 transition"></i>
-                                </div>
-                                <div>
-                                    <h4 class="text-xl font-bold">ML Character Recognition</h4>
-                                </div>
-                            </div>
-                            <div class="p-6 space-y-3">
-                                <p class="text-sm text-slate-500 dark:text-slate-400 line-clamp-3">
-                                    Designed a sophisticated CNN architecture and trained multiple classifiers (LR, SVM, RF) to achieve high-accuracy Optical Character Recognition using advanced image processing.
-                                </p>
-                            </div>
+                    <!-- ML OCR -->
+                    <div data-tilt data-tilt-scale="1.02" class="hud-panel flex flex-col justify-between group cursor-pointer" data-category="ml" onclick="openModal('ocr')">
+                        <div class="p-5 border-b border-cyan-500/20 relative overflow-hidden bg-space/50">
+                            <i data-lucide="scan-text" class="w-12 h-12 text-cyan-400 mb-2 opacity-80 group-hover:scale-110 transition duration-500"></i>
+                            <div class="absolute top-2 right-2 text-[10px] text-neon font-orbitron flex items-center gap-1 border border-neon/30 px-2 py-0.5"><div class="w-1 h-1 bg-neon rounded-full"></div> CMPLTD</div>
                         </div>
-                        <div class="p-6 pt-0">
-                            <button onclick="openModal('ocr')" class="w-full text-center py-2.5 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-brand-50 dark:hover:bg-brand-950/20 text-brand-600 dark:text-brand-400 font-medium text-sm transition-all">
-                                Project Overview
-                            </button>
+                        <div class="p-5 space-y-3 flex-grow">
+                            <h4 class="text-lg font-orbitron font-bold text-white group-hover:text-cyan-400 transition">Optical Char Recog.</h4>
+                            <p class="text-xs font-rajdhani text-cyan-500 tracking-widest uppercase">OpenCV • CNN • SVM</p>
+                            <p class="text-sm text-slate-400 font-inter line-clamp-3">Custom computer vision pipeline extracting unstructured text using multi-layered CNN and Random Forest models.</p>
                         </div>
                     </div>
+
+                    <!-- Next-Gen Folding Wing UAV -->
+                    <div data-tilt data-tilt-scale="1.02" class="hud-panel flex flex-col justify-between group cursor-pointer" data-category="aero" onclick="openModal('foldingWing')">
+                        <div class="p-5 border-b border-cyan-500/20 relative overflow-hidden bg-space/50">
+                            <i data-lucide="unfold-horizontal" class="w-12 h-12 text-aero mb-2 opacity-80 group-hover:scale-110 transition duration-500"></i>
+                            <div class="absolute top-2 right-2 text-[10px] text-neon font-orbitron flex items-center gap-1 border border-neon/30 px-2 py-0.5"><div class="w-1 h-1 bg-neon rounded-full"></div> CMPLTD</div>
+                        </div>
+                        <div class="p-5 space-y-3 flex-grow">
+                            <h4 class="text-lg font-orbitron font-bold text-white group-hover:text-cyan-400 transition">Folding Wing UAV</h4>
+                            <p class="text-xs font-rajdhani text-aero tracking-widest uppercase">Research • 3D Print</p>
+                            <p class="text-sm text-slate-400 font-inter line-clamp-3">Designed 4-bar linkage mechanisms. Collaborated under Prof. Abhishek for high-altitude UAV stress testing at IITK.</p>
+                        </div>
+                    </div>
+
+                    <!-- Smart Vending System -->
+                    <div data-tilt data-tilt-scale="1.02" class="hud-panel flex flex-col justify-between group cursor-pointer" data-category="hardware" onclick="openModal('vendingSystem')">
+                        <div class="p-5 border-b border-cyan-500/20 relative overflow-hidden bg-space/50">
+                            <i data-lucide="cpu" class="w-12 h-12 text-warning mb-2 opacity-80 group-hover:scale-110 transition duration-500"></i>
+                            <div class="absolute top-2 right-2 text-[10px] text-neon font-orbitron flex items-center gap-1 border border-neon/30 px-2 py-0.5"><div class="w-1 h-1 bg-neon rounded-full"></div> CMPLTD</div>
+                        </div>
+                        <div class="p-5 space-y-3 flex-grow">
+                            <h4 class="text-lg font-orbitron font-bold text-white group-hover:text-cyan-400 transition">Smart Vending Unit</h4>
+                            <p class="text-xs font-rajdhani text-warning tracking-widest uppercase">Arduino • SolidWorks</p>
+                            <p class="text-sm text-slate-400 font-inter line-clamp-3">Engineered precise sheet metal fabrication automated via Arduino Uno and ultrasonic location alignment sensors.</p>
+                        </div>
+                    </div>
+
+                     <!-- Nav Robot -->
+                     <div data-tilt data-tilt-scale="1.02" class="hud-panel flex flex-col justify-between group cursor-pointer" data-category="robotics" onclick="openModal('navRobot')">
+                        <div class="p-5 border-b border-cyan-500/20 relative overflow-hidden bg-space/50">
+                            <i data-lucide="radar" class="w-12 h-12 text-cyan-400 mb-2 opacity-80 group-hover:scale-110 transition duration-500"></i>
+                            <div class="absolute top-2 right-2 text-[10px] text-neon font-orbitron flex items-center gap-1 border border-neon/30 px-2 py-0.5"><div class="w-1 h-1 bg-neon rounded-full"></div> CMPLTD</div>
+                        </div>
+                        <div class="p-5 space-y-3 flex-grow">
+                            <h4 class="text-lg font-orbitron font-bold text-white group-hover:text-cyan-400 transition">Autonomous Nav Rover</h4>
+                            <p class="text-xs font-rajdhani text-cyan-500 tracking-widest uppercase">Arduino • HC-SR04</p>
+                            <p class="text-sm text-slate-400 font-inter line-clamp-3">Constructed a mobile obstacle-avoiding system running real-time pathfinding via ultrasonic sensor feeds.</p>
+                        </div>
+                    </div>
+
+                    <!-- Math Tools & Other hidden by default in UI structure but accessible via JS/Filters -->
+                    <div data-tilt data-tilt-scale="1.02" class="hud-panel flex flex-col justify-between group cursor-pointer" data-category="ml" onclick="openModal('mathData')">
+                        <div class="p-5 border-b border-cyan-500/20 relative overflow-hidden bg-space/50">
+                            <i data-lucide="bar-chart-2" class="w-12 h-12 text-cyan-400 mb-2 opacity-80 group-hover:scale-110 transition duration-500"></i>
+                            <div class="absolute top-2 right-2 text-[10px] text-neon font-orbitron flex items-center gap-1 border border-neon/30 px-2 py-0.5"><div class="w-1 h-1 bg-neon rounded-full"></div> CMPLTD</div>
+                        </div>
+                        <div class="p-5 space-y-3 flex-grow">
+                            <h4 class="text-lg font-orbitron font-bold text-white group-hover:text-cyan-400 transition">Data Science Math Tools</h4>
+                            <p class="text-xs font-rajdhani text-cyan-500 tracking-widest uppercase">Python • RF Classifiers</p>
+                            <p class="text-sm text-slate-400 font-inter line-clamp-3">Built specialized linear and logistic regression models reaching 94% accuracy on commercial datasets.</p>
+                        </div>
+                    </div>
+
+                     <!-- Cervical Cancer -->
+                     <div data-tilt data-tilt-scale="1.02" class="hud-panel flex flex-col justify-between group cursor-pointer" data-category="ml" onclick="openModal('cervicalCancer')">
+                        <div class="p-5 border-b border-cyan-500/20 relative overflow-hidden bg-space/50">
+                            <i data-lucide="activity" class="w-12 h-12 text-cyan-400 mb-2 opacity-80 group-hover:scale-110 transition duration-500"></i>
+                            <div class="absolute top-2 right-2 text-[10px] text-neon font-orbitron flex items-center gap-1 border border-neon/30 px-2 py-0.5"><div class="w-1 h-1 bg-neon rounded-full"></div> CMPLTD</div>
+                        </div>
+                        <div class="p-5 space-y-3 flex-grow">
+                            <h4 class="text-lg font-orbitron font-bold text-white group-hover:text-cyan-400 transition">Cancer Risk Predictor</h4>
+                            <p class="text-xs font-rajdhani text-cyan-500 tracking-widest uppercase">PCA • SMOTE • SVM</p>
+                            <p class="text-sm text-slate-400 font-inter line-clamp-3">Clinical screening binary classifiers. Balanced target imbalances with SMOTE and extracted variance via PCA.</p>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </section>
 
-        <!-- Professional Experience Section -->
-        <section id="experience" class="py-20">
-            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-                <div class="text-center space-y-3">
-                    <span class="text-xs font-bold uppercase tracking-widest text-brand-600 dark:text-brand-400">My Path</span>
-                    <h2 class="text-3xl font-extrabold sm:text-4xl">Experience & Leadership</h2>
+        <!-- Experience Section: MISSION LOGS -->
+        <section id="experience" class="py-24 relative">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+                
+                <div class="border-l-4 border-neon pl-4">
+                    <h2 class="text-3xl font-orbitron font-bold text-white uppercase tracking-wider">Mission Logs</h2>
+                    <p class="text-neon font-rajdhani tracking-[0.2em] text-sm uppercase mt-1">Operational History</p>
                 </div>
 
-                <div class="relative border-l border-slate-200 dark:border-slate-800 ml-4 sm:ml-6 space-y-10">
+                <div class="relative border-l-2 border-cyan-500/30 ml-4 sm:ml-6 space-y-12 pb-8">
+                    
                     <!-- Timeline Item 1 -->
-                    <div class="relative pl-8 sm:pl-10">
-                        <span class="absolute -left-[11px] top-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-brand-100 dark:bg-brand-950 ring-4 ring-white dark:ring-slate-900">
-                            <span class="h-2 w-2 rounded-full bg-brand-600"></span>
-                        </span>
-                        <div class="space-y-1">
-                            <span class="inline-block px-2.5 py-0.5 rounded text-xs font-medium bg-brand-50 dark:bg-brand-950/40 text-brand-700 dark:text-brand-400">Jun '24 - Jul '24</span>
-                            <h3 class="font-bold text-xl">Data Science Intern</h3>
-                            <p class="text-sm font-semibold text-slate-500 dark:text-slate-400">Deepjob Technology Pvt. Ltd / MyAnalytics School</p>
-                            <p class="text-sm text-slate-600 dark:text-slate-300 max-w-2xl mt-2 leading-relaxed">
-                                Developed a RAG-based chatbot using LangChain and web-scraped data to assist freshers. Integrated ChromaDB, optimized cross-encoders for re-ranking, and deployed the Streamlit interface on AWS EC2. Achieved an 85% accuracy with 2-second response times, increasing platform users by 20%.
+                    <div class="relative pl-8 sm:pl-10 group">
+                        <span class="absolute -left-[9px] top-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-space border-2 border-cyan-400 shadow-[0_0_10px_#00E5FF] group-hover:scale-125 transition duration-300"></span>
+                        
+                        <div class="hud-panel p-6">
+                            <span class="inline-block px-2.5 py-0.5 border border-cyan-500/50 bg-cyan-900/20 text-cyan-400 text-[10px] font-orbitron uppercase tracking-widest mb-3">OP_01: Jun '25 - Oct '25</span>
+                            <h3 class="font-bold text-xl text-white font-orbitron">Product and Operations Associate</h3>
+                            <p class="text-sm font-rajdhani text-warning tracking-widest uppercase mt-1">Playto Labs Pvt. Ltd</p>
+                            <p class="text-sm text-slate-400 font-inter mt-3 leading-relaxed">
+                                Led several cross-functional teams of product management, overall systems operations, and R&D pipelines ensuring streamlined hardware deliverables.
                             </p>
                         </div>
                     </div>
 
                     <!-- Timeline Item 2 -->
-                    <div class="relative pl-8 sm:pl-10">
-                        <span class="absolute -left-[11px] top-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-brand-100 dark:bg-brand-950 ring-4 ring-white dark:ring-slate-900">
-                            <span class="h-2 w-2 rounded-full bg-brand-600"></span>
-                        </span>
-                        <div class="space-y-1">
-                            <span class="inline-block px-2.5 py-0.5 rounded text-xs font-medium bg-brand-50 dark:bg-brand-950/40 text-brand-700 dark:text-brand-400">Dec '23 - May '24</span>
-                            <h3 class="font-bold text-xl">Undergraduate Researcher (UAVs)</h3>
-                            <p class="text-sm font-semibold text-slate-500 dark:text-slate-400">IIT Kanpur (Under Prof. Abhishek)</p>
-                            <p class="text-sm text-slate-600 dark:text-slate-300 max-w-2xl mt-2 leading-relaxed">
-                                Researched and designed next-gen folding wing mechanisms for UAVs. Utilized Autodesk Inventor for modeling 4-bar linkage mechanisms and rigorously tested 3D-printed prototypes. Contributed significantly to high-altitude optimization in Kalam Lab.
+                    <div class="relative pl-8 sm:pl-10 group">
+                        <span class="absolute -left-[9px] top-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-space border-2 border-cyan-400 group-hover:shadow-[0_0_10px_#00E5FF] group-hover:scale-125 transition duration-300"></span>
+                        
+                        <div class="hud-panel p-6">
+                            <span class="inline-block px-2.5 py-0.5 border border-cyan-500/50 bg-cyan-900/20 text-cyan-400 text-[10px] font-orbitron uppercase tracking-widest mb-3">OP_02: Jun '24 - Jul '24</span>
+                            <h3 class="font-bold text-xl text-white font-orbitron">Data Science Intern</h3>
+                            <p class="text-sm font-rajdhani text-warning tracking-widest uppercase mt-1">Deepjob Tech / MyAnalytics</p>
+                            <p class="text-sm text-slate-400 font-inter mt-3 leading-relaxed">
+                                Engineered a LangChain RAG chatbot processing data from 100+ job portals. Integrated ChromaDB and cross-encoders. Deployed on AWS EC2, increasing platform users by 20% with 85% accuracy.
                             </p>
                         </div>
                     </div>
 
                     <!-- Timeline Item 3 -->
-                    <div class="relative pl-8 sm:pl-10">
-                        <span class="absolute -left-[11px] top-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-brand-100 dark:bg-brand-950 ring-4 ring-white dark:ring-slate-900">
-                            <span class="h-2 w-2 rounded-full bg-brand-600"></span>
-                        </span>
-                        <div class="space-y-1">
-                            <span class="inline-block px-2.5 py-0.5 rounded text-xs font-medium bg-brand-50 dark:bg-brand-950/40 text-brand-700 dark:text-brand-400">May '23 - Apr '24</span>
-                            <h3 class="font-bold text-xl">Coordinator, Aeromodelling Club</h3>
-                            <p class="text-sm font-semibold text-slate-500 dark:text-slate-400">IIT Kanpur</p>
-                            <p class="text-sm text-slate-600 dark:text-slate-300 max-w-2xl mt-2 leading-relaxed">
-                                Led a team of 25+ secretaries and mentored the development of a UAV Military Drone (MQ-9 Reaper replica), earning recognition from the Indian Army. Successfully guided teams to the finals of the Boeing Aeromodelling Competition at Techfest, IIT Bombay.
+                    <div class="relative pl-8 sm:pl-10 group">
+                        <span class="absolute -left-[9px] top-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-space border-2 border-cyan-400 group-hover:shadow-[0_0_10px_#00E5FF] group-hover:scale-125 transition duration-300"></span>
+                        
+                        <div class="hud-panel p-6">
+                            <span class="inline-block px-2.5 py-0.5 border border-cyan-500/50 bg-cyan-900/20 text-cyan-400 text-[10px] font-orbitron uppercase tracking-widest mb-3">OP_03: Dec '23 - May '24</span>
+                            <h3 class="font-bold text-xl text-white font-orbitron">UAV Researcher</h3>
+                            <p class="text-sm font-rajdhani text-warning tracking-widest uppercase mt-1">IIT Kanpur • Prof. Abhishek</p>
+                            <p class="text-sm text-slate-400 font-inter mt-3 leading-relaxed">
+                                Modeled 4-bar linkage folding wing mechanisms via Autodesk Inventor. Executed rigorous 3D-printed stress testing, contributing directly to Kalam Lab's high-altitude UAV optimizations.
                             </p>
                         </div>
                     </div>
+
+                    <!-- Timeline Item 4 -->
+                    <div class="relative pl-8 sm:pl-10 group">
+                        <span class="absolute -left-[9px] top-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-space border-2 border-cyan-400 group-hover:shadow-[0_0_10px_#00E5FF] group-hover:scale-125 transition duration-300"></span>
+                        
+                        <div class="hud-panel p-6">
+                            <span class="inline-block px-2.5 py-0.5 border border-cyan-500/50 bg-cyan-900/20 text-cyan-400 text-[10px] font-orbitron uppercase tracking-widest mb-3">OP_04: May '23 - Apr '24</span>
+                            <h3 class="font-bold text-xl text-white font-orbitron">Coordinator, Aeromodelling Club</h3>
+                            <p class="text-sm font-rajdhani text-warning tracking-widest uppercase mt-1">IIT Kanpur</p>
+                            <p class="text-sm text-slate-400 font-inter mt-3 leading-relaxed">
+                                Directed 25+ secretaries and spearheaded the MQ-9 Reaper UAV drone replication. Achieved Indian Army recognition and led teams to finals in the Boeing Aeromodelling Competition.
+                            </p>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </section>
 
-        <!-- Interactive Contact Section -->
-        <section id="contact" class="py-20 bg-white dark:bg-slate-900/50 border-t border-slate-100 dark:border-slate-800">
+        <!-- Contact Section: INITIATE COMMUNICATION -->
+        <section id="contact" class="py-24 relative border-t border-cyan-900/30 bg-navy/40">
             <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid grid-cols-1 md:grid-cols-12 gap-12">
+                
+                <div class="mb-12 text-center">
+                    <h2 class="text-3xl font-orbitron font-bold text-white uppercase tracking-wider">System: COMM_LINK</h2>
+                    <p class="text-cyan-500 font-rajdhani tracking-[0.2em] text-sm uppercase mt-2">Establish secure connection</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-12 max-w-5xl mx-auto">
                     
                     <!-- Left: Detail Column -->
                     <div class="md:col-span-5 space-y-6">
-                        <span class="text-xs font-bold uppercase tracking-widest text-brand-600 dark:text-brand-400">Get in Touch</span>
-                        <h2 class="text-3xl font-extrabold sm:text-4xl">Let's build something fantastic</h2>
-                        <p class="text-slate-500 dark:text-slate-400">
-                            Looking to collaborate on exciting tech projects or have opportunities in Data Science and Software Development? Feel free to reach out!
-                        </p>
+                        <div class="hud-panel p-6 border-l-4 border-l-neon">
+                            <div class="space-y-6">
+                                <div class="flex items-center gap-4 group">
+                                    <div class="w-12 h-12 border border-cyan-500/30 flex items-center justify-center text-cyan-400 group-hover:bg-cyan-400/10 transition">
+                                        <i data-lucide="mail" class="w-5 h-5"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-[10px] text-slate-500 font-orbitron uppercase tracking-widest">Email Address</p>
+                                        <a href="mailto:sk7370066@gmail.com" class="font-rajdhani text-lg text-slate-200 hover:text-cyan-400 transition">sk7370066@gmail.com</a>
+                                    </div>
+                                </div>
 
-                        <div class="space-y-4 pt-4">
-                            <div class="flex items-center gap-4">
-                                <div class="w-11 h-11 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-brand-600 dark:text-brand-400">
-                                    <i data-lucide="mail" class="w-5 h-5"></i>
+                                <div class="flex items-center gap-4 group">
+                                    <div class="w-12 h-12 border border-cyan-500/30 flex items-center justify-center text-cyan-400 group-hover:bg-cyan-400/10 transition">
+                                        <i data-lucide="phone" class="w-5 h-5"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-[10px] text-slate-500 font-orbitron uppercase tracking-widest">Secure Line</p>
+                                        <a href="tel:+918709021300" class="font-rajdhani text-lg text-slate-200 hover:text-cyan-400 transition">+91 8709021300</a>
+                                    </div>
                                 </div>
-                                <div>
-                                    <p class="text-xs text-slate-400 font-semibold uppercase">Email Me</p>
-                                    <a href="mailto:sk7370066@gmail.com" class="font-medium text-slate-700 dark:text-slate-200 hover:text-brand-600 transition">sk7370066@gmail.com</a>
-                                </div>
-                            </div>
 
-                            <div class="flex items-center gap-4">
-                                <div class="w-11 h-11 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-brand-600 dark:text-brand-400">
-                                    <i data-lucide="phone" class="w-5 h-5"></i>
-                                </div>
-                                <div>
-                                    <p class="text-xs text-slate-400 font-semibold uppercase">Phone</p>
-                                    <a href="tel:+918709021300" class="font-medium text-slate-700 dark:text-slate-200 hover:text-brand-600 transition">+91 8709021300</a>
-                                </div>
-                            </div>
-
-                            <div class="flex items-center gap-4">
-                                <div class="w-11 h-11 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-brand-600 dark:text-brand-400">
-                                    <i data-lucide="map-pin" class="w-5 h-5"></i>
-                                </div>
-                                <div>
-                                    <p class="text-xs text-slate-400 font-semibold uppercase">Location</p>
-                                    <p class="font-medium text-slate-700 dark:text-slate-200">IIT Kanpur, UP, India</p>
+                                <div class="flex items-center gap-4 group">
+                                    <div class="w-12 h-12 border border-cyan-500/30 flex items-center justify-center text-cyan-400 group-hover:bg-cyan-400/10 transition">
+                                        <i data-lucide="map-pin" class="w-5 h-5"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-[10px] text-slate-500 font-orbitron uppercase tracking-widest">Coordinates</p>
+                                        <p class="font-rajdhani text-lg text-slate-200">IIT Kanpur, UP, India</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Right: Interactive Form -->
-                    <div class="md:col-span-7 bg-slate-50 dark:bg-slate-800/20 rounded-2xl border border-slate-100 dark:border-slate-850 p-6 sm:p-8">
-                        <form id="contact-form" class="space-y-4">
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <div class="space-y-1.5">
-                                    <label for="form-name" class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase">Your Name</label>
-                                    <input type="text" id="form-name" required class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900/50 focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 outline-none transition" placeholder="John Doe">
+                    <!-- Right: Terminal Form -->
+                    <div class="md:col-span-7">
+                        <form id="contact-form" class="hud-panel p-6 sm:p-8 space-y-5">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                                <div class="space-y-1">
+                                    <label class="text-[10px] text-cyan-500 font-orbitron uppercase tracking-widest">> IDENTIFICATION_</label>
+                                    <input type="text" id="form-name" required class="w-full px-4 py-3 terminal-input" placeholder="[ ENTER NAME ]">
                                 </div>
-                                <div class="space-y-1.5">
-                                    <label for="form-email" class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase">Your Email</label>
-                                    <input type="email" id="form-email" required class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900/50 focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 outline-none transition" placeholder="john@example.com">
+                                <div class="space-y-1">
+                                    <label class="text-[10px] text-cyan-500 font-orbitron uppercase tracking-widest">> RETURN_ADDR_</label>
+                                    <input type="email" id="form-email" required class="w-full px-4 py-3 terminal-input" placeholder="[ ENTER EMAIL ]">
                                 </div>
                             </div>
 
-                            <div class="space-y-1.5">
-                                <label for="form-subject" class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase">Subject</label>
-                                <input type="text" id="form-subject" required class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900/50 focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 outline-none transition" placeholder="Project Inquiry / Job Opening">
+                            <div class="space-y-1">
+                                <label class="text-[10px] text-cyan-500 font-orbitron uppercase tracking-widest">> PACKET_HEADER_</label>
+                                <input type="text" id="form-subject" required class="w-full px-4 py-3 terminal-input" placeholder="[ ENTER DIRECTIVE / SUBJECT ]">
                             </div>
 
-                            <div class="space-y-1.5">
-                                <label for="form-message" class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase">Your Message</label>
-                                <textarea id="form-message" rows="5" required class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900/50 focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 outline-none transition resize-none" placeholder="Describe your inquiry here..."></textarea>
+                            <div class="space-y-1">
+                                <label class="text-[10px] text-cyan-500 font-orbitron uppercase tracking-widest">> PAYLOAD_DATA_</label>
+                                <textarea id="form-message" rows="4" required class="w-full px-4 py-3 terminal-input resize-none" placeholder="[ ENTER DATA BLOCK HERE... ]"></textarea>
                             </div>
 
-                            <button type="submit" class="w-full py-4 px-6 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-medium shadow-md shadow-brand-500/10 hover:shadow-brand-500/25 transition-all flex items-center justify-center gap-2">
-                                Send Message
-                                <i data-lucide="send" class="w-4 h-4"></i>
+                            <button type="submit" class="w-full py-4 cyber-button mt-4 flex items-center justify-center gap-2">
+                                Transmit Message <i data-lucide="radio" class="w-4 h-4"></i>
                             </button>
                         </form>
                     </div>
@@ -509,87 +770,125 @@
     </main>
 
     <!-- Footer -->
-    <footer class="border-t border-slate-200 dark:border-slate-850 py-12 bg-white dark:bg-slate-900 transition-colors">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
-            <p class="text-sm text-slate-400">
-                &copy; 2026 Sujeet Kumar. Built with code & passion.
+    <footer class="border-t border-cyan-900/50 py-8 bg-space z-10 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4">
+            <p class="text-xs font-rajdhani text-slate-500 tracking-widest">
+                &copy; 2026 // SUJEET KUMAR // ALL SYSTEMS FUNCTIONAL
             </p>
-            <div class="flex gap-6 text-sm text-slate-400">
-                <a href="#about" class="hover:text-brand-500 transition">About</a>
-                <a href="#skills" class="hover:text-brand-500 transition">Skills</a>
-                <a href="#projects" class="hover:text-brand-500 transition">Projects</a>
-                <a href="#experience" class="hover:text-brand-500 transition">Experience</a>
+            <div class="flex gap-6 text-xs font-orbitron text-cyan-500/50 uppercase">
+                <a href="#about" class="hover:text-cyan-400 transition">Profile</a>
+                <a href="#projects" class="hover:text-cyan-400 transition">Missions</a>
+                <a href="#experience" class="hover:text-cyan-400 transition">Logs</a>
             </div>
         </div>
     </footer>
 
     <!-- Custom Modal for Projects Details -->
     <div id="project-modal" class="fixed inset-0 z-50 flex items-center justify-center hidden p-4">
-        <!-- Backdrop -->
-        <div onclick="closeModal()" class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"></div>
+        <div onclick="closeModal()" class="absolute inset-0 bg-space/90 backdrop-blur-md"></div>
         
-        <!-- Modal Content Container -->
-        <div class="relative bg-white dark:bg-slate-850 dark:bg-slate-900 rounded-2xl max-w-xl w-full max-h-[90vh] overflow-y-auto border border-slate-200 dark:border-slate-800 shadow-2xl z-10 p-6 space-y-6">
-            <button onclick="closeModal()" class="absolute top-4 right-4 p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition" aria-label="Close modal">
-                <i data-lucide="x" class="w-6 h-6"></i>
-            </button>
-
-            <div id="modal-content" class="space-y-4">
-                <!-- Injected dynamically by JS -->
+        <div class="relative hud-panel border-2 border-cyan-400 max-w-2xl w-full max-h-[90vh] overflow-y-auto z-10 p-1 font-inter">
+            <!-- Terminal Header -->
+            <div class="bg-cyan-900/30 border-b border-cyan-500/50 px-4 py-2 flex items-center justify-between">
+                <span class="text-xs font-orbitron text-cyan-400">DATA_ARCHIVE_ACCESS</span>
+                <button onclick="closeModal()" class="text-cyan-400 hover:text-white transition" aria-label="Close modal">
+                    <i data-lucide="x-square" class="w-5 h-5"></i>
+                </button>
+            </div>
+            
+            <div id="modal-content" class="p-6 sm:p-8 space-y-6">
+                <!-- Injected dynamically -->
             </div>
         </div>
     </div>
 
     <!-- Toast Notification Message Container -->
-    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-12 opacity-0 pointer-events-none transition-all duration-300 bg-emerald-600 text-white px-5 py-3.5 rounded-xl shadow-lg flex items-center gap-3">
-        <div class="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center text-white">
-            <i data-lucide="check" class="w-4 h-4"></i>
-        </div>
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-12 opacity-0 pointer-events-none transition-all duration-300 hud-panel border-neon bg-space text-neon px-5 py-4 flex items-center gap-4">
+        <i data-lucide="check-circle-2" class="w-6 h-6"></i>
         <div>
-            <p class="font-bold text-sm">Message Sent Successfully!</p>
-            <p class="text-xs text-emerald-100">Thank you, I will respond to you shortly.</p>
+            <p class="font-orbitron font-bold text-sm tracking-wide">PACKET TRANSMITTED</p>
+            <p class="text-xs font-rajdhani text-slate-400 tracking-widest">Awaiting system response...</p>
         </div>
     </div>
 
     <!-- Script Block -->
     <script>
-        // Init Lucide Icons
+        // Init Icons
         lucide.createIcons();
 
-        // -------------------------
-        // Dark/Light Mode Engine
-        // -------------------------
-        const themeToggleBtn = document.getElementById('theme-toggle');
-        const sunIcon = document.getElementById('sun-icon');
-        const moonIcon = document.getElementById('moon-icon');
+        // Canvas Background Engine
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        let particles = [];
 
-        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark');
-            sunIcon.classList.remove('hidden');
-            moonIcon.classList.add('hidden');
-        } else {
-            document.documentElement.classList.remove('dark');
-            sunIcon.classList.add('hidden');
-            moonIcon.classList.remove('hidden');
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
+                this.size = Math.random() * 1.5;
+            }
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                if (this.x < 0) this.x = width;
+                if (this.x > width) this.x = 0;
+                if (this.y < 0) this.y = height;
+                if (this.y > height) this.y = 0;
+            }
+            draw() {
+                ctx.fillStyle = 'rgba(0, 229, 255, 0.5)';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
         }
 
-        themeToggleBtn.addEventListener('click', () => {
-            if (document.documentElement.classList.contains('dark')) {
-                document.documentElement.classList.remove('dark');
-                localStorage.setItem('theme', 'light');
-                sunIcon.classList.add('hidden');
-                moonIcon.classList.remove('hidden');
-            } else {
-                document.documentElement.classList.add('dark');
-                localStorage.setItem('theme', 'dark');
-                sunIcon.classList.remove('hidden');
-                moonIcon.classList.add('hidden');
-            }
+        for (let i = 0; i < 70; i++) particles.push(new Particle());
+
+        function animateCanvas() {
+            ctx.clearRect(0, 0, width, height);
+            
+            // Draw faint grid
+            ctx.strokeStyle = 'rgba(0, 229, 255, 0.03)';
+            ctx.lineWidth = 1;
+            const step = 40;
+            ctx.beginPath();
+            for (let x = 0; x < width; x += step) { ctx.moveTo(x, 0); ctx.lineTo(x, height); }
+            for (let y = 0; y < height; y += step) { ctx.moveTo(0, y); ctx.lineTo(width, y); }
+            ctx.stroke();
+
+            particles.forEach(p => { p.update(); p.draw(); });
+            requestAnimationFrame(animateCanvas);
+        }
+        animateCanvas();
+
+        // Typed.js for Hero Section
+        var typed = new Typed('#typed-output', {
+            strings: [
+                'AI ENGINEER', 
+                'ROBOTICS BUILDER', 
+                'UAV DESIGNER',
+                'MECHANICAL ENGINEER',
+                'PROBLEM SOLVER'
+            ],
+            typeSpeed: 50,
+            backSpeed: 30,
+            backDelay: 2000,
+            loop: true,
+            showCursor: false
         });
 
-        // -------------------------
-        // Mobile Navigation Menu Toggle
-        // -------------------------
+        // Mobile Menu Toggle
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
 
@@ -603,18 +902,16 @@
             });
         });
 
-        // -------------------------
         // Dynamic Filter Gallery Engine
-        // -------------------------
         const filterButtons = document.querySelectorAll('#filter-container button');
         const projectCards = document.querySelectorAll('#projects-grid > div');
 
         filterButtons.forEach(btn => {
             btn.addEventListener('click', () => {
                 filterButtons.forEach(b => {
-                    b.className = 'px-4 py-2 rounded-lg text-sm font-medium bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 transition';
+                    b.className = 'px-4 py-1.5 border border-slate-700 text-slate-400 hover:border-cyan-400 hover:text-cyan-400 transition uppercase';
                 });
-                btn.className = 'px-4 py-2 rounded-lg text-sm font-medium bg-brand-600 text-white shadow-sm transition';
+                btn.className = 'px-4 py-1.5 border border-cyan-400 bg-cyan-400/10 text-cyan-400 uppercase';
 
                 const targetFilter = btn.getAttribute('data-filter');
 
@@ -629,9 +926,7 @@
             });
         });
 
-        // -------------------------
         // Project Overview Modals Data
-        // -------------------------
         const modalElement = document.getElementById('project-modal');
         const modalContent = document.getElementById('modal-content');
 
@@ -639,7 +934,7 @@
             chatbot: {
                 title: "RAG-based Job Chatbot",
                 tech: "Python, LangChain, ChromaDB, AWS EC2, Streamlit",
-                desc: "An intelligent retrieval-augmented generation (RAG) chatbot created during my internship. Built to process data scraped from over 100 job portals, helping freshers accurately find and compare job requirements based on conversational queries.",
+                desc: "An intelligent retrieval-augmented generation (RAG) chatbot created during my data science internship. Built to process data scraped from over 100 job portals, helping freshers accurately find and compare job requirements based on conversational queries.",
                 features: [
                     "Recursive text chunking & advanced embedding vectors stored in ChromaDB",
                     "Integrated Cross-Encoder to re-rank outputs, boosting context relevance to 85%",
@@ -679,6 +974,99 @@
                     "Applied complex OpenCV image thresholds (Erosion, Dilation, Median Filter)",
                     "Achieved a highly consistent 80.43% test-set accuracy via GridSearchCV"
                 ]
+            },
+            uavDrone: {
+                title: "MQ-9 Reaper Scaled UAV",
+                tech: "Pixhawk PX4, GPS Module, Xflr5, Mission Planner",
+                desc: "Led a dedicated engineering team of 15 students to configure, simulate, and assemble an fully autonomous scaled military drone with a 2.5m wingspan.",
+                features: [
+                    "Designed using detailed Xflr5 aerodynamic and CAD structural models",
+                    "Employed Pixhawk PX4 dynamic flight computer alongside GPS integrations",
+                    "Accommodated a 2.7kg MTOW with 300g payload margins with 10min endurance",
+                    "Formally recognized by the Indian Army for outstanding UAV mentorship"
+                ]
+            },
+            foldingWing: {
+                title: "Next-Gen Folding Wing Mechanism",
+                tech: "Autodesk Inventor, 3D Printing, Stress/Aerodynamic Testing",
+                desc: "Undergrad research directly under Prof. Abhishek on folding configurations for modern high-performance unmanned aerial vehicles.",
+                features: [
+                    "Researched advanced deployment mechanisms like Lockheed's Outrider",
+                    "Iteratively generated 4-bar linkage models in Autodesk Inventor",
+                    "Formulated and stress-tested complex 3D-printed modular prototypes",
+                    "Assisted structural testing optimizations within IITK's Kalam Lab"
+                ]
+            },
+            vendingSystem: {
+                title: "Smart Beverage Vending System",
+                tech: "Arduino UNO, HC-SR04, Fusion 360, SolidWorks, Steel Fabrication",
+                desc: "Designed and engineered a solid-built beverage vending apparatus optimized via automation systems.",
+                features: [
+                    "Crafted durable structural chassis from steel and aluminum sheets",
+                    "Programmed Arduino control logic interacting with HC-SR04 sensor arrays",
+                    "Simulated automated machining processes with SolidWorks and CraftWare",
+                    "Managed complex physical fabrication steps including lathe operations"
+                ]
+            },
+            graphTheory: {
+                title: "Algorithmic Graph Theory Projects",
+                tech: "C++, Graph Traversals, SSSP, APSP, Network Flow",
+                desc: "Conducted deep explorations into graph representations, optimization algorithms, and network-related computer science issues.",
+                features: [
+                    "Implemented Kruskal's and Prim's algorithms solving Minimum Spanning Tree problems",
+                    "Employed Kosaraju's and Tarjan's algorithms to pinpoint strongly connected elements",
+                    "Developed code structures for bipartite graph matching and network flows"
+                ]
+            },
+            navRobot: {
+                title: "Autonomous Navigation Rover",
+                tech: "Arduino UNO R3, HC-SR04 Sensors, Course-Correction Code",
+                desc: "A small-scale autonomous mobile rover designed to maneuver through unmapped obstacles without hardcoded paths.",
+                features: [
+                    "Utilized HC-SR04 ultrasonic sensors to continuously feed distance measurements",
+                    "Programmed direct physical course-adjustment logic onto Arduino UNO",
+                    "Optimized battery power management and motor drive calibrations"
+                ]
+            },
+            oopsCpp: {
+                title: "Object-Oriented C++ Custom Systems",
+                tech: "C++, Custom Memory Allocation, Pointers, Class Structures",
+                desc: "Built custom abstract data structures exploring core low-level execution layers inside C++.",
+                features: [
+                    "Formed concrete data layouts implementing manual constructors and destructors",
+                    "Utilized Polymorphism, Abstraction, and Encapsulation paradigms",
+                    "Implemented strict resource management routines avoiding system leaks"
+                ]
+            },
+            mathData: {
+                title: "Math Tools for Data Science",
+                tech: "Python, Scikit-Learn, Random Forest, Seaborn Plots",
+                desc: "Built specialized classification sequences modeling medical and commercial datasets.",
+                features: [
+                    "Utilized Decision Tree and Random Forest engines on the Kyphosis dataset",
+                    "Applied Logistic and Linear Regression reaching 94% accuracy scores",
+                    "Developed rich visual data correlations via Seaborn and Matplotlib"
+                ]
+            },
+            cervicalCancer: {
+                title: "Cervical Cancer Screening Classifier",
+                tech: "Python, ML Modeling, PCA, SMOTE, KNN, SVM",
+                desc: "Designed highly reliable screening predictions addressing massive target category imbalances.",
+                features: [
+                    "Trained binary classification targets on the Cancer Risk Factors dataset",
+                    "Executed PCA feature extractions to find primary data variance",
+                    "Balanced data variables with SMOTE, boosting KNN and SVM accuracies to 94%"
+                ]
+            },
+            bankLoan: {
+                title: "Bank Loan Risk Monitoring Tool",
+                tech: "SQL, Power BI, KPI Dashboarding",
+                desc: "A decision support dashboard mapping bank lending activities and loan delinquency risks.",
+                features: [
+                    "Formulated precise SQL queries capturing overall lending KPIs",
+                    "Mapped region-specific loan profiles, repayment trends, and borrow behavior",
+                    "Designed simple classifications separating high-yield loans from risk items"
+                ]
             }
         };
 
@@ -687,23 +1075,23 @@
             if (!data) return;
 
             modalContent.innerHTML = `
-                <div class="space-y-2">
-                    <h3 class="text-2xl font-black">${data.title}</h3>
-                    <p class="text-xs font-semibold text-brand-600 dark:text-brand-400">Stack: ${data.tech}</p>
+                <div class="space-y-3">
+                    <h3 class="text-3xl font-orbitron font-bold text-white tracking-wider">${data.title}</h3>
+                    <p class="text-xs font-rajdhani text-cyan-400 tracking-widest uppercase border border-cyan-500/30 inline-block px-2 py-1 bg-cyan-900/20">TECH_STACK: ${data.tech}</p>
                 </div>
-                <hr class="border-slate-200 dark:border-slate-800" />
-                <p class="text-slate-600 dark:text-slate-300 leading-relaxed text-sm">
+                <div class="h-px w-full bg-cyan-500/30 my-4"></div>
+                <p class="text-slate-300 leading-relaxed text-sm">
                     ${data.desc}
                 </p>
-                <div class="space-y-2">
-                    <h4 class="font-bold text-sm">Core Implementations:</h4>
-                    <ul class="list-disc list-inside space-y-1.5 text-slate-500 dark:text-slate-400 text-sm">
-                        ${data.features.map(feat => `<li>${feat}</li>`).join('')}
+                <div class="space-y-3 mt-4">
+                    <h4 class="font-orbitron font-bold text-sm text-neon tracking-widest uppercase">> Core System Implementations:</h4>
+                    <ul class="space-y-2 text-slate-400 text-sm font-rajdhani tracking-wide">
+                        ${data.features.map(feat => `<li class="flex items-start gap-2"><div class="w-1 h-1 bg-cyan-400 mt-2 rounded-full"></div> ${feat}</li>`).join('')}
                     </ul>
                 </div>
-                <div class="pt-4 flex gap-4">
-                    <button onclick="closeModal()" class="w-full px-5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition font-medium text-sm">
-                        Close Modal
+                <div class="pt-6">
+                    <button onclick="closeModal()" class="w-full cyber-button py-3 text-sm">
+                        TERMINATE SESSION
                     </button>
                 </div>
             `;
@@ -721,22 +1109,20 @@
             if (e.key === 'Escape') closeModal();
         });
 
-        // -------------------------
         // Toast Alerts / Contact Form Handler
-        // -------------------------
         const contactForm = document.getElementById('contact-form');
         const toast = document.getElementById('toast');
 
         contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
 
-            // Clear Form Inputs
+            // Clear Form
             document.getElementById('form-name').value = '';
             document.getElementById('form-email').value = '';
             document.getElementById('form-subject').value = '';
             document.getElementById('form-message').value = '';
 
-            // Trigger Toast Box Animation
+            // Animate Toast Box
             toast.classList.remove('translate-y-12', 'opacity-0', 'pointer-events-none');
             toast.classList.add('translate-y-0', 'opacity-100');
 

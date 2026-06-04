@@ -63,7 +63,7 @@
         .scanlines {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
-            background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0, 229, 255, 0.05) 50%, rgba(0, 229, 255, 0.05));
+            background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0, 229, 255, 0.03) 50%, rgba(0, 229, 255, 0.03));
             background-size: 100% 4px;
             pointer-events: none;
             z-index: 9999;
@@ -151,18 +151,19 @@
     <!-- Top Navigation HUD -->
     <header class="fixed top-0 left-0 w-full z-40 bg-navy/70 backdrop-blur-md border-b border-cyan-500/30">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-            <a href="#hero" class="flex items-center gap-3 group">
+            <a href="#hero" onclick="switchView('main')" class="flex items-center gap-3 group">
                 <div class="w-2 h-2 bg-neon rounded-full animate-pulse-fast shadow-[0_0_10px_#00FFB3]"></div>
                 <span class="text-sm font-orbitron text-cyan-400 tracking-widest group-hover:text-white transition">SK // SYSTEM_ONLINE</span>
             </a>
 
             <!-- Desktop Nav Links -->
             <nav class="hidden md:flex items-center space-x-8 font-rajdhani text-sm tracking-widest">
-                <a href="#about" class="text-slate-400 hover:text-cyan-400 transition-colors flex items-center gap-1"><span class="text-cyan-500/50">01.</span> PROFILE</a>
-                <a href="#skills" class="text-slate-400 hover:text-cyan-400 transition-colors flex items-center gap-1"><span class="text-cyan-500/50">02.</span> CAPABILITIES</a>
-                <a href="#projects" class="text-slate-400 hover:text-cyan-400 transition-colors flex items-center gap-1"><span class="text-cyan-500/50">03.</span> MISSIONS</a>
-                <a href="#experience" class="text-slate-400 hover:text-cyan-400 transition-colors flex items-center gap-1"><span class="text-cyan-500/50">04.</span> LOGS</a>
-                <a href="#contact" class="text-neon hover:text-white transition-colors flex items-center gap-1"><span class="text-cyan-500/50">05.</span> COMM_LINK</a>
+                <a href="#about" onclick="switchView('main')" class="text-slate-400 hover:text-cyan-400 transition-colors flex items-center gap-1"><span class="text-cyan-500/50">01.</span> PROFILE</a>
+                <a href="#skills" onclick="switchView('main')" class="text-slate-400 hover:text-cyan-400 transition-colors flex items-center gap-1"><span class="text-cyan-500/50">02.</span> CAPABILITIES</a>
+                <a href="#projects" onclick="switchView('main')" class="text-slate-400 hover:text-cyan-400 transition-colors flex items-center gap-1"><span class="text-cyan-500/50">03.</span> MISSIONS</a>
+                <a href="#experience" onclick="switchView('main')" class="text-slate-400 hover:text-cyan-400 transition-colors flex items-center gap-1"><span class="text-cyan-500/50">04.</span> LOGS</a>
+                <button onclick="switchView('gallery')" class="text-slate-400 hover:text-cyan-400 transition-colors flex items-center gap-1"><span class="text-cyan-500/50">05.</span> GALLERY</button>
+                <a href="#contact" onclick="switchView('main')" class="text-neon hover:text-white transition-colors flex items-center gap-1"><span class="text-cyan-500/50">06.</span> COMM_LINK</a>
             </nav>
 
             <button id="mobile-menu-btn" class="p-2 md:hidden text-cyan-400 border border-cyan-500/30 bg-navy hover:bg-cyan-900/30 transition">
@@ -177,597 +178,818 @@
 
     <!-- Mobile Nav Menu -->
     <div id="mobile-menu" class="hidden fixed inset-0 top-16 z-30 bg-space/95 backdrop-blur-xl border-t border-cyan-500/30 p-6 flex flex-col space-y-6 font-rajdhani text-lg tracking-widest">
-        <a href="#about" class="text-cyan-400 hover:text-white transition border-b border-cyan-500/20 pb-2">> INITIATE: PROFILE</a>
-        <a href="#skills" class="text-cyan-400 hover:text-white transition border-b border-cyan-500/20 pb-2">> INITIATE: CAPABILITIES</a>
-        <a href="#projects" class="text-cyan-400 hover:text-white transition border-b border-cyan-500/20 pb-2">> INITIATE: MISSIONS</a>
-        <a href="#experience" class="text-cyan-400 hover:text-white transition border-b border-cyan-500/20 pb-2">> INITIATE: LOGS</a>
-        <a href="#contact" class="text-neon hover:text-white transition">> ESTABLISH: COMM_LINK</a>
+        <a href="#about" onclick="switchView('main')" class="text-cyan-400 hover:text-white transition border-b border-cyan-500/20 pb-2">> INITIATE: PROFILE</a>
+        <a href="#skills" onclick="switchView('main')" class="text-cyan-400 hover:text-white transition border-b border-cyan-500/20 pb-2">> INITIATE: CAPABILITIES</a>
+        <a href="#projects" onclick="switchView('main')" class="text-cyan-400 hover:text-white transition border-b border-cyan-500/20 pb-2">> INITIATE: MISSIONS</a>
+        <a href="#experience" onclick="switchView('main')" class="text-cyan-400 hover:text-white transition border-b border-cyan-500/20 pb-2">> INITIATE: LOGS</a>
+        <button onclick="switchView('gallery')" class="text-left text-cyan-400 hover:text-white transition border-b border-cyan-500/20 pb-2">> VIEW: GALLERY</button>
+        <a href="#contact" onclick="switchView('main')" class="text-neon hover:text-white transition">> ESTABLISH: COMM_LINK</a>
     </div>
 
-    <main class="pt-16">
-        
-        <!-- Hero Section: COMMAND CENTER -->
-        <section id="hero" class="relative min-h-[calc(100vh-4rem)] flex items-center justify-center px-4 sm:px-6 lg:px-8 py-12 overflow-hidden">
-            <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center w-full relative z-10">
-                
-                <!-- Left: Terminal Readout -->
-                <div class="space-y-6">
-                    <div class="inline-flex items-center gap-3 px-4 py-1.5 border border-warning/50 bg-warning/10 text-warning text-xs font-rajdhani font-bold tracking-widest uppercase">
-                        <i data-lucide="alert-triangle" class="w-4 h-4"></i>
-                        Open for collaboration
-                    </div>
-
-                    <div>
-                        <h2 class="text-cyan-500 font-rajdhani tracking-[0.3em] text-sm uppercase mb-2">Lead Systems Operator</h2>
-                        <h1 class="text-5xl sm:text-7xl font-black text-white leading-none tracking-tight">
-                            SUJEET <br>
-                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-aero">KUMAR</span>
-                        </h1>
-                    </div>
+    <!-- MAIN PORTFOLIO WRAPPER (DEFAULT LANDING PAGE) -->
+    <div id="portfolio-landing-view">
+        <main class="pt-16">
+            
+            <!-- Hero Section: COMMAND CENTER -->
+            <section id="hero" class="relative min-h-[calc(100vh-4rem)] flex items-center justify-center px-4 sm:px-6 lg:px-8 py-12 overflow-hidden">
+                <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center w-full relative z-10">
                     
-                    <div class="h-8">
-                        <span class="text-2xl sm:text-3xl font-rajdhani font-bold text-neon">> <span id="typed-output"></span></span>
-                    </div>
-
-                    <p class="text-slate-400 font-inter text-sm sm:text-base max-w-lg leading-relaxed border-l-2 border-cyan-500/30 pl-4 py-1">
-                        Fourth-Year Undergraduate at IIT Kanpur. Passionate about solving complex problems through AI, scalable data systems, robotics logic, and algorithmic flight planning.
-                    </p>
-
-                    <div class="pt-6 flex flex-wrap items-center gap-4 font-rajdhani text-sm">
-                        <a href="#projects" class="cyber-button px-8 py-3 flex items-center gap-2">
-                            Access Archives <i data-lucide="database" class="w-4 h-4"></i>
-                        </a>
-                        <a href="#contact" class="px-8 py-3 border border-slate-600 text-slate-300 hover:border-neon hover:text-neon transition flex items-center gap-2 uppercase tracking-widest bg-navy/50">
-                            Transmit Signal <i data-lucide="radio" class="w-4 h-4"></i>
-                        </a>
-                    </div>
-
-                    <!-- Socials Comm Panel -->
-                    <div class="pt-8 flex gap-6 text-cyan-500/50">
-                        <a href="https://github.com/Sjeetk21" target="_blank" class="hover:text-cyan-400 hover:shadow-[0_0_10px_#00E5FF] transition rounded-full p-2 border border-transparent hover:border-cyan-500/30" aria-label="GitHub"><i data-lucide="github" class="w-5 h-5"></i></a>
-                        <a href="https://linkedin.com/in/sujeet-kumar" target="_blank" class="hover:text-cyan-400 hover:shadow-[0_0_10px_#00E5FF] transition rounded-full p-2 border border-transparent hover:border-cyan-500/30" aria-label="LinkedIn"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
-                        <a href="mailto:sjeetk21@iitk.ac.in" class="hover:text-cyan-400 hover:shadow-[0_0_10px_#00E5FF] transition rounded-full p-2 border border-transparent hover:border-cyan-500/30" aria-label="Email"><i data-lucide="mail" class="w-5 h-5"></i></a>
-                    </div>
-                </div>
-
-                <!-- Right: 3D Engineering Dashboard -->
-                <div class="relative h-[500px] w-full flex items-center justify-center hidden lg:flex perspective-1000">
-                    <!-- Central HUD Elements -->
-                    <div class="absolute inset-0 flex items-center justify-center">
-                        <!-- Outer rotating ring -->
-                        <svg class="w-96 h-96 animate-spin-slow opacity-30 text-cyan-500" viewBox="0 0 100 100">
-                            <circle cx="50" cy="50" r="48" fill="none" stroke="currentColor" stroke-width="0.5" stroke-dasharray="2 4" />
-                            <circle cx="50" cy="50" r="42" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="10 5" />
-                        </svg>
-                        <!-- Inner rotating ring -->
-                        <svg class="w-72 h-72 animate-spin-reverse opacity-50 text-aero absolute" viewBox="0 0 100 100">
-                            <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="4 8" />
-                            <circle cx="50" cy="50" r="38" fill="none" stroke="currentColor" stroke-width="0.5" />
-                        </svg>
-                        <!-- Central Core Icon (Drone/AI fusion) -->
-                        <div class="absolute text-cyan-300 animate-pulse drop-shadow-[0_0_15px_rgba(0,229,255,0.8)]">
-                            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
-                                <circle cx="12" cy="12" r="4"/>
-                                <circle cx="12" cy="12" r="1"/>
-                            </svg>
+                    <!-- Left: Terminal Readout -->
+                    <div class="space-y-6">
+                        <div class="inline-flex items-center gap-3 px-4 py-1.5 border border-warning/50 bg-warning/10 text-warning text-xs font-rajdhani font-bold tracking-widest uppercase">
+                            <i data-lucide="alert-triangle" class="w-4 h-4"></i>
+                            Open for collaboration
                         </div>
-                    </div>
 
-                    <!-- Floating Stat Widgets -->
-                    <div data-tilt data-tilt-glare data-tilt-max-glare="0.2" class="absolute top-10 left-0 hud-panel p-4 flex flex-col gap-1 z-20 cursor-default">
-                        <span class="text-xs text-cyan-500 font-rajdhani tracking-widest uppercase">Logic Engine</span>
-                        <span class="text-2xl font-orbitron font-bold text-white">200+</span>
-                        <span class="text-xs text-slate-400 font-inter">Days DSA Streak</span>
-                    </div>
-
-                    <div data-tilt data-tilt-glare data-tilt-max-glare="0.2" class="absolute bottom-20 left-4 hud-panel p-4 flex flex-col gap-1 z-20 cursor-default">
-                        <span class="text-xs text-neon font-rajdhani tracking-widest uppercase">Command Ops</span>
-                        <span class="text-2xl font-orbitron font-bold text-white">15+</span>
-                        <span class="text-xs text-slate-400 font-inter">Team Members Led</span>
-                    </div>
-
-                    <div data-tilt data-tilt-glare data-tilt-max-glare="0.2" class="absolute top-32 right-0 hud-panel p-4 flex flex-col gap-1 z-20 cursor-default">
-                        <span class="text-xs text-warning font-rajdhani tracking-widest uppercase">Archived</span>
-                        <span class="text-2xl font-orbitron font-bold text-white">13+</span>
-                        <span class="text-xs text-slate-400 font-inter">Engr Projects</span>
-                    </div>
-
-                    <div data-tilt data-tilt-glare data-tilt-max-glare="0.2" class="absolute bottom-10 right-10 hud-panel p-4 flex flex-col gap-1 z-20 cursor-default">
-                        <span class="text-xs text-aero font-rajdhani tracking-widest uppercase">R&D output</span>
-                        <span class="text-2xl font-orbitron font-bold text-white">02</span>
-                        <span class="text-xs text-slate-400 font-inter">Patents/Research</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- About Section: MISSION PROFILE -->
-        <section id="about" class="py-24 relative border-y border-cyan-900/30 bg-navy/40">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                
-                <div class="mb-12 border-l-4 border-cyan-400 pl-4">
-                    <h2 class="text-3xl font-orbitron font-bold text-white uppercase tracking-wider">Mission Profile</h2>
-                    <p class="text-cyan-500 font-rajdhani tracking-[0.2em] text-sm uppercase mt-1">Classification: Mechanical & AI Engineer</p>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
-                    <!-- Left: Aerospace SVG Diagram -->
-                    <div class="md:col-span-5 flex justify-center relative">
-                        <div class="w-full aspect-square max-w-sm rounded-full border border-cyan-500/20 flex items-center justify-center relative">
-                            <!-- Radar sweep -->
-                            <div class="absolute inset-0 rounded-full border border-cyan-500/40" style="background: conic-gradient(from 0deg, rgba(0,229,255,0) 70%, rgba(0,229,255,0.2) 100%); animation: spin 4s linear infinite;"></div>
-                            
-                            <!-- Static Grid lines -->
-                            <div class="absolute inset-0 w-full h-full">
-                                <div class="w-[1px] h-full bg-cyan-500/20 absolute left-1/2"></div>
-                                <div class="h-[1px] w-full bg-cyan-500/20 absolute top-1/2"></div>
-                            </div>
-                            
-                            <!-- Center Icon -->
-                            <i data-lucide="satellite" class="w-20 h-20 text-cyan-300 relative z-10 animate-pulse"></i>
-                        </div>
-                    </div>
-
-                    <!-- Right: Narrative -->
-                    <div class="md:col-span-7 space-y-6">
-                        <p class="text-lg text-slate-300 font-inter leading-relaxed">
-                            I am a senior undergraduate at the <span class="text-cyan-400 font-semibold">Indian Institute of Technology Kanpur</span>, combining a rigorous foundation in Mechanical Engineering with advanced applied knowledge in Machine Learning, Aeromodelling, and Autonomous Robotics.
-                        </p>
-                        <p class="text-slate-400 font-inter leading-relaxed">
-                            My operational directive is building intelligent, scalable physical and digital systems. Whether architecting a RAG-based LLM structure, engineering aerodynamic mechanisms for UAVs, or executing precise pathfinding algorithms for rovers, I bridge the critical gap between software intelligence and hardware execution.
-                        </p>
-                        
-                        <!-- Mini achievement grids -->
-                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6">
-                            <div class="hud-panel p-4 text-center group">
-                                <i data-lucide="graduation-cap" class="w-6 h-6 text-aero mx-auto mb-2 group-hover:scale-110 transition"></i>
-                                <span class="block text-xs font-rajdhani font-bold text-white tracking-wider">IIT KANPUR</span>
-                                <span class="text-[10px] text-slate-500">Academics</span>
-                            </div>
-                            <div class="hud-panel p-4 text-center group">
-                                <i data-lucide="plane-takeoff" class="w-6 h-6 text-neon mx-auto mb-2 group-hover:scale-110 transition"></i>
-                                <span class="block text-xs font-rajdhani font-bold text-white tracking-wider">UAV RESEARCH</span>
-                                <span class="text-[10px] text-slate-500">Aeromodelling</span>
-                            </div>
-                            <div class="hud-panel p-4 text-center group">
-                                <i data-lucide="cpu" class="w-6 h-6 text-warning mx-auto mb-2 group-hover:scale-110 transition"></i>
-                                <span class="block text-xs font-rajdhani font-bold text-white tracking-wider">PRODUCT DEV</span>
-                                <span class="text-[10px] text-slate-500">Hardware & IoT</span>
-                            </div>
-                            <div class="hud-panel p-4 text-center group">
-                                <i data-lucide="brain-circuit" class="w-6 h-6 text-cyan-400 mx-auto mb-2 group-hover:scale-110 transition"></i>
-                                <span class="block text-xs font-rajdhani font-bold text-white tracking-wider">AI SYSTEMS</span>
-                                <span class="text-[10px] text-slate-500">Data Science</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Skills Section: TECH STACK & CAPABILITIES -->
-        <section id="skills" class="py-24 relative">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="mb-12 border-l-4 border-neon pl-4">
-                    <h2 class="text-3xl font-orbitron font-bold text-white uppercase tracking-wider">Engineering Capabilities</h2>
-                    <p class="text-neon font-rajdhani tracking-[0.2em] text-sm uppercase mt-1">System Technical Stack</p>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <!-- AI Panel -->
-                    <div data-tilt data-tilt-scale="1.02" class="hud-panel p-6 border-t-4 border-t-cyan-400">
-                        <div class="flex items-center gap-3 mb-6 border-b border-cyan-500/20 pb-3">
-                            <i data-lucide="network" class="w-6 h-6 text-cyan-400"></i>
-                            <h3 class="font-orbitron font-bold text-sm tracking-widest text-white uppercase">AI & ML</h3>
-                        </div>
-                        <ul class="space-y-3 font-rajdhani text-slate-300 tracking-wide text-sm">
-                            <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-cyan-400"></div> TensorFlow & Keras</li>
-                            <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-cyan-400"></div> Scikit-Learn</li>
-                            <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-cyan-400"></div> OpenCV</li>
-                            <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-cyan-400"></div> LangChain & LLMs</li>
-                            <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-cyan-400"></div> Pandas & NumPy</li>
-                        </ul>
-                    </div>
-
-                    <!-- Robotics Panel -->
-                    <div data-tilt data-tilt-scale="1.02" class="hud-panel p-6 border-t-4 border-t-warning">
-                        <div class="flex items-center gap-3 mb-6 border-b border-warning/20 pb-3">
-                            <i data-lucide="bot" class="w-6 h-6 text-warning"></i>
-                            <h3 class="font-orbitron font-bold text-sm tracking-widest text-white uppercase">Robotics</h3>
-                        </div>
-                        <ul class="space-y-3 font-rajdhani text-slate-300 tracking-wide text-sm">
-                            <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-warning"></div> Arduino & ESP32</li>
-                            <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-warning"></div> Control Systems</li>
-                            <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-warning"></div> Path Planning (A*, RRT)</li>
-                            <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-warning"></div> Sensor Integration (IoT)</li>
-                            <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-warning"></div> Hardware Prototyping</li>
-                        </ul>
-                    </div>
-
-                    <!-- Aerospace Panel -->
-                    <div data-tilt data-tilt-scale="1.02" class="hud-panel p-6 border-t-4 border-t-aero">
-                        <div class="flex items-center gap-3 mb-6 border-b border-aero/20 pb-3">
-                            <i data-lucide="rocket" class="w-6 h-6 text-aero"></i>
-                            <h3 class="font-orbitron font-bold text-sm tracking-widest text-white uppercase">Aerospace</h3>
-                        </div>
-                        <ul class="space-y-3 font-rajdhani text-slate-300 tracking-wide text-sm">
-                            <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-aero"></div> Pixhawk PX4</li>
-                            <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-aero"></div> Mission Planner</li>
-                            <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-aero"></div> XFLR5 (Aerodynamics)</li>
-                            <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-aero"></div> Autodesk Inventor</li>
-                            <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-aero"></div> SolidWorks / AutoCAD</li>
-                        </ul>
-                    </div>
-
-                    <!-- Software Panel -->
-                    <div data-tilt data-tilt-scale="1.02" class="hud-panel p-6 border-t-4 border-t-neon">
-                        <div class="flex items-center gap-3 mb-6 border-b border-neon/20 pb-3">
-                            <i data-lucide="terminal" class="w-6 h-6 text-neon"></i>
-                            <h3 class="font-orbitron font-bold text-sm tracking-widest text-white uppercase">Software</h3>
-                        </div>
-                        <ul class="space-y-3 font-rajdhani text-slate-300 tracking-wide text-sm">
-                            <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-neon"></div> Python</li>
-                            <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-neon"></div> C / C++ / C#</li>
-                            <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-neon"></div> MATLAB</li>
-                            <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-neon"></div> SQL / Databases</li>
-                            <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-neon"></div> Cloud (AWS EC2)</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Projects Section: ENGINEERING MISSION CARDS -->
-        <section id="projects" class="py-24 relative border-t border-cyan-900/30 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-navy/50 via-space to-space">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
-                
-                <!-- Hero Project: MQ-9 Reaper -->
-                <div class="space-y-6">
-                    <div class="border-l-4 border-warning pl-4 flex items-center justify-between">
                         <div>
-                            <h2 class="text-3xl font-orbitron font-bold text-white uppercase tracking-wider">Primary Archive</h2>
-                            <p class="text-warning font-rajdhani tracking-[0.2em] text-sm uppercase mt-1">Classified: Hero Project</p>
+                            <h2 class="text-cyan-500 font-rajdhani tracking-[0.3em] text-sm uppercase mb-2">Lead Systems Operator</h2>
+                            <h1 class="text-5xl sm:text-7xl font-black text-white leading-none tracking-tight">
+                                SUJEET <br>
+                                <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-aero">KUMAR</span>
+                            </h1>
                         </div>
-                        <div class="px-3 py-1 border border-neon text-neon text-xs font-orbitron flex items-center gap-2">
-                            <div class="w-2 h-2 bg-neon animate-pulse"></div> MISSION COMPLETED
+                        
+                        <div class="h-8">
+                            <span class="text-2xl sm:text-3xl font-rajdhani font-bold text-neon">> <span id="typed-output"></span></span>
+                        </div>
+
+                        <p class="text-slate-400 font-inter text-sm sm:text-base max-w-lg leading-relaxed border-l-2 border-cyan-500/30 pl-4 py-1">
+                            Passionate doing projects on AI, scalable data systems, robotics logic, and UAV fabrication.
+                        </p>
+
+                        <div class="pt-6 flex flex-wrap items-center gap-4 font-rajdhani text-sm">
+                            <a href="#projects" class="cyber-button px-8 py-3 flex items-center gap-2">
+                                Access Archives <i data-lucide="database" class="w-4 h-4"></i>
+                            </a>
+                            <a href="#contact" class="px-8 py-3 border border-slate-600 text-slate-300 hover:border-neon hover:text-neon transition flex items-center gap-2 uppercase tracking-widest bg-navy/50">
+                                Transmit Signal <i data-lucide="radio" class="w-4 h-4"></i>
+                            </a>
+                        </div>
+
+                        <!-- Socials Comm Panel -->
+                        <div class="pt-8 flex gap-6 text-cyan-500/50">
+                            <a href="https://github.com/Sjeetk21" target="_blank" class="hover:text-cyan-400 hover:shadow-[0_0_10px_#00E5FF] transition rounded-full p-2 border border-transparent hover:border-cyan-500/30" aria-label="GitHub"><i data-lucide="github" class="w-5 h-5"></i></a>
+                            <a href="https://linkedin.com/in/sujeet-kumar" target="_blank" class="hover:text-cyan-400 hover:shadow-[0_0_10px_#00E5FF] transition rounded-full p-2 border border-transparent hover:border-cyan-500/30" aria-label="LinkedIn"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
+                            <a href="mailto:sjeetk21@iitk.ac.in" class="hover:text-cyan-400 hover:shadow-[0_0_10px_#00E5FF] transition rounded-full p-2 border border-transparent hover:border-cyan-500/30" aria-label="Email"><i data-lucide="mail" class="w-5 h-5"></i></a>
                         </div>
                     </div>
 
-                    <div class="hud-panel p-6 sm:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center group cursor-pointer" onclick="openModal('uavDrone')">
-                        <div class="lg:col-span-7 h-64 sm:h-80 w-full relative border border-cyan-500/20 bg-space overflow-hidden flex items-center justify-center">
-                            <!-- Background Grid -->
-                            <div class="absolute inset-0 bg-[linear-gradient(rgba(0,229,255,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(0,229,255,0.1)_1px,transparent_1px)] bg-[size:20px_20px]"></div>
-                            <!-- SVG Wireframe -->
-                            <svg class="w-full h-full text-cyan-500/80 p-8 group-hover:scale-105 transition duration-500 drop-shadow-[0_0_8px_rgba(0,229,255,0.8)]" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="0.5">
-                                <path d="M50 10 L50 90 M20 40 L80 40 M30 70 L70 70" stroke-dasharray="2 2" opacity="0.5"/>
-                                <path d="M48 20 L52 20 L55 50 L85 55 L85 60 L55 60 L52 80 L60 85 L60 88 L40 88 L40 85 L48 80 L45 60 L15 60 L15 55 L45 50 Z" stroke-width="1.5" stroke-linejoin="round"/>
+                    <!-- Right: 3D Engineering Dashboard -->
+                    <div class="relative h-[500px] w-full flex items-center justify-center hidden lg:flex perspective-1000">
+                        <!-- Central HUD Elements -->
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <!-- Outer rotating ring -->
+                            <svg class="w-96 h-96 animate-spin-slow opacity-30 text-cyan-500" viewBox="0 0 100 100">
+                                <circle cx="50" cy="50" r="48" fill="none" stroke="currentColor" stroke-width="0.5" stroke-dasharray="2 4" />
+                                <circle cx="50" cy="50" r="42" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="10 5" />
                             </svg>
-                            <div class="absolute top-4 left-4 text-xs font-rajdhani text-cyan-500 tracking-widest">DRONE_SCHEMATIC_v1.0</div>
+                            <!-- Inner rotating ring -->
+                            <svg class="w-72 h-72 animate-spin-reverse opacity-50 text-aero absolute" viewBox="0 0 100 100">
+                                <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="4 8" />
+                                <circle cx="50" cy="50" r="38" fill="none" stroke="currentColor" stroke-width="0.5" />
+                            </svg>
+                            <!-- Central Core Icon (Personal Photo) -->
+                            <div class="absolute w-100 h-100 rounded-full overflow-hidden border-2 border-cyan-400 drop-shadow-[0_0_15px_rgba(0,229,255,0.6)] z-10 bg-space/50 flex items-center justify-center">
+                                <img src="https://github.com/Sjeetk21/sujeet/blob/main/20231229_232557(1)(1).png?raw=true" alt="Sujeet Kumar" class="w-full h-full object-cover object-center relative z-10">
+                            </div>
                         </div>
 
-                        <div class="lg:col-span-5 space-y-6">
+                        <!-- Floating Stat Widgets -->
+                        <div data-tilt data-tilt-glare data-tilt-max-glare="0.2" class="absolute top-10 left-0 hud-panel p-4 flex flex-col gap-1 z-20 cursor-default">
+                            <span class="text-xs text-cyan-500 font-rajdhani tracking-widest uppercase">Logic Engine</span>
+                            <span class="text-2xl font-orbitron font-bold text-white">200+</span>
+                            <span class="text-xs text-slate-400 font-inter">Days DSA Streak</span>
+                        </div>
+
+                        <div data-tilt data-tilt-glare data-tilt-max-glare="0.2" class="absolute bottom-20 left-4 hud-panel p-4 flex flex-col gap-1 z-20 cursor-default">
+                            <span class="text-xs text-neon font-rajdhani tracking-widest uppercase">Command Ops</span>
+                            <span class="text-2xl font-orbitron font-bold text-white">15+</span>
+                            <span class="text-xs text-slate-400 font-inter">Team Members Led</span>
+                        </div>
+
+                        <div data-tilt data-tilt-glare data-tilt-max-glare="0.2" class="absolute top-32 right-0 hud-panel p-4 flex flex-col gap-1 z-20 cursor-default">
+                            <span class="text-xs text-warning font-rajdhani tracking-widest uppercase">Archived</span>
+                            <span class="text-2xl font-orbitron font-bold text-white">13+</span>
+                            <span class="text-xs text-slate-400 font-inter">Engr Projects</span>
+                        </div>
+
+                        <div data-tilt data-tilt-glare data-tilt-max-glare="0.2" class="absolute bottom-10 right-10 hud-panel p-4 flex flex-col gap-1 z-20 cursor-default">
+                            <span class="text-xs text-aero font-rajdhani tracking-widest uppercase">R&D output</span>
+                            <span class="text-2xl font-orbitron font-bold text-white">02</span>
+                            <span class="text-xs text-slate-400 font-inter">Research Projects</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- About Section: MISSION PROFILE -->
+            <section id="about" class="py-24 relative border-y border-cyan-900/30 bg-navy/40">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    
+                    <div class="mb-12 border-l-4 border-cyan-400 pl-4">
+                        <h2 class="text-3xl font-orbitron font-bold text-white uppercase tracking-wider">Mission Profile</h2>
+                        <p class="text-cyan-500 font-rajdhani tracking-[0.2em] text-sm uppercase mt-1">Classification: Mechanical & AI Engineer</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
+                        <!-- Left: Aerospace SVG Diagram (image_4f3521.png) -->
+                        <div class="md:col-span-5 flex justify-center relative">
+                            <div class="w-full aspect-square max-w-sm rounded-full border border-cyan-500/20 flex items-center justify-center relative">
+                                <!-- Radar sweep -->
+                                <div class="absolute inset-0 rounded-full border border-cyan-500/40" style="background: conic-gradient(from 0deg, rgba(0,229,255,0) 70%, rgba(0,229,255,0.2) 100%); animation: spin 4s linear infinite;"></div>
+                                
+                                <!-- Static Grid lines -->
+                                <div class="absolute inset-0 w-full h-full">
+                                    <div class="w-[1px] h-full bg-cyan-500/20 absolute left-1/2"></div>
+                                    <div class="h-[1px] w-full bg-cyan-500/20 absolute top-1/2"></div>
+                                </div>
+                                
+                                <!-- Central Profile Photo replacing satellite icon -->
+                                <div class="absolute w-100 h-100 rounded-full overflow-hidden border-2 border-cyan-400/80 bg-gradient-to-b from-navy/90 to-space shadow-[0_0_25px_rgba(0,229,255,0.3)] z-10 flex items-center justify-center group/radar cursor-pointer">
+                                    <!-- Radial overlay to blend background-less photo seamlessly -->
+                                    <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_45%,rgba(5,8,22,0.9)_100%)] z-20"></div>
+                                    <img src="https://github.com/Sjeetk21/sujeet/blob/main/IMG_20251106_221113(1)(1).png?raw=true" alt="Sujeet Kumar" class="w-full h-full object-cover object-center relative z-10 transition-transform duration-500 group-hover/radar:scale-110">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right: Narrative -->
+                        <div class="md:col-span-7 space-y-6">
+                            <p class="text-lg text-slate-300 font-inter leading-relaxed">
+                                I'm a 2025 graduate from <span class="text-cyan-400 font-semibold">Indian Institute of Technology Kanpur</span>, combining a rigorous foundation in Mechanical Engineering with advanced applied knowledge in Machine Learning, Aeromodelling, and Autonomous Robotics.
+                            </p>
+                            <p class="text-slate-400 font-inter leading-relaxed">
+                                My operational directive is building intelligent, scalable physical and digital systems. Whether architecting a RAG-based LLM structure, engineering aerodynamic mechanisms for UAVs, or executing precise pathfinding algorithms for rovers, I bridge the critical gap between software intelligence and hardware execution.
+                            </p>
+                            
+                            <!-- Mini achievement grids -->
+                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6">
+                                <div class="hud-panel p-4 text-center group">
+                                    <i data-lucide="graduation-cap" class="w-6 h-6 text-aero mx-auto mb-2 group-hover:scale-110 transition"></i>
+                                    <span class="block text-xs font-rajdhani font-bold text-white tracking-wider">IIT KANPUR</span>
+                                    <span class="text-[10px] text-slate-500">Academics</span>
+                                </div>
+                                <div class="hud-panel p-4 text-center group">
+                                    <i data-lucide="plane-takeoff" class="w-6 h-6 text-neon mx-auto mb-2 group-hover:scale-110 transition"></i>
+                                    <span class="block text-xs font-rajdhani font-bold text-white tracking-wider">UAV RESEARCH</span>
+                                    <span class="text-[10px] text-slate-500">Aeromodelling</span>
+                                </div>
+                                <div class="hud-panel p-4 text-center group">
+                                    <i data-lucide="cpu" class="w-6 h-6 text-warning mx-auto mb-2 group-hover:scale-110 transition"></i>
+                                    <span class="block text-xs font-rajdhani font-bold text-white tracking-wider">PRODUCT DEV</span>
+                                    <span class="text-[10px] text-slate-500">Hardware & IoT</span>
+                                </div>
+                                <div class="hud-panel p-4 text-center group">
+                                    <i data-lucide="brain-circuit" class="w-6 h-6 text-cyan-400 mx-auto mb-2 group-hover:scale-110 transition"></i>
+                                    <span class="block text-xs font-rajdhani font-bold text-white tracking-wider">AI SYSTEMS</span>
+                                    <span class="text-[10px] text-slate-500">Data Science</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Skills Section: TECH STACK & CAPABILITIES -->
+            <section id="skills" class="py-24 relative">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="mb-12 border-l-4 border-neon pl-4">
+                        <h2 class="text-3xl font-orbitron font-bold text-white uppercase tracking-wider">Engineering Capabilities</h2>
+                        <p class="text-neon font-rajdhani tracking-[0.2em] text-sm uppercase mt-1">System Technical Stack</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <!-- AI Panel -->
+                        <div data-tilt data-tilt-scale="1.02" class="hud-panel p-6 border-t-4 border-t-cyan-400">
+                            <div class="flex items-center gap-3 mb-6 border-b border-cyan-500/20 pb-3">
+                                <i data-lucide="network" class="w-6 h-6 text-cyan-400"></i>
+                                <h3 class="font-orbitron font-bold text-sm tracking-widest text-white uppercase">AI & ML</h3>
+                            </div>
+                            <ul class="space-y-3 font-rajdhani text-slate-300 tracking-wide text-sm">
+                                <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-cyan-400"></div> TensorFlow & Keras</li>
+                                <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-cyan-400"></div> Scikit-Learn</li>
+                                <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-cyan-400"></div> OpenCV</li>
+                                <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-cyan-400"></div> LangChain & LLMs</li>
+                                <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-cyan-400"></div> Pandas & NumPy</li>
+                            </ul>
+                        </div>
+
+                        <!-- Robotics Panel -->
+                        <div data-tilt data-tilt-scale="1.02" class="hud-panel p-6 border-t-4 border-t-warning">
+                            <div class="flex items-center gap-3 mb-6 border-b border-warning/20 pb-3">
+                                <i data-lucide="bot" class="w-6 h-6 text-warning"></i>
+                                <h3 class="font-orbitron font-bold text-sm tracking-widest text-white uppercase">Robotics</h3>
+                            </div>
+                            <ul class="space-y-3 font-rajdhani text-slate-300 tracking-wide text-sm">
+                                <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-warning"></div> Arduino & ESP32</li>
+                                <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-warning"></div> Control Systems</li>
+                                <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-warning"></div> Path Planning (A*, RRT)</li>
+                                <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-warning"></div> Sensor Integration (IoT)</li>
+                                <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-warning"></div> Hardware Prototyping</li>
+                            </ul>
+                        </div>
+
+                        <!-- Aerospace Panel -->
+                        <div data-tilt data-tilt-scale="1.02" class="hud-panel p-6 border-t-4 border-t-aero">
+                            <div class="flex items-center gap-3 mb-6 border-b border-aero/20 pb-3">
+                                <i data-lucide="rocket" class="w-6 h-6 text-aero"></i>
+                                <h3 class="font-orbitron font-bold text-sm tracking-widest text-white uppercase">Aerospace</h3>
+                            </div>
+                            <ul class="space-y-3 font-rajdhani text-slate-300 tracking-wide text-sm">
+                                <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-aero"></div> Pixhawk PX4</li>
+                                <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-aero"></div> Mission Planner</li>
+                                <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-aero"></div> XFLR5 (Aerodynamics)</li>
+                                <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-aero"></div> Autodesk Inventor</li>
+                                <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-aero"></div> SolidWorks / AutoCAD</li>
+                            </ul>
+                        </div>
+
+                        <!-- Software Panel -->
+                        <div data-tilt data-tilt-scale="1.02" class="hud-panel p-6 border-t-4 border-t-neon">
+                            <div class="flex items-center gap-3 mb-6 border-b border-neon/20 pb-3">
+                                <i data-lucide="terminal" class="w-6 h-6 text-neon"></i>
+                                <h3 class="font-orbitron font-bold text-sm tracking-widest text-white uppercase">Software</h3>
+                            </div>
+                            <ul class="space-y-3 font-rajdhani text-slate-300 tracking-wide text-sm">
+                                <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-neon"></div> Python</li>
+                                <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-neon"></div> C / C++ / C#</li>
+                                <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-neon"></div> MATLAB</li>
+                                <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-neon"></div> SQL / Databases</li>
+                                <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-neon"></div> Cloud (AWS EC2)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Projects Section: ENGINEERING MISSION CARDS -->
+            <section id="projects" class="py-24 relative border-t border-cyan-900/30 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-navy/50 via-space to-space">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+                    
+                    <!-- Hero Project: MQ-9 Reaper -->
+                    <div class="space-y-6">
+                        <div class="border-l-4 border-warning pl-4 flex items-center justify-between">
                             <div>
-                                <h3 class="text-3xl font-orbitron font-bold text-white tracking-wide">MQ-9 Reaper Scaled UAV</h3>
-                                <p class="text-cyan-400 font-rajdhani text-sm mt-1 tracking-widest">Pixhawk PX4 • GPS • Mission Planner</p>
+                                <h2 class="text-3xl font-orbitron font-bold text-white uppercase tracking-wider">Primary Archive</h2>
+                                <p class="text-warning font-rajdhani tracking-[0.2em] text-sm uppercase mt-1">Classified: Hero Project</p>
                             </div>
-                            <p class="text-slate-400 font-inter text-sm leading-relaxed">
-                                Mentored a 15-student engineering team to configure and assemble a fully autonomous 1:10 scaled military drone. Recognized by the Indian Army for outstanding mentorship.
-                            </p>
-                            <div class="grid grid-cols-2 gap-4">
-                                <div class="border border-cyan-500/20 p-3 bg-navy/50">
-                                    <span class="block text-[10px] text-slate-500 font-orbitron uppercase">Wingspan</span>
-                                    <span class="text-lg text-white font-rajdhani">2.5 Meters</span>
-                                </div>
-                                <div class="border border-cyan-500/20 p-3 bg-navy/50">
-                                    <span class="block text-[10px] text-slate-500 font-orbitron uppercase">MTOW</span>
-                                    <span class="text-lg text-white font-rajdhani">2.7 kg</span>
-                                </div>
-                                <div class="border border-cyan-500/20 p-3 bg-navy/50">
-                                    <span class="block text-[10px] text-slate-500 font-orbitron uppercase">Payload</span>
-                                    <span class="text-lg text-white font-rajdhani">300 grams</span>
-                                </div>
-                                <div class="border border-cyan-500/20 p-3 bg-navy/50">
-                                    <span class="block text-[10px] text-slate-500 font-orbitron uppercase">Endurance</span>
-                                    <span class="text-lg text-white font-rajdhani">10 Minutes</span>
-                                </div>
+                            <div class="px-3 py-1 border border-neon text-neon text-xs font-orbitron flex items-center gap-2">
+                                <div class="w-2 h-2 bg-neon animate-pulse"></div> MISSION COMPLETED
                             </div>
                         </div>
-                    </div>
-                </div>
 
-                <!-- Grid Filters -->
-                <div class="pt-10">
-                    <div class="border-l-4 border-cyan-400 pl-4 mb-6">
-                        <h2 class="text-xl font-orbitron font-bold text-white uppercase tracking-wider">Mission Archives</h2>
-                    </div>
-                    <div class="flex flex-wrap gap-3 font-rajdhani tracking-widest text-sm" id="filter-container">
-                        <button data-filter="all" class="px-4 py-1.5 border border-cyan-400 bg-cyan-400/10 text-cyan-400 hover:bg-cyan-400 hover:text-space transition uppercase">SYS.ALL</button>
-                        <button data-filter="ml" class="px-4 py-1.5 border border-slate-700 text-slate-400 hover:border-cyan-400 hover:text-cyan-400 transition uppercase">TRGT: AI/ML</button>
-                        <button data-filter="robotics" class="px-4 py-1.5 border border-slate-700 text-slate-400 hover:border-cyan-400 hover:text-cyan-400 transition uppercase">TRGT: ROBOTICS</button>
-                        <button data-filter="aero" class="px-4 py-1.5 border border-slate-700 text-slate-400 hover:border-cyan-400 hover:text-cyan-400 transition uppercase">TRGT: AERO</button>
-                        <button data-filter="hardware" class="px-4 py-1.5 border border-slate-700 text-slate-400 hover:border-cyan-400 hover:text-cyan-400 transition uppercase">TRGT: HARDWARE</button>
-                    </div>
-                </div>
-
-                <!-- Grid Projects -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="projects-grid">
-                    
-                    <!-- RAG Chatbot -->
-                    <div data-tilt data-tilt-scale="1.02" class="hud-panel flex flex-col justify-between group cursor-pointer" data-category="ml" onclick="openModal('chatbot')">
-                        <div class="p-5 border-b border-cyan-500/20 relative overflow-hidden bg-space/50">
-                            <i data-lucide="brain-circuit" class="w-12 h-12 text-cyan-400 mb-2 opacity-80 group-hover:scale-110 transition duration-500"></i>
-                            <div class="absolute top-2 right-2 text-[10px] text-neon font-orbitron flex items-center gap-1 border border-neon/30 px-2 py-0.5"><div class="w-1 h-1 bg-neon rounded-full"></div> CMPLTD</div>
-                        </div>
-                        <div class="p-5 space-y-3 flex-grow">
-                            <h4 class="text-lg font-orbitron font-bold text-white group-hover:text-cyan-400 transition">RAG Job Chatbot</h4>
-                            <p class="text-xs font-rajdhani text-cyan-500 tracking-widest uppercase">LangChain • ChromaDB</p>
-                            <p class="text-sm text-slate-400 font-inter line-clamp-3">LLM-powered RAG chatbot comparing data from 100+ companies. Features semantic embeddings, cross-encoders, and AWS EC2 deployment.</p>
-                        </div>
-                    </div>
-
-                    <!-- Optimized Robotic Nav -->
-                    <div data-tilt data-tilt-scale="1.02" class="hud-panel flex flex-col justify-between group cursor-pointer" data-category="robotics" onclick="openModal('navigation')">
-                        <div class="p-5 border-b border-cyan-500/20 relative overflow-hidden bg-space/50">
-                            <i data-lucide="navigation-2" class="w-12 h-12 text-warning mb-2 opacity-80 group-hover:scale-110 transition duration-500"></i>
-                            <div class="absolute top-2 right-2 text-[10px] text-neon font-orbitron flex items-center gap-1 border border-neon/30 px-2 py-0.5"><div class="w-1 h-1 bg-neon rounded-full"></div> CMPLTD</div>
-                        </div>
-                        <div class="p-5 space-y-3 flex-grow">
-                            <h4 class="text-lg font-orbitron font-bold text-white group-hover:text-cyan-400 transition">Robotic Nav System</h4>
-                            <p class="text-xs font-rajdhani text-warning tracking-widest uppercase">MATLAB • A* • RRT</p>
-                            <p class="text-sm text-slate-400 font-inter line-clamp-3">Simulated 3-DOF planar arm mapping C-spaces. Leveraged Potential Field and Dijkstra algorithms for obstacle traversal.</p>
-                        </div>
-                    </div>
-
-                    <!-- Smart Ride Navigator -->
-                    <div data-tilt data-tilt-scale="1.02" class="hud-panel flex flex-col justify-between group cursor-pointer" data-category="hardware" onclick="openModal('ride')">
-                        <div class="p-5 border-b border-cyan-500/20 relative overflow-hidden bg-space/50">
-                            <i data-lucide="map" class="w-12 h-12 text-aero mb-2 opacity-80 group-hover:scale-110 transition duration-500"></i>
-                            <div class="absolute top-2 right-2 text-[10px] text-neon font-orbitron flex items-center gap-1 border border-neon/30 px-2 py-0.5"><div class="w-1 h-1 bg-neon rounded-full"></div> CMPLTD</div>
-                        </div>
-                        <div class="p-5 space-y-3 flex-grow">
-                            <h4 class="text-lg font-orbitron font-bold text-white group-hover:text-cyan-400 transition">Smart Ride Navigator</h4>
-                            <p class="text-xs font-rajdhani text-aero tracking-widest uppercase">ESP32 • Bluetooth • IoT</p>
-                            <p class="text-sm text-slate-400 font-inter line-clamp-3">Haptic handlebar navigation syncing GPS via bluetooth to ESP32 to eliminate visual screen distraction. Patent Filed.</p>
-                        </div>
-                    </div>
-
-                    <!-- ML OCR -->
-                    <div data-tilt data-tilt-scale="1.02" class="hud-panel flex flex-col justify-between group cursor-pointer" data-category="ml" onclick="openModal('ocr')">
-                        <div class="p-5 border-b border-cyan-500/20 relative overflow-hidden bg-space/50">
-                            <i data-lucide="scan-text" class="w-12 h-12 text-cyan-400 mb-2 opacity-80 group-hover:scale-110 transition duration-500"></i>
-                            <div class="absolute top-2 right-2 text-[10px] text-neon font-orbitron flex items-center gap-1 border border-neon/30 px-2 py-0.5"><div class="w-1 h-1 bg-neon rounded-full"></div> CMPLTD</div>
-                        </div>
-                        <div class="p-5 space-y-3 flex-grow">
-                            <h4 class="text-lg font-orbitron font-bold text-white group-hover:text-cyan-400 transition">Optical Char Recog.</h4>
-                            <p class="text-xs font-rajdhani text-cyan-500 tracking-widest uppercase">OpenCV • CNN • SVM</p>
-                            <p class="text-sm text-slate-400 font-inter line-clamp-3">Custom computer vision pipeline extracting unstructured text using multi-layered CNN and Random Forest models.</p>
-                        </div>
-                    </div>
-
-                    <!-- Next-Gen Folding Wing UAV -->
-                    <div data-tilt data-tilt-scale="1.02" class="hud-panel flex flex-col justify-between group cursor-pointer" data-category="aero" onclick="openModal('foldingWing')">
-                        <div class="p-5 border-b border-cyan-500/20 relative overflow-hidden bg-space/50">
-                            <i data-lucide="unfold-horizontal" class="w-12 h-12 text-aero mb-2 opacity-80 group-hover:scale-110 transition duration-500"></i>
-                            <div class="absolute top-2 right-2 text-[10px] text-neon font-orbitron flex items-center gap-1 border border-neon/30 px-2 py-0.5"><div class="w-1 h-1 bg-neon rounded-full"></div> CMPLTD</div>
-                        </div>
-                        <div class="p-5 space-y-3 flex-grow">
-                            <h4 class="text-lg font-orbitron font-bold text-white group-hover:text-cyan-400 transition">Folding Wing UAV</h4>
-                            <p class="text-xs font-rajdhani text-aero tracking-widest uppercase">Research • 3D Print</p>
-                            <p class="text-sm text-slate-400 font-inter line-clamp-3">Designed 4-bar linkage mechanisms. Collaborated under Prof. Abhishek for high-altitude UAV stress testing at IITK.</p>
-                        </div>
-                    </div>
-
-                    <!-- Smart Vending System -->
-                    <div data-tilt data-tilt-scale="1.02" class="hud-panel flex flex-col justify-between group cursor-pointer" data-category="hardware" onclick="openModal('vendingSystem')">
-                        <div class="p-5 border-b border-cyan-500/20 relative overflow-hidden bg-space/50">
-                            <i data-lucide="cpu" class="w-12 h-12 text-warning mb-2 opacity-80 group-hover:scale-110 transition duration-500"></i>
-                            <div class="absolute top-2 right-2 text-[10px] text-neon font-orbitron flex items-center gap-1 border border-neon/30 px-2 py-0.5"><div class="w-1 h-1 bg-neon rounded-full"></div> CMPLTD</div>
-                        </div>
-                        <div class="p-5 space-y-3 flex-grow">
-                            <h4 class="text-lg font-orbitron font-bold text-white group-hover:text-cyan-400 transition">Smart Vending Unit</h4>
-                            <p class="text-xs font-rajdhani text-warning tracking-widest uppercase">Arduino • SolidWorks</p>
-                            <p class="text-sm text-slate-400 font-inter line-clamp-3">Engineered precise sheet metal fabrication automated via Arduino Uno and ultrasonic location alignment sensors.</p>
-                        </div>
-                    </div>
-
-                     <!-- Nav Robot -->
-                     <div data-tilt data-tilt-scale="1.02" class="hud-panel flex flex-col justify-between group cursor-pointer" data-category="robotics" onclick="openModal('navRobot')">
-                        <div class="p-5 border-b border-cyan-500/20 relative overflow-hidden bg-space/50">
-                            <i data-lucide="radar" class="w-12 h-12 text-cyan-400 mb-2 opacity-80 group-hover:scale-110 transition duration-500"></i>
-                            <div class="absolute top-2 right-2 text-[10px] text-neon font-orbitron flex items-center gap-1 border border-neon/30 px-2 py-0.5"><div class="w-1 h-1 bg-neon rounded-full"></div> CMPLTD</div>
-                        </div>
-                        <div class="p-5 space-y-3 flex-grow">
-                            <h4 class="text-lg font-orbitron font-bold text-white group-hover:text-cyan-400 transition">Autonomous Nav Rover</h4>
-                            <p class="text-xs font-rajdhani text-cyan-500 tracking-widest uppercase">Arduino • HC-SR04</p>
-                            <p class="text-sm text-slate-400 font-inter line-clamp-3">Constructed a mobile obstacle-avoiding system running real-time pathfinding via ultrasonic sensor feeds.</p>
-                        </div>
-                    </div>
-
-                    <!-- Math Tools & Other hidden by default in UI structure but accessible via JS/Filters -->
-                    <div data-tilt data-tilt-scale="1.02" class="hud-panel flex flex-col justify-between group cursor-pointer" data-category="ml" onclick="openModal('mathData')">
-                        <div class="p-5 border-b border-cyan-500/20 relative overflow-hidden bg-space/50">
-                            <i data-lucide="bar-chart-2" class="w-12 h-12 text-cyan-400 mb-2 opacity-80 group-hover:scale-110 transition duration-500"></i>
-                            <div class="absolute top-2 right-2 text-[10px] text-neon font-orbitron flex items-center gap-1 border border-neon/30 px-2 py-0.5"><div class="w-1 h-1 bg-neon rounded-full"></div> CMPLTD</div>
-                        </div>
-                        <div class="p-5 space-y-3 flex-grow">
-                            <h4 class="text-lg font-orbitron font-bold text-white group-hover:text-cyan-400 transition">Data Science Math Tools</h4>
-                            <p class="text-xs font-rajdhani text-cyan-500 tracking-widest uppercase">Python • RF Classifiers</p>
-                            <p class="text-sm text-slate-400 font-inter line-clamp-3">Built specialized linear and logistic regression models reaching 94% accuracy on commercial datasets.</p>
-                        </div>
-                    </div>
-
-                     <!-- Cervical Cancer -->
-                     <div data-tilt data-tilt-scale="1.02" class="hud-panel flex flex-col justify-between group cursor-pointer" data-category="ml" onclick="openModal('cervicalCancer')">
-                        <div class="p-5 border-b border-cyan-500/20 relative overflow-hidden bg-space/50">
-                            <i data-lucide="activity" class="w-12 h-12 text-cyan-400 mb-2 opacity-80 group-hover:scale-110 transition duration-500"></i>
-                            <div class="absolute top-2 right-2 text-[10px] text-neon font-orbitron flex items-center gap-1 border border-neon/30 px-2 py-0.5"><div class="w-1 h-1 bg-neon rounded-full"></div> CMPLTD</div>
-                        </div>
-                        <div class="p-5 space-y-3 flex-grow">
-                            <h4 class="text-lg font-orbitron font-bold text-white group-hover:text-cyan-400 transition">Cancer Risk Predictor</h4>
-                            <p class="text-xs font-rajdhani text-cyan-500 tracking-widest uppercase">PCA • SMOTE • SVM</p>
-                            <p class="text-sm text-slate-400 font-inter line-clamp-3">Clinical screening binary classifiers. Balanced target imbalances with SMOTE and extracted variance via PCA.</p>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-        <!-- Experience Section: MISSION LOGS -->
-        <section id="experience" class="py-24 relative">
-            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
-                
-                <div class="border-l-4 border-neon pl-4">
-                    <h2 class="text-3xl font-orbitron font-bold text-white uppercase tracking-wider">Mission Logs</h2>
-                    <p class="text-neon font-rajdhani tracking-[0.2em] text-sm uppercase mt-1">Operational History</p>
-                </div>
-
-                <div class="relative border-l-2 border-cyan-500/30 ml-4 sm:ml-6 space-y-12 pb-8">
-                    
-                    <!-- Timeline Item 1 -->
-                    <div class="relative pl-8 sm:pl-10 group">
-                        <span class="absolute -left-[9px] top-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-space border-2 border-cyan-400 shadow-[0_0_10px_#00E5FF] group-hover:scale-125 transition duration-300"></span>
-                        
-                        <div class="hud-panel p-6">
-                            <span class="inline-block px-2.5 py-0.5 border border-cyan-500/50 bg-cyan-900/20 text-cyan-400 text-[10px] font-orbitron uppercase tracking-widest mb-3">OP_01: Jun '25 - Oct '25</span>
-                            <h3 class="font-bold text-xl text-white font-orbitron">Product and Operations Associate</h3>
-                            <p class="text-sm font-rajdhani text-warning tracking-widest uppercase mt-1">Playto Labs Pvt. Ltd</p>
-                            <p class="text-sm text-slate-400 font-inter mt-3 leading-relaxed">
-                                Led several cross-functional teams of product management, overall systems operations, and R&D pipelines ensuring streamlined hardware deliverables.
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Timeline Item 2 -->
-                    <div class="relative pl-8 sm:pl-10 group">
-                        <span class="absolute -left-[9px] top-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-space border-2 border-cyan-400 group-hover:shadow-[0_0_10px_#00E5FF] group-hover:scale-125 transition duration-300"></span>
-                        
-                        <div class="hud-panel p-6">
-                            <span class="inline-block px-2.5 py-0.5 border border-cyan-500/50 bg-cyan-900/20 text-cyan-400 text-[10px] font-orbitron uppercase tracking-widest mb-3">OP_02: Jun '24 - Jul '24</span>
-                            <h3 class="font-bold text-xl text-white font-orbitron">Data Science Intern</h3>
-                            <p class="text-sm font-rajdhani text-warning tracking-widest uppercase mt-1">Deepjob Tech / MyAnalytics</p>
-                            <p class="text-sm text-slate-400 font-inter mt-3 leading-relaxed">
-                                Engineered a LangChain RAG chatbot processing data from 100+ job portals. Integrated ChromaDB and cross-encoders. Deployed on AWS EC2, increasing platform users by 20% with 85% accuracy.
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Timeline Item 3 -->
-                    <div class="relative pl-8 sm:pl-10 group">
-                        <span class="absolute -left-[9px] top-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-space border-2 border-cyan-400 group-hover:shadow-[0_0_10px_#00E5FF] group-hover:scale-125 transition duration-300"></span>
-                        
-                        <div class="hud-panel p-6">
-                            <span class="inline-block px-2.5 py-0.5 border border-cyan-500/50 bg-cyan-900/20 text-cyan-400 text-[10px] font-orbitron uppercase tracking-widest mb-3">OP_03: Dec '23 - May '24</span>
-                            <h3 class="font-bold text-xl text-white font-orbitron">UAV Researcher</h3>
-                            <p class="text-sm font-rajdhani text-warning tracking-widest uppercase mt-1">IIT Kanpur • Prof. Abhishek</p>
-                            <p class="text-sm text-slate-400 font-inter mt-3 leading-relaxed">
-                                Modeled 4-bar linkage folding wing mechanisms via Autodesk Inventor. Executed rigorous 3D-printed stress testing, contributing directly to Kalam Lab's high-altitude UAV optimizations.
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Timeline Item 4 -->
-                    <div class="relative pl-8 sm:pl-10 group">
-                        <span class="absolute -left-[9px] top-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-space border-2 border-cyan-400 group-hover:shadow-[0_0_10px_#00E5FF] group-hover:scale-125 transition duration-300"></span>
-                        
-                        <div class="hud-panel p-6">
-                            <span class="inline-block px-2.5 py-0.5 border border-cyan-500/50 bg-cyan-900/20 text-cyan-400 text-[10px] font-orbitron uppercase tracking-widest mb-3">OP_04: May '23 - Apr '24</span>
-                            <h3 class="font-bold text-xl text-white font-orbitron">Coordinator, Aeromodelling Club</h3>
-                            <p class="text-sm font-rajdhani text-warning tracking-widest uppercase mt-1">IIT Kanpur</p>
-                            <p class="text-sm text-slate-400 font-inter mt-3 leading-relaxed">
-                                Directed 25+ secretaries and spearheaded the MQ-9 Reaper UAV drone replication. Achieved Indian Army recognition and led teams to finals in the Boeing Aeromodelling Competition.
-                            </p>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact Section: INITIATE COMMUNICATION -->
-        <section id="contact" class="py-24 relative border-t border-cyan-900/30 bg-navy/40">
-            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                
-                <div class="mb-12 text-center">
-                    <h2 class="text-3xl font-orbitron font-bold text-white uppercase tracking-wider">System: COMM_LINK</h2>
-                    <p class="text-cyan-500 font-rajdhani tracking-[0.2em] text-sm uppercase mt-2">Establish secure connection</p>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-12 gap-12 max-w-5xl mx-auto">
-                    
-                    <!-- Left: Detail Column -->
-                    <div class="md:col-span-5 space-y-6">
-                        <div class="hud-panel p-6 border-l-4 border-l-neon">
-                            <div class="space-y-6">
-                                <div class="flex items-center gap-4 group">
-                                    <div class="w-12 h-12 border border-cyan-500/30 flex items-center justify-center text-cyan-400 group-hover:bg-cyan-400/10 transition">
-                                        <i data-lucide="mail" class="w-5 h-5"></i>
+                        <div class="hud-panel p-6 sm:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center group cursor-pointer" onclick="openModal('uavDrone')">
+                            <div class="lg:col-span-7 h-64 sm:h-80 w-full relative border border-cyan-500/20 bg-space overflow-hidden flex items-center justify-center group/video" onclick="event.stopPropagation(); playProjectVideo(this)">
+                                <!-- Background Grid -->
+                                <div class="absolute inset-0 bg-[linear-gradient(rgba(0,229,255,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(0,229,255,0.1)_1px,transparent_1px)] bg-[size:20px_20px] z-0"></div>
+                                
+                                <!-- Project Thumbnail & Video Container -->
+                                <div class="absolute inset-0 z-10 w-full h-full flex items-center justify-center bg-space/80">
+                                    <img src="https://github.com/Sjeetk21/sujeet/blob/main/IMG_8588.jpg?raw=true" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover/video:opacity-80 transition duration-500 project-thumb">
+                                    
+                                    <!-- Play Button Overlay -->
+                                    <div class="relative z-20 w-16 h-16 rounded-full bg-cyan-900/80 border border-cyan-400 flex items-center justify-center text-cyan-400 group-hover/video:scale-110 group-hover/video:bg-cyan-400 group-hover/video:text-space transition duration-300 drop-shadow-[0_0_10px_#00E5FF] play-icon">
+                                        <i data-lucide="play" class="w-8 h-8 ml-1"></i>
                                     </div>
-                                    <div>
-                                        <p class="text-[10px] text-slate-500 font-orbitron uppercase tracking-widest">Email Address</p>
-                                        <a href="mailto:sk7370066@gmail.com" class="font-rajdhani text-lg text-slate-200 hover:text-cyan-400 transition">sk7370066@gmail.com</a>
-                                    </div>
+
+                                    <!-- Google Drive Video Iframe -->
+                                    <iframe class="hidden absolute inset-0 w-full h-full z-30 project-video border-0" 
+                                            data-src="https://drive.google.com/file/d/1E_fqeHSfUC5zvKG7Ssuhsd2eeq4L2ZFy/preview" 
+                                            allow="autoplay">
+                                    </iframe>
                                 </div>
 
-                                <div class="flex items-center gap-4 group">
-                                    <div class="w-12 h-12 border border-cyan-500/30 flex items-center justify-center text-cyan-400 group-hover:bg-cyan-400/10 transition">
-                                        <i data-lucide="phone" class="w-5 h-5"></i>
-                                    </div>
-                                    <div>
-                                        <p class="text-[10px] text-slate-500 font-orbitron uppercase tracking-widest">Secure Line</p>
-                                        <a href="tel:+918709021300" class="font-rajdhani text-lg text-slate-200 hover:text-cyan-400 transition">+91 8709021300</a>
-                                    </div>
-                                </div>
+                                <div class="absolute top-4 left-4 text-xs font-rajdhani text-cyan-500 tracking-widest z-20 bg-space/80 px-2 py-1 border border-cyan-500/30">DRONE_FOOTAGE_v1.0</div>
+                            </div>
 
-                                <div class="flex items-center gap-4 group">
-                                    <div class="w-12 h-12 border border-cyan-500/30 flex items-center justify-center text-cyan-400 group-hover:bg-cyan-400/10 transition">
-                                        <i data-lucide="map-pin" class="w-5 h-5"></i>
+                            <div class="lg:col-span-5 space-y-6">
+                                <div>
+                                    <h3 class="text-3xl font-orbitron font-bold text-white tracking-wide">MQ-9 Reaper Scaled UAV</h3>
+                                    <p class="text-cyan-400 font-rajdhani text-sm mt-1 tracking-widest">Pixhawk PX4 • GPS • Mission Planner</p>
+                                </div>
+                                <p class="text-slate-400 font-inter text-sm leading-relaxed">
+                                    Mentored a 15-student engineering team to configure and assemble a fully autonomous 1:10 scaled military drone. Recognized by the Indian Army for outstanding mentorship.
+                                </p>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div class="border border-cyan-500/20 p-3 bg-navy/50">
+                                        <span class="block text-[10px] text-slate-500 font-orbitron uppercase">Wingspan</span>
+                                        <span class="text-lg text-white font-rajdhani">2.5 Meters</span>
                                     </div>
-                                    <div>
-                                        <p class="text-[10px] text-slate-500 font-orbitron uppercase tracking-widest">Coordinates</p>
-                                        <p class="font-rajdhani text-lg text-slate-200">IIT Kanpur, UP, India</p>
+                                    <div class="border border-cyan-500/20 p-3 bg-navy/50">
+                                        <span class="block text-[10px] text-slate-500 font-orbitron uppercase">MTOW</span>
+                                        <span class="text-lg text-white font-rajdhani">2.7 kg</span>
+                                    </div>
+                                    <div class="border border-cyan-500/20 p-3 bg-navy/50">
+                                        <span class="block text-[10px] text-slate-500 font-orbitron uppercase">Payload</span>
+                                        <span class="text-lg text-white font-rajdhani">300 grams</span>
+                                    </div>
+                                    <div class="border border-cyan-500/20 p-3 bg-navy/50">
+                                        <span class="block text-[10px] text-slate-500 font-orbitron uppercase">Endurance</span>
+                                        <span class="text-lg text-white font-rajdhani">10 Minutes</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Right: Terminal Form -->
-                    <div class="md:col-span-7">
-                        <form id="contact-form" class="hud-panel p-6 sm:p-8 space-y-5">
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    <!-- Grid Filters -->
+                    <div class="pt-10">
+                        <div class="border-l-4 border-cyan-400 pl-4 mb-6">
+                            <h2 class="text-xl font-orbitron font-bold text-white uppercase tracking-wider">Mission Archives</h2>
+                        </div>
+                        <div class="flex flex-wrap gap-3 font-rajdhani tracking-widest text-sm" id="filter-container">
+                            <button data-filter="all" class="px-4 py-1.5 border border-cyan-400 bg-cyan-400/10 text-cyan-400 hover:bg-cyan-400 hover:text-space transition uppercase">SYS.ALL</button>
+                            <button data-filter="ml" class="px-4 py-1.5 border border-slate-700 text-slate-400 hover:border-cyan-400 hover:text-cyan-400 transition uppercase">TRGT: AI/ML</button>
+                            <button data-filter="robotics" class="px-4 py-1.5 border border-slate-700 text-slate-400 hover:border-cyan-400 hover:text-cyan-400 transition uppercase">TRGT: ROBOTICS</button>
+                            <button data-filter="aero" class="px-4 py-1.5 border border-slate-700 text-slate-400 hover:border-cyan-400 hover:text-cyan-400 transition uppercase">TRGT: AERO</button>
+                            <button data-filter="hardware" class="px-4 py-1.5 border border-slate-700 text-slate-400 hover:border-cyan-400 hover:text-cyan-400 transition uppercase">TRGT: HARDWARE</button>
+                        </div>
+                    </div>
+
+                    <!-- Grid Projects -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="projects-grid">
+                        
+                        <!-- RAG Chatbot -->
+                        <div data-tilt data-tilt-scale="1.02" class="hud-panel flex flex-col justify-between group cursor-pointer" data-category="ml" onclick="openModal('chatbot')">
+                            <div class="p-5 border-b border-cyan-500/20 relative overflow-hidden bg-space/50">
+                                <i data-lucide="brain-circuit" class="w-12 h-12 text-cyan-400 mb-2 opacity-80 group-hover:scale-110 transition duration-500"></i>
+                                <div class="absolute top-2 right-2 text-[10px] text-neon font-orbitron flex items-center gap-1 border border-neon/30 px-2 py-0.5"><div class="w-1 h-1 bg-neon rounded-full"></div> CMPLTD</div>
+                            </div>
+                            <div class="p-5 space-y-3 flex-grow">
+                                <h4 class="text-lg font-orbitron font-bold text-white group-hover:text-cyan-400 transition">RAG Job Chatbot</h4>
+                                <p class="text-xs font-rajdhani text-cyan-500 tracking-widest uppercase">LangChain • ChromaDB</p>
+                                <p class="text-sm text-slate-400 font-inter line-clamp-3">LLM-powered RAG chatbot comparing data from 100+ companies. Features semantic embeddings, cross-encoders, and AWS EC2 deployment.</p>
+                            </div>
+                        </div>
+
+                        <!-- Optimized Robotic Nav -->
+                        <div data-tilt data-tilt-scale="1.02" class="hud-panel flex flex-col justify-between group cursor-pointer" data-category="robotics" onclick="openModal('navigation')">
+                            <div class="p-5 border-b border-cyan-500/20 relative overflow-hidden bg-space/50">
+                                <i data-lucide="navigation-2" class="w-12 h-12 text-warning mb-2 opacity-80 group-hover:scale-110 transition duration-500"></i>
+                                <div class="absolute top-2 right-2 text-[10px] text-neon font-orbitron flex items-center gap-1 border border-neon/30 px-2 py-0.5"><div class="w-1 h-1 bg-neon rounded-full"></div> CMPLTD</div>
+                            </div>
+                            <div class="p-5 space-y-3 flex-grow">
+                                <h4 class="text-lg font-orbitron font-bold text-white group-hover:text-cyan-400 transition">Robotic Nav System</h4>
+                                <p class="text-xs font-rajdhani text-warning tracking-widest uppercase">MATLAB • A* • RRT</p>
+                                <p class="text-sm text-slate-400 font-inter line-clamp-3">Simulated 3-DOF planar arm mapping C-spaces. Leveraged Potential Field and Dijkstra algorithms for obstacle traversal.</p>
+                            </div>
+                        </div>
+
+                        <!-- Smart Ride Navigator -->
+                        <div data-tilt data-tilt-scale="1.02" class="hud-panel flex flex-col justify-between group cursor-pointer" data-category="hardware" onclick="openModal('ride')">
+                            <div class="p-5 border-b border-cyan-500/20 relative overflow-hidden bg-space/50">
+                                <i data-lucide="map" class="w-12 h-12 text-aero mb-2 opacity-80 group-hover:scale-110 transition duration-500"></i>
+                                <div class="absolute top-2 right-2 text-[10px] text-neon font-orbitron flex items-center gap-1 border border-neon/30 px-2 py-0.5"><div class="w-1 h-1 bg-neon rounded-full"></div> CMPLTD</div>
+                            </div>
+                            <div class="p-5 space-y-3 flex-grow">
+                                <h4 class="text-lg font-orbitron font-bold text-white group-hover:text-cyan-400 transition">Smart Ride Navigator</h4>
+                                <p class="text-xs font-rajdhani text-aero tracking-widest uppercase">ESP32 • Bluetooth • IoT</p>
+                                <p class="text-sm text-slate-400 font-inter line-clamp-3">Haptic handlebar navigation syncing GPS via bluetooth to ESP32 to eliminate visual screen distraction. Patent Filed.</p>
+                            </div>
+                        </div>
+
+                        <!-- ML OCR -->
+                        <div data-tilt data-tilt-scale="1.02" class="hud-panel flex flex-col justify-between group cursor-pointer" data-category="ml" onclick="openModal('ocr')">
+                            <div class="p-5 border-b border-cyan-500/20 relative overflow-hidden bg-space/50">
+                                <i data-lucide="scan-text" class="w-12 h-12 text-cyan-400 mb-2 opacity-80 group-hover:scale-110 transition duration-500"></i>
+                                <div class="absolute top-2 right-2 text-[10px] text-neon font-orbitron flex items-center gap-1 border border-neon/30 px-2 py-0.5"><div class="w-1 h-1 bg-neon rounded-full"></div> CMPLTD</div>
+                            </div>
+                            <div class="p-5 space-y-3 flex-grow">
+                                <h4 class="text-lg font-orbitron font-bold text-white group-hover:text-cyan-400 transition">Optical Char Recog.</h4>
+                                <p class="text-xs font-rajdhani text-cyan-500 tracking-widest uppercase">OpenCV • CNN • SVM</p>
+                                <p class="text-sm text-slate-400 font-inter line-clamp-3">Custom computer vision pipeline extracting unstructured text using multi-layered CNN and Random Forest models.</p>
+                            </div>
+                        </div>
+
+                        <!-- Next-Gen Folding Wing UAV -->
+                        <div data-tilt data-tilt-scale="1.02" class="hud-panel flex flex-col justify-between group cursor-pointer" data-category="aero" onclick="openModal('foldingWing')">
+                            <div class="p-5 border-b border-cyan-500/20 relative overflow-hidden bg-space/50">
+                                <i data-lucide="unfold-horizontal" class="w-12 h-12 text-aero mb-2 opacity-80 group-hover:scale-110 transition duration-500"></i>
+                                <div class="absolute top-2 right-2 text-[10px] text-neon font-orbitron flex items-center gap-1 border border-neon/30 px-2 py-0.5"><div class="w-1 h-1 bg-neon rounded-full"></div> CMPLTD</div>
+                            </div>
+                            <div class="p-5 space-y-3 flex-grow">
+                                <h4 class="text-lg font-orbitron font-bold text-white group-hover:text-cyan-400 transition">Folding Wing UAV</h4>
+                                <p class="text-xs font-rajdhani text-aero tracking-widest uppercase">Research • 3D Print</p>
+                                <p class="text-sm text-slate-400 font-inter line-clamp-3">Designed 4-bar linkage mechanisms. Collaborated under Prof. Abhishek for high-altitude UAV stress testing at IITK.</p>
+                            </div>
+                        </div>
+
+                        <!-- Smart Vending System -->
+                        <div data-tilt data-tilt-scale="1.02" class="hud-panel flex flex-col justify-between group cursor-pointer" data-category="hardware" onclick="openModal('vendingSystem')">
+                            <div class="p-5 border-b border-cyan-500/20 relative overflow-hidden bg-space/50">
+                                <i data-lucide="cpu" class="w-12 h-12 text-warning mb-2 opacity-80 group-hover:scale-110 transition duration-500"></i>
+                                <div class="absolute top-2 right-2 text-[10px] text-neon font-orbitron flex items-center gap-1 border border-neon/30 px-2 py-0.5"><div class="w-1 h-1 bg-neon rounded-full"></div> CMPLTD</div>
+                            </div>
+                            <div class="p-5 space-y-3 flex-grow">
+                                <h4 class="text-lg font-orbitron font-bold text-white group-hover:text-cyan-400 transition">Smart Vending Unit</h4>
+                                <p class="text-xs font-rajdhani text-warning tracking-widest uppercase">Arduino • SolidWorks</p>
+                                <p class="text-sm text-slate-400 font-inter line-clamp-3">Engineered precise sheet metal fabrication automated via Arduino Uno and ultrasonic location alignment sensors.</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- Casual Landing Gallery Preview Section (replaces image_4ecfbf.jpg) -->
+            <section id="media-preview-section" class="py-24 relative border-t border-cyan-900/30 bg-space/60">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+                    
+                    <div class="flex flex-col md:flex-row items-start md:items-end justify-between gap-4">
+                        <div class="border-l-4 border-neon pl-4">
+                            <h2 class="text-3xl font-orbitron font-bold text-white uppercase tracking-wider">Media & Life Logs</h2>
+                            <p class="text-neon font-rajdhani tracking-[0.2em] text-sm uppercase mt-1">Snapshot Teaser // Casual Archives</p>
+                        </div>
+                        <button onclick="switchView('gallery')" class="px-6 py-2 border border-neon text-neon hover:bg-neon hover:text-space transition font-rajdhani tracking-wider text-sm uppercase">
+                            Open Full Gallery →
+                        </button>
+                    </div>
+
+                    <!-- Compact Preview Grid (Only 3 clean, casual shots, no project visual filters) -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- Preview Card 1 -->
+                        <div class="hud-panel relative overflow-hidden group cursor-pointer" onclick="switchView('gallery')">
+                            <div class="aspect-video relative overflow-hidden bg-space">
+                                <img src="https://github.com/Sjeetk21/sujeet/blob/main/IMG_8588.jpg?raw=true" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-80" alt="UAV Configuration">
+                                <div class="absolute inset-0 bg-gradient-to-t from-space via-transparent to-transparent opacity-60"></div>
+                            </div>
+                            <div class="p-4 space-y-1">
+                                <h4 class="font-orbitron font-bold text-sm text-white group-hover:text-neon transition">MQ-9 Scaled UAV Assembly</h4>
+                                <p class="text-xs text-slate-400 font-inter">Live component mounting setup at IIT Kanpur.</p>
+                            </div>
+                        </div>
+
+                        <!-- Preview Card 2 -->
+                        <div class="hud-panel relative overflow-hidden group cursor-pointer" onclick="switchView('gallery')">
+                            <div class="aspect-video relative overflow-hidden bg-space">
+                                <img src="https://placehold.co/600x400/0b1120/00e5ff?text=Robotic+Workspace+Plot" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-80" alt="Robotics Simulation">
+                                <div class="absolute inset-0 bg-gradient-to-t from-space via-transparent to-transparent opacity-60"></div>
+                            </div>
+                            <div class="p-4 space-y-1">
+                                <h4 class="font-orbitron font-bold text-sm text-white group-hover:text-neon transition">Planar Arm Avoidance Trajectory</h4>
+                                <p class="text-xs text-slate-400 font-inter">Trajectory mapping using dynamic Dijkstra variables.</p>
+                            </div>
+                        </div>
+
+                        <!-- Preview Card 3 -->
+                        <div class="hud-panel relative overflow-hidden group cursor-pointer" onclick="switchView('gallery')">
+                            <div class="aspect-video relative overflow-hidden bg-space">
+                                <img src="https://placehold.co/600x400/0b1120/00ffb3?text=IIT+Kanpur+Aero+Lab" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-80" alt="IITK Aero Lab">
+                                <div class="absolute inset-0 bg-gradient-to-t from-space via-transparent to-transparent opacity-60"></div>
+                            </div>
+                            <div class="p-4 space-y-1">
+                                <h4 class="font-orbitron font-bold text-sm text-white group-hover:text-neon transition">Aero Briefing & Workshops</h4>
+                                <p class="text-xs text-slate-400 font-inter">Instructing aerospace design to student chapters.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Experience Section: MISSION LOGS -->
+            <section id="experience" class="py-24 relative">
+                <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+                    
+                    <div class="border-l-4 border-neon pl-4">
+                        <h2 class="text-3xl font-orbitron font-bold text-white uppercase tracking-wider">Mission Logs</h2>
+                        <p class="text-neon font-rajdhani tracking-[0.2em] text-sm uppercase mt-1">Operational History</p>
+                    </div>
+
+                    <div class="relative border-l-2 border-cyan-500/30 ml-4 sm:ml-6 space-y-12 pb-8">
+                        
+                        <!-- Timeline Item 1 -->
+                        <div class="relative pl-8 sm:pl-10 group">
+                            <span class="absolute -left-[9px] top-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-space border-2 border-cyan-400 shadow-[0_0_10px_#00E5FF] group-hover:scale-125 transition duration-300"></span>
+                            
+                            <div class="hud-panel p-6">
+                                <span class="inline-block px-2.5 py-0.5 border border-cyan-500/50 bg-cyan-900/20 text-cyan-400 text-[10px] font-orbitron uppercase tracking-widest mb-3">OP_01: Jun '25 - Oct '25</span>
+                                <h3 class="font-bold text-xl text-white font-orbitron">Product and Operations Associate</h3>
+                                <p class="text-sm font-rajdhani text-warning tracking-widest uppercase mt-1">Playto Labs Pvt. Ltd</p>
+                                <p class="text-sm text-slate-400 font-inter mt-3 leading-relaxed">
+                                    Led several cross-functional teams of product management, overall systems operations, and R&D pipelines ensuring streamlined hardware deliverables.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Timeline Item 2 -->
+                        <div class="relative pl-8 sm:pl-10 group">
+                            <span class="absolute -left-[9px] top-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-space border-2 border-cyan-400 group-hover:shadow-[0_0_10px_#00E5FF] group-hover:scale-125 transition duration-300"></span>
+                            
+                            <div class="hud-panel p-6">
+                                <span class="inline-block px-2.5 py-0.5 border border-cyan-500/50 bg-cyan-900/20 text-cyan-400 text-[10px] font-orbitron uppercase tracking-widest mb-3">OP_02: Jun '24 - Jul '24</span>
+                                <h3 class="font-bold text-xl text-white font-orbitron">Data Science Intern</h3>
+                                <p class="text-sm font-rajdhani text-warning tracking-widest uppercase mt-1">Deepjob Tech / MyAnalytics</p>
+                                <p class="text-sm text-slate-400 font-inter mt-3 leading-relaxed">
+                                    Engineered a LangChain RAG chatbot processing data from 100+ job portals. Integrated ChromaDB and cross-encoders. Deployed on AWS EC2, increasing platform users by 20% with 85% accuracy.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Timeline Item 3 -->
+                        <div class="relative pl-8 sm:pl-10 group">
+                            <span class="absolute -left-[9px] top-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-space border-2 border-cyan-400 group-hover:shadow-[0_0_10px_#00E5FF] group-hover:scale-125 transition duration-300"></span>
+                            
+                            <div class="hud-panel p-6">
+                                <span class="inline-block px-2.5 py-0.5 border border-cyan-500/50 bg-cyan-900/20 text-cyan-400 text-[10px] font-orbitron uppercase tracking-widest mb-3">OP_03: Dec '23 - May '24</span>
+                                <h3 class="font-bold text-xl text-white font-orbitron">UAV Researcher</h3>
+                                <p class="text-sm font-rajdhani text-warning tracking-widest uppercase mt-1">IIT Kanpur • Prof. Abhishek</p>
+                                <p class="text-sm text-slate-400 font-inter mt-3 leading-relaxed">
+                                    Modeled 4-bar linkage folding wing mechanisms via Autodesk Inventor. Executed rigorous 3D-printed stress testing, contributing directly to Kalam Lab's high-altitude UAV optimizations.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Timeline Item 4 -->
+                        <div class="relative pl-8 sm:pl-10 group">
+                            <span class="absolute -left-[9px] top-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-space border-2 border-cyan-400 group-hover:shadow-[0_0_10px_#00E5FF] group-hover:scale-125 transition duration-300"></span>
+                            
+                            <div class="hud-panel p-6">
+                                <span class="inline-block px-2.5 py-0.5 border border-cyan-500/50 bg-cyan-900/20 text-cyan-400 text-[10px] font-orbitron uppercase tracking-widest mb-3">OP_04: May '23 - Apr '24</span>
+                                <h3 class="font-bold text-xl text-white font-orbitron">Coordinator, Aeromodelling Club</h3>
+                                <p class="text-sm font-rajdhani text-warning tracking-widest uppercase mt-1">IIT Kanpur</p>
+                                <p class="text-sm text-slate-400 font-inter mt-3 leading-relaxed">
+                                    Directed 25+ secretaries and spearheaded the MQ-9 Reaper UAV drone replication. Achieved Indian Army recognition and led teams to finals in the Boeing Aeromodelling Competition.
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact Section: INITIATE COMMUNICATION -->
+            <section id="contact" class="py-24 relative border-t border-cyan-900/30 bg-navy/40">
+                <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                    
+                    <div class="mb-12 text-center">
+                        <h2 class="text-3xl font-orbitron font-bold text-white uppercase tracking-wider">System: COMM_LINK</h2>
+                        <p class="text-cyan-500 font-rajdhani tracking-[0.2em] text-sm uppercase mt-2">Establish secure connection</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-12 max-w-5xl mx-auto">
+                        
+                        <!-- Left: Detail Column -->
+                        <div class="md:col-span-5 space-y-6">
+                            <div class="hud-panel p-6 border-l-4 border-l-neon">
+                                <div class="space-y-6">
+                                    <div class="flex items-center gap-4 group">
+                                        <div class="w-12 h-12 border border-cyan-500/30 flex items-center justify-center text-cyan-400 group-hover:bg-cyan-400/10 transition">
+                                            <i data-lucide="mail" class="w-5 h-5"></i>
+                                        </div>
+                                        <div>
+                                            <p class="text-[10px] text-slate-500 font-orbitron uppercase tracking-widest">Email Address</p>
+                                            <a href="mailto:sk7370066@gmail.com" class="font-rajdhani text-lg text-slate-200 hover:text-cyan-400 transition">sk7370066@gmail.com</a>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex items-center gap-4 group">
+                                        <div class="w-12 h-12 border border-cyan-500/30 flex items-center justify-center text-cyan-400 group-hover:bg-cyan-400/10 transition">
+                                            <i data-lucide="phone" class="w-5 h-5"></i>
+                                        </div>
+                                        <div>
+                                            <p class="text-[10px] text-slate-500 font-orbitron uppercase tracking-widest">Secure Line</p>
+                                            <a href="tel:+918709021300" class="font-rajdhani text-lg text-slate-200 hover:text-cyan-400 transition">+91 8709021300</a>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex items-center gap-4 group">
+                                        <div class="w-12 h-12 border border-cyan-500/30 flex items-center justify-center text-cyan-400 group-hover:bg-cyan-400/10 transition">
+                                            <i data-lucide="map-pin" class="w-5 h-5"></i>
+                                        </div>
+                                        <div>
+                                            <p class="text-[10px] text-slate-500 font-orbitron uppercase tracking-widest">Coordinates</p>
+                                            <p class="font-rajdhani text-lg text-slate-200">IIT Kanpur, UP, India</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right: Terminal Form -->
+                        <div class="md:col-span-7">
+                            <form id="contact-form" class="hud-panel p-6 sm:p-8 space-y-5">
+                                <input type="hidden" name="access_key" value="68b793de-6821-4ccd-80f1-d5236367a9cd">
+                                
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                                    <div class="space-y-1">
+                                        <label class="text-[10px] text-cyan-500 font-orbitron uppercase tracking-widest">> IDENTIFICATION_</label>
+                                        <input type="text" name="name" id="form-name" required class="w-full px-4 py-3 terminal-input" placeholder="[ ENTER NAME ]">
+                                    </div>
+                                    <div class="space-y-1">
+                                        <label class="text-[10px] text-cyan-500 font-orbitron uppercase tracking-widest">> RETURN_ADDR_</label>
+                                        <input type="email" name="email" id="form-email" required class="w-full px-4 py-3 terminal-input" placeholder="[ ENTER EMAIL ]">
+                                    </div>
+                                </div>
+
                                 <div class="space-y-1">
-                                    <label class="text-[10px] text-cyan-500 font-orbitron uppercase tracking-widest">> IDENTIFICATION_</label>
-                                    <input type="text" id="form-name" required class="w-full px-4 py-3 terminal-input" placeholder="[ ENTER NAME ]">
+                                    <label class="text-[10px] text-cyan-500 font-orbitron uppercase tracking-widest">> PACKET_HEADER_</label>
+                                    <input type="text" name="subject" id="form-subject" required class="w-full px-4 py-3 terminal-input" placeholder="[ ENTER DIRECTIVE / SUBJECT ]">
                                 </div>
+
                                 <div class="space-y-1">
-                                    <label class="text-[10px] text-cyan-500 font-orbitron uppercase tracking-widest">> RETURN_ADDR_</label>
-                                    <input type="email" id="form-email" required class="w-full px-4 py-3 terminal-input" placeholder="[ ENTER EMAIL ]">
+                                    <label class="text-[10px] text-cyan-500 font-orbitron uppercase tracking-widest">> PAYLOAD_DATA_</label>
+                                    <textarea name="message" id="form-message" rows="4" required class="w-full px-4 py-3 terminal-input resize-none" placeholder="[ ENTER DATA BLOCK HERE... ]"></textarea>
                                 </div>
-                            </div>
 
-                            <div class="space-y-1">
-                                <label class="text-[10px] text-cyan-500 font-orbitron uppercase tracking-widest">> PACKET_HEADER_</label>
-                                <input type="text" id="form-subject" required class="w-full px-4 py-3 terminal-input" placeholder="[ ENTER DIRECTIVE / SUBJECT ]">
-                            </div>
+                                <button type="submit" id="form-submit-btn" class="w-full py-4 cyber-button mt-4 flex items-center justify-center gap-2">
+                                    <span id="btn-text">Transmit Message</span> <i data-lucide="radio" class="w-4 h-4"></i>
+                                </button>
+                            </form>
+                        </div>
 
-                            <div class="space-y-1">
-                                <label class="text-[10px] text-cyan-500 font-orbitron uppercase tracking-widest">> PAYLOAD_DATA_</label>
-                                <textarea id="form-message" rows="4" required class="w-full px-4 py-3 terminal-input resize-none" placeholder="[ ENTER DATA BLOCK HERE... ]"></textarea>
-                            </div>
-
-                            <button type="submit" class="w-full py-4 cyber-button mt-4 flex items-center justify-center gap-2">
-                                Transmit Message <i data-lucide="radio" class="w-4 h-4"></i>
-                            </button>
-                        </form>
                     </div>
+                </div>
+            </section>
+        </main>
+    </div>
 
+    <!-- ISOLATED GALLERY VIEW (DEDICATED DYNAMIC SUB-PAGE SCREEN STATE) -->
+    <div id="full-gallery-view" class="hidden min-h-screen pt-24 pb-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto space-y-12">
+            
+            <div class="flex flex-col md:flex-row items-start md:items-end justify-between gap-6 border-b border-cyan-500/20 pb-8">
+                <div>
+                    <button onclick="switchView('main')" class="text-sm font-rajdhani text-cyan-400 hover:text-white transition flex items-center gap-2 uppercase tracking-wider mb-4">
+                        <i data-lucide="arrow-left" class="w-4 h-4"></i> Return to Terminal
+                    </button>
+                    <h2 class="text-4xl font-orbitron font-bold text-white uppercase tracking-wider">Visual Log Archives</h2>
+                    <p class="text-cyan-500 font-rajdhani tracking-[0.2em] text-sm uppercase mt-1">Classification: Casual Media Collections</p>
+                </div>
+                
+                <!-- Gallery Page Filter Controls -->
+                <div class="flex flex-wrap gap-2 font-rajdhani tracking-widest text-sm" id="gallery-filter-container">
+                    <button data-gfilter="all" class="px-4 py-1.5 border border-neon bg-neon/10 text-neon hover:bg-neon hover:text-space transition uppercase">SYS.ALL</button>
+                    <button data-gfilter="uav" class="px-4 py-1.5 border border-slate-700 text-slate-400 hover:border-neon hover:text-neon transition uppercase">LOGS: UAV_FLIGHT</button>
+                    <button data-gfilter="robotics" class="px-4 py-1.5 border border-slate-700 text-slate-400 hover:border-neon hover:text-neon transition uppercase">LOGS: ROBOTICS</button>
+                    <button data-gfilter="campus" class="px-4 py-1.5 border border-slate-700 text-slate-400 hover:border-neon hover:text-neon transition uppercase">LOGS: CAMPUS_LIFE</button>
+                </div>
+
+                <!-- Admin Command Trigger -->
+                <button onclick="openAdminPanel()" class="px-4 py-1.5 border border-warning text-warning hover:bg-warning hover:text-space transition font-rajdhani text-sm uppercase flex items-center gap-2">
+                    <i data-lucide="terminal" class="w-4 h-4"></i> DEV PANEL
+                </button>
+            </div>
+
+            <!-- Complete Clean Gallery Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" id="gallery-grid">
+                <!-- Fallback Initial Items (Will be populated & overridden by live GitHub catalog if setup) -->
+                <!-- Media Card 1: UAV (Personal Image) -->
+                <div class="hud-panel relative group overflow-hidden cursor-pointer flex flex-col rounded-xl" data-gcategory="uav" onclick="openGalleryMedia('https://github.com/Sjeetk21/sujeet/blob/main/IMG_8588.jpg?raw=true', 'image', 'MQ-9 Reaper field configuration setup prior to pilot authorization loops.')">
+                    <div class="aspect-video relative overflow-hidden bg-space border-b border-cyan-500/20">
+                        <img src="https://github.com/Sjeetk21/sujeet/blob/main/IMG_8588.jpg?raw=true" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-80" alt="UAV Configuration">
+                        <div class="absolute inset-0 bg-gradient-to-t from-space via-transparent to-transparent opacity-60"></div>
+                        <div class="absolute top-2 left-2 text-[10px] font-rajdhani text-neon tracking-widest bg-space/80 px-2 py-0.5 border border-neon/30">LOG // 01</div>
+                    </div>
+                    <div class="p-4 space-y-2 flex-grow">
+                        <h4 class="font-orbitron font-bold text-sm text-white tracking-wide group-hover:text-neon transition">MQ-9 Scaled UAV Frame Setup</h4>
+                        <p class="text-xs text-slate-400 font-inter">Live physical testing, component checks, and electronic setup adjustments during flight builds at IIT Kanpur.</p>
+                    </div>
+                </div>
+
+                <!-- Media Card 2: Robotics Simulation -->
+                <div class="hud-panel relative group overflow-hidden cursor-pointer flex flex-col rounded-xl" data-gcategory="robotics" onclick="openGalleryMedia('https://placehold.co/600x400/0b1120/00e5ff?text=Robotic+Workspace+Plot', 'image', 'Visualizing dynamic planar arm workspace boundaries and dynamic avoidance grids.')">
+                    <div class="aspect-video relative overflow-hidden bg-space border-b border-cyan-500/20">
+                        <img src="https://placehold.co/600x400/0b1120/00e5ff?text=Robotic+Workspace+Plot" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-80" alt="Robotics Simulation">
+                        <div class="absolute inset-0 bg-gradient-to-t from-space via-transparent to-transparent opacity-60"></div>
+                        <div class="absolute top-2 left-2 text-[10px] font-rajdhani text-neon tracking-widest bg-space/80 px-2 py-0.5 border border-neon/30">LOG // 02</div>
+                    </div>
+                    <div class="p-4 space-y-2 flex-grow">
+                        <h4 class="font-orbitron font-bold text-sm text-white tracking-wide group-hover:text-neon transition">Arm Trajectory Avoidance Simulations</h4>
+                        <p class="text-xs text-slate-400 font-inter">Checking route path planning heuristics inside MATLAB to map configuration spaces safely.</p>
+                    </div>
+                </div>
+
+                <!-- Media Card 3: IITK Life -->
+                <div class="hud-panel relative group overflow-hidden cursor-pointer flex flex-col rounded-xl" data-gcategory="campus" onclick="openGalleryMedia('https://placehold.co/600x400/0b1120/00ffb3?text=IIT+Kanpur+Aero+Lab', 'image', 'Aviation engineering guidelines and workshop briefs for students.')">
+                    <div class="aspect-video relative overflow-hidden bg-space border-b border-cyan-500/20">
+                        <img src="https://placehold.co/600x400/0b1120/00ffb3?text=IIT+Kanpur+Aero+Lab" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-80" alt="IITK Aero Lab">
+                        <div class="absolute inset-0 bg-gradient-to-t from-space via-transparent to-transparent opacity-60"></div>
+                        <div class="absolute top-2 left-2 text-[10px] font-rajdhani text-neon tracking-widest bg-space/80 px-2 py-0.5 border border-neon/30">LOG // 03</div>
+                    </div>
+                    <div class="p-4 space-y-2 flex-grow">
+                        <h4 class="font-orbitron font-bold text-sm text-white tracking-wide group-hover:text-neon transition">Aerodynamics Workshop Instructions</h4>
+                        <p class="text-xs text-slate-400 font-inter">Leading club workshops at Aeromodelling Club to instruct juniors on structural safety configurations.</p>
+                    </div>
+                </div>
+
+                <!-- Media Card 4: Folding Wing CAD -->
+                <div class="hud-panel relative group overflow-hidden cursor-pointer flex flex-col rounded-xl" data-gcategory="uav" onclick="openGalleryMedia('https://placehold.co/600x400/0b1120/0099ff?text=4-Bar+Deployment+Model', 'image', 'UAV 3D CAD modeling structure constraints of 4-bar deploy sequence.')">
+                    <div class="aspect-video relative overflow-hidden bg-space border-b border-cyan-500/20">
+                        <img src="https://placehold.co/600x400/0b1120/0099ff?text=4-Bar+Deployment+Model" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-80" alt="UAV linkage">
+                        <div class="absolute inset-0 bg-gradient-to-t from-space via-transparent to-transparent opacity-60"></div>
+                        <div class="absolute top-2 left-2 text-[10px] font-rajdhani text-neon tracking-widest bg-space/80 px-2 py-0.5 border border-neon/30">LOG // 04</div>
+                    </div>
+                    <div class="p-4 space-y-2 flex-grow">
+                        <h4 class="font-orbitron font-bold text-sm text-white tracking-wide group-hover:text-neon transition">Folding Wing CAD Deploy Logic</h4>
+                        <p class="text-xs text-slate-400 font-inter">Linkage mechanism studies and structural limits mapped inside Autodesk Inventor prior to laboratory builds.</p>
+                    </div>
+                </div>
+
+                <!-- Media Card 5: Extra-curricular (Wall climbing) -->
+                <div class="hud-panel relative group overflow-hidden cursor-pointer flex flex-col rounded-xl" data-gcategory="campus" onclick="openGalleryMedia('https://placehold.co/600x400/050816/ff7a00?text=Wall+Climbing+Competitor', 'image', 'Intermediate wall climbing tournament path strategy.')">
+                    <div class="aspect-video relative overflow-hidden bg-space border-b border-cyan-500/20">
+                        <img src="https://placehold.co/600x400/050816/ff7a00?text=Wall+Climbing+Competitor" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-80" alt="Wall climbing">
+                        <div class="absolute inset-0 bg-gradient-to-t from-space via-transparent to-transparent opacity-60"></div>
+                        <div class="absolute top-2 left-2 text-[10px] font-rajdhani text-neon tracking-widest bg-space/80 px-2 py-0.5 border border-neon/30">LOG // 05</div>
+                    </div>
+                    <div class="p-4 space-y-2 flex-grow">
+                        <h4 class="font-orbitron font-bold text-sm text-white tracking-wide group-hover:text-neon transition">Wall Climbing Tournament Finals</h4>
+                        <p class="text-xs text-slate-400 font-inter">Demonstrating climbing route planning skills and perseverance during physical events at IIT Kanpur climbing gyms.</p>
+                    </div>
+                </div>
+
+                <!-- Media Card 6: Drone Flight Video Playback link -->
+                <div class="hud-panel relative group overflow-hidden cursor-pointer flex flex-col rounded-xl" data-gcategory="uav" onclick="openGalleryMedia('https://drive.google.com/file/d/1E_fqeHSfUC5zvKG7Ssuhsd2eeq4L2ZFy/preview', 'video', 'Scaled replica MQ-9 UAV autonomous flight telemetry recordings at local fields.')">
+                    <div class="aspect-video relative overflow-hidden bg-space border-b border-cyan-500/20 flex items-center justify-center">
+                        <div class="absolute inset-0 bg-gradient-to-br from-indigo-950/30 to-space/80 flex items-center justify-center">
+                            <i data-lucide="video" class="w-12 h-12 text-neon animate-pulse drop-shadow-[0_0_8px_#00FFB3]"></i>
+                        </div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-space via-transparent to-transparent opacity-60"></div>
+                        <div class="absolute top-2 left-2 text-[10px] font-rajdhani text-neon tracking-widest bg-space/80 px-2 py-0.5 border border-neon/30">LOG // 06</div>
+                    </div>
+                    <div class="p-4 space-y-2 flex-grow">
+                        <h4 class="font-orbitron font-bold text-sm text-white tracking-wide group-hover:text-neon transition">UAV Test Flight Footage</h4>
+                        <p class="text-xs text-slate-400 font-inter">Viewing autonomous flight stability and trajectory loops recorded on the flight computer.</p>
+                    </div>
                 </div>
             </div>
-        </section>
+            
+            <div class="pt-8 text-center">
+                <button onclick="switchView('main')" class="cyber-button px-10 py-4 text-sm tracking-widest">
+                    ← Back to Command Center
+                </button>
+            </div>
+        </div>
+    </div>
 
-    </main>
+    <!-- Secure Developer Payload Configuration Panel (Admin Overlay) -->
+    <div id="admin-panel-overlay" class="fixed inset-0 z-50 flex items-center justify-center hidden p-4">
+        <div onclick="closeAdminPanel()" class="absolute inset-0 bg-space/95 backdrop-blur-md"></div>
+        <div class="relative hud-panel border-2 border-warning max-w-lg w-full z-10 p-1 font-rajdhani">
+            <div class="bg-warning/20 border-b border-warning/50 px-4 py-2 flex items-center justify-between text-warning">
+                <span class="text-sm font-orbitron font-bold">DEVELOPER PAYLOAD TERMINAL</span>
+                <button onclick="closeAdminPanel()" class="hover:text-white transition"><i data-lucide="x-square" class="w-5 h-5"></i></button>
+            </div>
+            <div class="p-6 space-y-4">
+                <p class="text-xs text-slate-400">Configure GitHub PAT to directly upload new media logs to your repo entirely client-side. Credentials stay inside your local browser's secure cache.</p>
+                
+                <!-- Credentials Section -->
+                <div class="grid grid-cols-2 gap-3 border-b border-slate-800 pb-3">
+                    <div class="space-y-1">
+                        <label class="text-[10px] text-cyan-400 font-orbitron uppercase">GH USERNAME</label>
+                        <input type="text" id="admin-gh-user" class="w-full px-3 py-1.5 text-xs terminal-input" placeholder="e.g. Sjeetk21">
+                    </div>
+                    <div class="space-y-1">
+                        <label class="text-[10px] text-cyan-400 font-orbitron uppercase">REPO NAME</label>
+                        <input type="text" id="admin-gh-repo" class="w-full px-3 py-1.5 text-xs terminal-input" placeholder="e.g. sujeet">
+                    </div>
+                    <div class="col-span-2 space-y-1">
+                        <label class="text-[10px] text-cyan-400 font-orbitron uppercase">GH PERSONAL ACCESS TOKEN (PAT)</label>
+                        <input type="password" id="admin-gh-pat" class="w-full px-3 py-1.5 text-xs terminal-input" placeholder="ghp_xxxxxxxxxxxxxxxxxxxxxxxx">
+                    </div>
+                </div>
+
+                <!-- Log Submission Section -->
+                <div class="space-y-3">
+                    <div class="space-y-1">
+                        <label class="text-[10px] text-warning font-orbitron uppercase">CHOOSE PAYLOAD FILE</label>
+                        <input type="file" id="admin-payload-file" accept="image/*,video/*" class="w-full text-xs text-slate-400 file:mr-4 file:py-1 file:px-3 file:border-0 file:bg-warning/20 file:text-warning hover:file:bg-warning/30">
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="space-y-1 col-span-2">
+                            <label class="text-[10px] text-cyan-400 font-orbitron uppercase">LOG TITLE</label>
+                            <input type="text" id="admin-payload-title" class="w-full px-3 py-1.5 text-xs terminal-input" placeholder="Enter log title...">
+                        </div>
+                        <div class="space-y-1">
+                            <label class="text-[10px] text-cyan-400 font-orbitron uppercase">LOG CATEGORY</label>
+                            <select id="admin-payload-cat" class="w-full px-3 py-1.5 text-xs terminal-input">
+                                <option value="uav">LOGS: UAV_FLIGHT</option>
+                                <option value="robotics">LOGS: ROBOTICS</option>
+                                <option value="campus">LOGS: CAMPUS_LIFE</option>
+                            </select>
+                        </div>
+                        <div class="space-y-1">
+                            <label class="text-[10px] text-cyan-400 font-orbitron uppercase">MEDIA TYPE</label>
+                            <select id="admin-payload-type" class="w-full px-3 py-1.5 text-xs terminal-input">
+                                <option value="image">IMAGE FILE</option>
+                                <option value="video">VIDEO LINK (IFRAME)</option>
+                            </select>
+                        </div>
+                        <div class="space-y-1 col-span-2">
+                            <label class="text-[10px] text-cyan-400 font-orbitron uppercase">LOG DESCRIPTION</label>
+                            <textarea id="admin-payload-desc" rows="2" class="w-full px-3 py-1.5 text-xs terminal-input resize-none" placeholder="Provide system overview logs..."></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-2">
+                    <button onclick="deployPayloadToGitHub()" id="admin-deploy-btn" class="w-full py-3 border border-warning hover:bg-warning hover:text-space transition text-warning font-orbitron text-xs tracking-widest uppercase">
+                        INITIATE DEPLOYMENT SEQUENCE
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer class="border-t border-cyan-900/50 py-8 bg-space z-10 relative">
@@ -776,14 +998,15 @@
                 &copy; 2026 // SUJEET KUMAR // ALL SYSTEMS FUNCTIONAL
             </p>
             <div class="flex gap-6 text-xs font-orbitron text-cyan-500/50 uppercase">
-                <a href="#about" class="hover:text-cyan-400 transition">Profile</a>
-                <a href="#projects" class="hover:text-cyan-400 transition">Missions</a>
-                <a href="#experience" class="hover:text-cyan-400 transition">Logs</a>
+                <a href="#about" onclick="switchView('main')" class="hover:text-cyan-400 transition">Profile</a>
+                <a href="#projects" onclick="switchView('main')" class="hover:text-cyan-400 transition">Missions</a>
+                <a href="#experience" onclick="switchView('main')" class="hover:text-cyan-400 transition">Logs</a>
+                <button onclick="switchView('gallery')" class="hover:text-cyan-400 transition">Gallery</button>
             </div>
         </div>
     </footer>
 
-    <!-- Custom Modal for Projects Details -->
+    <!-- Custom Modal for Projects & Media Details -->
     <div id="project-modal" class="fixed inset-0 z-50 flex items-center justify-center hidden p-4">
         <div onclick="closeModal()" class="absolute inset-0 bg-space/90 backdrop-blur-md"></div>
         
@@ -806,17 +1029,37 @@
     <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-12 opacity-0 pointer-events-none transition-all duration-300 hud-panel border-neon bg-space text-neon px-5 py-4 flex items-center gap-4">
         <i data-lucide="check-circle-2" class="w-6 h-6"></i>
         <div>
-            <p class="font-orbitron font-bold text-sm tracking-wide">PACKET TRANSMITTED</p>
-            <p class="text-xs font-rajdhani text-slate-400 tracking-widest">Awaiting system response...</p>
+            <p class="font-orbitron font-bold text-sm tracking-wide" id="toast-title">PACKET TRANSMITTED</p>
+            <p class="text-xs font-rajdhani text-slate-400 tracking-widest" id="toast-desc">Awaiting system response...</p>
         </div>
     </div>
 
     <!-- Script Block -->
     <script>
-        // Init Icons
         lucide.createIcons();
 
-        // Canvas Background Engine
+        // Local dynamic catalog store (Loads from gallery.json if present on GitHub)
+        let customGalleryCatalog = [];
+
+        // View Switcher Engine (SPA State Manager)
+        function switchView(viewName) {
+            const portfolioView = document.getElementById('portfolio-landing-view');
+            const galleryView = document.getElementById('full-gallery-view');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            if (mobileMenu) mobileMenu.classList.add('hidden');
+
+            if (viewName === 'gallery') {
+                portfolioView.classList.add('hidden');
+                galleryView.classList.remove('hidden');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                loadCatalogFromGitHub(); // Attempt catalog grab on navigate
+            } else {
+                portfolioView.classList.remove('hidden');
+                galleryView.classList.add('hidden');
+            }
+        }
+
         const canvas = document.getElementById('bg-canvas');
         const ctx = canvas.getContext('2d');
         let width, height;
@@ -896,13 +1139,34 @@
             mobileMenu.classList.toggle('hidden');
         });
 
-        mobileMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
+        // Tactical Gallery Filters Engine
+        const galleryFilterButtons = document.querySelectorAll('#gallery-filter-container button');
+        
+        galleryFilterButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                galleryFilterButtons.forEach(b => {
+                    b.className = 'px-4 py-1.5 border border-slate-700 text-slate-400 hover:border-neon hover:text-neon transition uppercase';
+                });
+                btn.className = 'px-4 py-1.5 border border-neon bg-neon/10 text-neon uppercase';
+
+                const targetFilter = btn.getAttribute('data-gfilter');
+                filterActiveGalleryGrid(targetFilter);
             });
         });
 
-        // Dynamic Filter Gallery Engine
+        function filterActiveGalleryGrid(filter) {
+            const cards = document.querySelectorAll('#gallery-grid > div');
+            cards.forEach(card => {
+                const cardCategory = card.getAttribute('data-gcategory');
+                if (filter === 'all' || cardCategory === filter) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Dynamic Filter Gallery Engine (Missions Grid)
         const filterButtons = document.querySelectorAll('#filter-container button');
         const projectCards = document.querySelectorAll('#projects-grid > div');
 
@@ -1007,66 +1271,6 @@
                     "Simulated automated machining processes with SolidWorks and CraftWare",
                     "Managed complex physical fabrication steps including lathe operations"
                 ]
-            },
-            graphTheory: {
-                title: "Algorithmic Graph Theory Projects",
-                tech: "C++, Graph Traversals, SSSP, APSP, Network Flow",
-                desc: "Conducted deep explorations into graph representations, optimization algorithms, and network-related computer science issues.",
-                features: [
-                    "Implemented Kruskal's and Prim's algorithms solving Minimum Spanning Tree problems",
-                    "Employed Kosaraju's and Tarjan's algorithms to pinpoint strongly connected elements",
-                    "Developed code structures for bipartite graph matching and network flows"
-                ]
-            },
-            navRobot: {
-                title: "Autonomous Navigation Rover",
-                tech: "Arduino UNO R3, HC-SR04 Sensors, Course-Correction Code",
-                desc: "A small-scale autonomous mobile rover designed to maneuver through unmapped obstacles without hardcoded paths.",
-                features: [
-                    "Utilized HC-SR04 ultrasonic sensors to continuously feed distance measurements",
-                    "Programmed direct physical course-adjustment logic onto Arduino UNO",
-                    "Optimized battery power management and motor drive calibrations"
-                ]
-            },
-            oopsCpp: {
-                title: "Object-Oriented C++ Custom Systems",
-                tech: "C++, Custom Memory Allocation, Pointers, Class Structures",
-                desc: "Built custom abstract data structures exploring core low-level execution layers inside C++.",
-                features: [
-                    "Formed concrete data layouts implementing manual constructors and destructors",
-                    "Utilized Polymorphism, Abstraction, and Encapsulation paradigms",
-                    "Implemented strict resource management routines avoiding system leaks"
-                ]
-            },
-            mathData: {
-                title: "Math Tools for Data Science",
-                tech: "Python, Scikit-Learn, Random Forest, Seaborn Plots",
-                desc: "Built specialized classification sequences modeling medical and commercial datasets.",
-                features: [
-                    "Utilized Decision Tree and Random Forest engines on the Kyphosis dataset",
-                    "Applied Logistic and Linear Regression reaching 94% accuracy scores",
-                    "Developed rich visual data correlations via Seaborn and Matplotlib"
-                ]
-            },
-            cervicalCancer: {
-                title: "Cervical Cancer Screening Classifier",
-                tech: "Python, ML Modeling, PCA, SMOTE, KNN, SVM",
-                desc: "Designed highly reliable screening predictions addressing massive target category imbalances.",
-                features: [
-                    "Trained binary classification targets on the Cancer Risk Factors dataset",
-                    "Executed PCA feature extractions to find primary data variance",
-                    "Balanced data variables with SMOTE, boosting KNN and SVM accuracies to 94%"
-                ]
-            },
-            bankLoan: {
-                title: "Bank Loan Risk Monitoring Tool",
-                tech: "SQL, Power BI, KPI Dashboarding",
-                desc: "A decision support dashboard mapping bank lending activities and loan delinquency risks.",
-                features: [
-                    "Formulated precise SQL queries capturing overall lending KPIs",
-                    "Mapped region-specific loan profiles, repayment trends, and borrow behavior",
-                    "Designed simple classifications separating high-yield loans from risk items"
-                ]
             }
         };
 
@@ -1105,32 +1309,351 @@
             document.body.style.overflow = '';
         }
 
+        // Open Tactical Gallery Media Lightbox inside existing Project Modal
+        function openGalleryMedia(url, type, desc) {
+            modalContent.innerHTML = `
+                <div class="space-y-3">
+                    <span class="text-xs font-rajdhani text-neon tracking-widest border border-neon/30 px-2 py-0.5 bg-neon/10 uppercase">MEDIA_LOG_OPEN</span>
+                    <h3 class="text-2xl font-orbitron font-bold text-white tracking-wider">Visual Capture View</h3>
+                </div>
+                <div class="h-px w-full bg-cyan-500/30 my-4"></div>
+                
+                <div class="w-full aspect-video border border-cyan-500/30 bg-space rounded overflow-hidden flex items-center justify-center relative">
+                    ${type === 'video' ? `
+                        <iframe class="w-full h-full border-0" src="${url}" allow="autoplay" allowfullscreen></iframe>
+                    ` : `
+                        <img src="${url}" class="w-full h-full object-cover opacity-90" alt="Observation Capture">
+                    `}
+                </div>
+
+                <p class="text-slate-300 leading-relaxed text-sm font-inter">
+                    ${desc}
+                </p>
+
+                <div class="pt-6">
+                    <button onclick="closeModal()" class="w-full cyber-button py-3 text-sm">
+                        SECURE OBSERVATION SHELL
+                    </button>
+                </div>
+            `;
+            modalElement.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            lucide.createIcons();
+        }
+
+        // Play Project Video Function
+        function playProjectVideo(container) {
+            const thumb = container.querySelector('.project-thumb');
+            const icon = container.querySelector('.play-icon');
+            const video = container.querySelector('.project-video');
+
+            if (video && thumb && icon) {
+                thumb.style.display = 'none';
+                icon.style.display = 'none';
+                video.classList.remove('hidden');
+                
+                if (video.tagName.toLowerCase() === 'iframe') {
+                    if (!video.src) video.src = video.getAttribute('data-src');
+                } else if (video.play) {
+                    video.play();
+                }
+                
+                lucide.createIcons();
+            }
+        }
+
         window.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeModal();
+            if (e.key === 'Escape') {
+                closeModal();
+                closeAdminPanel();
+            }
         });
 
-        // Toast Alerts / Contact Form Handler
-        const contactForm = document.getElementById('contact-form');
-        const toast = document.getElementById('toast');
+        // Toast alerts triggers
+        function triggerToast(title, desc) {
+            const toastElement = document.getElementById('toast');
+            document.getElementById('toast-title').innerText = title;
+            document.getElementById('toast-desc').innerText = desc;
 
-        contactForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-
-            // Clear Form
-            document.getElementById('form-name').value = '';
-            document.getElementById('form-email').value = '';
-            document.getElementById('form-subject').value = '';
-            document.getElementById('form-message').value = '';
-
-            // Animate Toast Box
-            toast.classList.remove('translate-y-12', 'opacity-0', 'pointer-events-none');
-            toast.classList.add('translate-y-0', 'opacity-100');
+            toastElement.classList.remove('translate-y-12', 'opacity-0', 'pointer-events-none');
+            toastElement.classList.add('translate-y-0', 'opacity-100');
 
             setTimeout(() => {
-                toast.classList.remove('translate-y-0', 'opacity-100');
-                toast.classList.add('translate-y-12', 'opacity-0', 'pointer-events-none');
-            }, 4500);
+                toastElement.classList.remove('translate-y-0', 'opacity-100');
+                toastElement.classList.add('translate-y-12', 'opacity-0', 'pointer-events-none');
+            }, 5000);
+        }
+
+        // Admin configuration state logic
+        const adminOverlay = document.getElementById('admin-panel-overlay');
+
+        function openAdminPanel() {
+            adminOverlay.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+
+            // Auto-fill existing keys securely if cached in local storage
+            document.getElementById('admin-gh-user').value = localStorage.getItem('gh_user') || '';
+            document.getElementById('admin-gh-repo').value = localStorage.getItem('gh_repo') || '';
+            document.getElementById('admin-gh-pat').value = localStorage.getItem('gh_pat') || '';
+        }
+
+        function closeAdminPanel() {
+            adminOverlay.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        // Fetch dynamic items directly from Git on load (Serverless JSON synchronization)
+        async function loadCatalogFromGitHub() {
+            const user = localStorage.getItem('gh_user') || 'Sjeetk21';
+            const repo = localStorage.getItem('gh_repo') || 'sujeet';
+            const url = `https://raw.githubusercontent.com/${user}/${repo}/main/gallery.json`;
+
+            try {
+                const response = await fetch(url);
+                if (response.ok) {
+                    customGalleryCatalog = await response.json();
+                    renderGalleryGrid(customGalleryCatalog);
+                }
+            } catch (err) {
+                console.log("No remote custom catalog discovered yet. Using built-in portfolio template defaults.", err);
+            }
+        }
+
+        function renderGalleryGrid(items) {
+            const grid = document.getElementById('gallery-grid');
+            // Retain original template hardcoded assets, append any fresh catalog arrays
+            const initialHTML = `
+                <!-- Media Card 1 -->
+                <div class="hud-panel relative group overflow-hidden cursor-pointer flex flex-col rounded-xl" data-gcategory="uav" onclick="openGalleryMedia('https://github.com/Sjeetk21/sujeet/blob/main/IMG_8588.jpg?raw=true', 'image', 'MQ-9 Reaper field configuration setup prior to pilot authorization loops.')">
+                    <div class="aspect-video relative overflow-hidden bg-space border-b border-cyan-500/20">
+                        <img src="https://github.com/Sjeetk21/sujeet/blob/main/IMG_8588.jpg?raw=true" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-80" alt="UAV Configuration">
+                        <div class="absolute inset-0 bg-gradient-to-t from-space via-transparent to-transparent opacity-60"></div>
+                        <div class="absolute top-2 left-2 text-[10px] font-rajdhani text-neon tracking-widest bg-space/80 px-2 py-0.5 border border-neon/30">LOG // 01</div>
+                    </div>
+                    <div class="p-4 space-y-2 flex-grow">
+                        <h4 class="font-orbitron font-bold text-sm text-white tracking-wide group-hover:text-neon transition">MQ-9 Scaled UAV Frame Setup</h4>
+                        <p class="text-xs text-slate-400 font-inter">Live physical testing, component checks, and electronic setup adjustments during flight builds at IIT Kanpur.</p>
+                    </div>
+                </div>
+                <!-- Media Card 2 -->
+                <div class="hud-panel relative group overflow-hidden cursor-pointer flex flex-col rounded-xl" data-gcategory="robotics" onclick="openGalleryMedia('https://placehold.co/600x400/0b1120/00e5ff?text=Robotic+Workspace+Plot', 'image', 'Visualizing dynamic planar arm workspace boundaries and dynamic avoidance grids.')">
+                    <div class="aspect-video relative overflow-hidden bg-space border-b border-cyan-500/20">
+                        <img src="https://placehold.co/600x400/0b1120/00e5ff?text=Robotic+Workspace+Plot" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-80" alt="Robotics Simulation">
+                        <div class="absolute inset-0 bg-gradient-to-t from-space via-transparent to-transparent opacity-60"></div>
+                        <div class="absolute top-2 left-2 text-[10px] font-rajdhani text-neon tracking-widest bg-space/80 px-2 py-0.5 border border-neon/30">LOG // 02</div>
+                    </div>
+                    <div class="p-4 space-y-2 flex-grow">
+                        <h4 class="font-orbitron font-bold text-sm text-white tracking-wide group-hover:text-neon transition">Arm Trajectory Avoidance Simulations</h4>
+                        <p class="text-xs text-slate-400 font-inter">Checking route path planning heuristics inside MATLAB to map configuration spaces safely.</p>
+                    </div>
+                </div>
+                <!-- Media Card 3 -->
+                <div class="hud-panel relative group overflow-hidden cursor-pointer flex flex-col rounded-xl" data-gcategory="campus" onclick="openGalleryMedia('https://placehold.co/600x400/0b1120/00ffb3?text=IIT+Kanpur+Aero+Lab', 'image', 'Aviation engineering guidelines and workshop briefs for students.')">
+                    <div class="aspect-video relative overflow-hidden bg-space border-b border-cyan-500/20">
+                        <img src="https://placehold.co/600x400/0b1120/00ffb3?text=IIT+Kanpur+Aero+Lab" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-80" alt="IITK Aero Lab">
+                        <div class="absolute inset-0 bg-gradient-to-t from-space via-transparent to-transparent opacity-60"></div>
+                        <div class="absolute top-2 left-2 text-[10px] font-rajdhani text-neon tracking-widest bg-space/80 px-2 py-0.5 border border-neon/30">LOG // 03</div>
+                    </div>
+                    <div class="p-4 space-y-2 flex-grow">
+                        <h4 class="font-orbitron font-bold text-sm text-white tracking-wide group-hover:text-neon transition">Aerodynamics Workshop Instructions</h4>
+                        <p class="text-xs text-slate-400 font-inter">Leading club workshops at Aeromodelling Club to instruct juniors on structural safety configurations.</p>
+                    </div>
+                </div>
+            `;
+
+            let dynamicHTML = '';
+            items.forEach((item, index) => {
+                dynamicHTML += `
+                    <div class="hud-panel relative group overflow-hidden cursor-pointer flex flex-col rounded-xl" data-gcategory="${item.category}" onclick="openGalleryMedia('${item.url}', '${item.type}', '${item.desc}')">
+                        <div class="aspect-video relative overflow-hidden bg-space border-b border-cyan-500/20">
+                            <img src="${item.url}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-80" alt="Log Archive Item">
+                            <div class="absolute inset-0 bg-gradient-to-t from-space via-transparent to-transparent opacity-60"></div>
+                            <div class="absolute top-2 left-2 text-[10px] font-rajdhani text-warning tracking-widest bg-space/80 px-2 py-0.5 border border-warning/30">USER LOG // ${index + 4}</div>
+                        </div>
+                        <div class="p-4 space-y-2 flex-grow">
+                            <h4 class="font-orbitron font-bold text-sm text-white tracking-wide group-hover:text-warning transition">${item.title}</h4>
+                            <p class="text-xs text-slate-400 font-inter">${item.desc}</p>
+                        </div>
+                    </div>
+                `;
+            });
+
+            grid.innerHTML = initialHTML + dynamicHTML;
+        }
+
+        // Core Deployment Sequence
+        async function deployPayloadToGitHub() {
+            const user = document.getElementById('admin-gh-user').value.trim();
+            const repo = document.getElementById('admin-gh-repo').value.trim();
+            const pat = document.getElementById('admin-gh-pat').value.trim();
+            const fileInput = document.getElementById('admin-payload-file');
+            const title = document.getElementById('admin-payload-title').value.trim();
+            const category = document.getElementById('admin-payload-cat').value;
+            const type = document.getElementById('admin-payload-type').value;
+            const desc = document.getElementById('admin-payload-desc').value.trim();
+            const deployBtn = document.getElementById('admin-deploy-btn');
+
+            if (!user || !repo || !pat || !title || !desc) {
+                alert("ERR_OVERRIDE: All parameter fields are required to secure the commit connection.");
+                return;
+            }
+
+            // Cache credentials locally for smooth future administrative logins
+            localStorage.setItem('gh_user', user);
+            localStorage.setItem('gh_repo', repo);
+            localStorage.setItem('gh_pat', pat);
+
+            deployBtn.innerText = "CONVERTING PAYLOAD FILE...";
+            deployBtn.disabled = true;
+
+            let fileUrl = "";
+
+            if (fileInput.files.length > 0) {
+                const file = fileInput.files[0];
+                const base64Content = await toBase64(file);
+                const cleanBase64 = base64Content.split(',')[1];
+                const cleanFileName = `${Date.now()}_${file.name.replace(/\s+/g, '_')}`;
+                const assetPath = `assets/gallery/${cleanFileName}`;
+
+                deployBtn.innerText = "COMMITTING FILE TO GITHUB...";
+
+                try {
+                    // 1. Commit raw image asset directly to repository assets path
+                    const fileResponse = await fetch(`https://api.github.com/repos/${user}/${repo}/contents/${assetPath}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Authorization': `token ${pat}`,
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            message: `Deploy media asset: ${cleanFileName}`,
+                            content: cleanBase64,
+                            branch: 'main'
+                        })
+                    });
+
+                    if (fileResponse.ok) {
+                        fileUrl = `https://raw.githubusercontent.com/${user}/${repo}/main/${assetPath}`;
+                    } else {
+                        throw new Error("Failed to push visual media file assets.");
+                    }
+                } catch (error) {
+                    console.error(error);
+                    deployBtn.innerText = "INITIATE DEPLOYMENT SEQUENCE";
+                    deployBtn.disabled = false;
+                    alert("FATAL_ERROR: Failed to establish write stream on the specified asset path.");
+                    return;
+                }
+            } else {
+                // If no file, use a placeholder
+                fileUrl = `https://placehold.co/600x400/0b1120/00e5ff?text=${encodeURIComponent(title)}`;
+            }
+
+            deployBtn.innerText = "UPDATING DATABASE INDEX...";
+
+            try {
+                // 2. Fetch or create catalog JSON database
+                let catalogSha = null;
+                let existingCatalog = [];
+                const catalogPath = "gallery.json";
+
+                const catalogMetaResponse = await fetch(`https://api.github.com/repos/${user}/${repo}/contents/${catalogPath}?ref=main`, {
+                    headers: { 'Authorization': `token ${pat}` }
+                });
+
+                if (catalogMetaResponse.status === 200) {
+                    const metaData = await catalogMetaResponse.json();
+                    catalogSha = metaData.sha;
+                    const decodedContent = atob(metaData.content.replace(/\s/g, ''));
+                    existingCatalog = JSON.parse(decodedContent);
+                }
+
+                // Add the new payload to our local array copy
+                const newPayloadItem = { title, category, type, desc, url: fileUrl };
+                existingCatalog.push(newPayloadItem);
+
+                const updatedCatalogBase64 = btoa(JSON.stringify(existingCatalog, null, 2));
+
+                const catalogPutResponse = await fetch(`https://api.github.com/repos/${user}/${repo}/contents/${catalogPath}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `token ${pat}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        message: "Synchronize catalog collection indexes",
+                        content: updatedCatalogBase64,
+                        sha: catalogSha,
+                        branch: 'main'
+                    })
+                });
+
+                if (catalogPutResponse.ok) {
+                    deployBtn.innerText = "INITIATE DEPLOYMENT SEQUENCE";
+                    deployBtn.disabled = false;
+                    closeAdminPanel();
+                    triggerToast("DEPLOYMENT COMPLETED", "Payload deployed to repo branch. Live pages will sync shortly.");
+                    loadCatalogFromGitHub(); // Reload the UI grid view immediately
+                } else {
+                    throw new Error("Catalog index revision failed.");
+                }
+
+            } catch (error) {
+                console.error(error);
+                deployBtn.innerText = "INITIATE DEPLOYMENT SEQUENCE";
+                deployBtn.disabled = false;
+                alert("FATAL_ERROR: Failed to synchronize visual database catalogs.");
+            }
+        }
+
+        // Convert files locally to Base64 data streams
+        const toBase64 = file => new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = error => reject(error);
         });
+
+        // Contact form handling code
+        const contactForm = document.getElementById('contact-form');
+        const submitBtnText = document.getElementById('btn-text');
+
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            submitBtnText.innerText = "TRANSMITTING...";
+
+            const formData = new FormData(contactForm);
+            const object = Object.fromEntries(formData);
+            const json = JSON.stringify(object);
+
+            fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: json
+            })
+            .then(async (response) => {
+                if (response.status == 200) {
+                    contactForm.reset();
+                    submitBtnText.innerText = "Transmit Message";
+                    triggerToast("PACKET TRANSMITTED", "Message was routed successfully. Awaiting operator feedback.");
+                } else {
+                    submitBtnText.innerText = "TRANSMISSION FAILED";
+                    setTimeout(() => { submitBtnText.innerText = "Transmit Message"; }, 3000);
+                }
+            })
+            .catch(error => {
+                submitBtnText.innerText = "TRANSMISSION ERROR";
+                setTimeout(() => { submitBtnText.innerText = "Transmit Message"; }, 3000);
+            });
+        });
+
+        // Initial setup load
+        window.onload = function() {
+            loadCatalogFromGitHub();
+        }
     </script>
 </body>
 </html>
